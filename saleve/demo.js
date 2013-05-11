@@ -15,8 +15,8 @@
       tileAttrib : 'Routing powered by <a href="http://opentripplanner.org/">OpenTripPlanner</a>, Map tiles &copy; Development Seed and OpenStreetMap ',
       initLatLng : new L.LatLng(46.19845429999999, 6.142476200000033), // Geneva
       initZoom : 13,
-      minZoom : 3,
-      maxZoom : 17
+      minZoom : 13,
+      maxZoom : 13
   };
 
   var map = L.map('map', {minZoom: config.minZoom, maxZoom: config.maxZoom}),
