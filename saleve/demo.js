@@ -3,7 +3,7 @@
 
 (function(){
   var bikeIcon = L.icon({
-      iconUrl: 'marker-bike-green-shadowed.png',
+      iconUrl: 'http://image.noelshack.com/fichiers/2013/19/1368268918-pierre.png',
       iconSize: [25, 39],
       iconAnchor: [12, 39],
       shadowUrl: null
