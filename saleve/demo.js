@@ -5,7 +5,7 @@
   var bikeIcon = L.icon({
       iconUrl: 'http://image.noelshack.com/fichiers/2013/19/1368268918-pierre.png',
       iconSize: [40, 49],
-      iconAnchor: [20, 25],
+      iconAnchor: [20, 2],
       shadowUrl: null
   });
 
