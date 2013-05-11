@@ -15,7 +15,7 @@
       tileAttrib : 'Routing powered by <a href="http://opentripplanner.org/">OpenTripPlanner</a>, Map tiles &copy; Development Seed and OpenStreetMap ',
       initLatLng : new L.LatLng(46.19845429999999, 6.142476200000033), // Geneva
       initZoom : 13,
-      minZoom : 13,
+      minZoom : 3,
       maxZoom : 17
   };
 
@@ -24,7 +24,7 @@
         L.polyline([[6.1430740356446, 46.211585998536], [6.1420440673828, 46.200256347657], [6.1544036865235, 46.195106506348], [6.1592102050782, 46.188583374024], [6.1581802368164, 46.177597045899], [6.1471939086914, 46.170043945313], [6.1348342895508, 46.175880432129], [6.1389541625977, 46.191329956055], [6.1358642578125, 46.207122802735], [6.1293411254883, 46.207122802735]])
       ];
   map.addLayer(new L.TileLayer(config.tileUrl, {attribution: config.tileAttrib}));
-  map.addLayer(new L.TileLayer(config.overlayTileUrl));
+  //map.addLayer(new L.TileLayer(config.overlayTileUrl));
   map.setView(config.initLatLng, config.initZoom);
 
 
