@@ -88,7 +88,7 @@ width:800px;
 
 .bandeau2{
 /*background: #F5ECD3;*/
-background-image:url(../img/bandeau.png);
+background-image:url(http://image.noelshack.com/fichiers/2013/35/1377869387-bandeau.png);
 background-repeat:no-repeat;
 height : 100px;
 position: relative;
@@ -292,7 +292,7 @@ width:24px;
 height:24px;
 /*text-indent:-9999px;*/
 outline:none;
-background:url(../img/fleche.png) no-repeat;
+background:url(http://image.noelshack.com/fichiers/2013/35/1377869387-fleche.png) no-repeat;
 z-index:3;
 }
 
