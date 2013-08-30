@@ -25,13 +25,13 @@
                 <div class="sp11">Lorioux</div>
             </div>
             <div class ="entete3">
-                <div class="sp12">26 ans ~ Né le 27 février<br>
+                <div class="sp12">27 ans ~ Né le 27 février<br>
                     10 RUE DU CHEVAL ROUGE 45000 ORLEANS</div>
                 <div class="sp13">06 22 79 73 71 <br>
                     pierrelorioux@hotmail.fr</div>
                  
             </div>
-            <div class="photo"><img src="http://pierre.lorioux.free.frimg/photo.png" width="250" height="250" alt="Photo" /> </div>
+            <div class="photo"><img src="pierre.lorioux.free.fr/img/photo.png" width="250" height="250" alt="Photo" /> </div>
         </div>
         <div class = "bandeau">
             <div class = "bandeau2">
@@ -72,13 +72,15 @@
         
         // Center the map 
         .setView(new L.LatLng(47.9065, 1.9095), 15);
-        map.options.maxBounds = restrictBounds;
+        
 
         // Get metadata about the map from MapBox
         wax.tilejson(url, function(tilejson) {
             // Add MapBox Streets as a base layer
             map.addLayer(new wax.leaf.connector(tilejson));
         });
+		//TODO FIX THE MAX BOUND 
+		//map.options.maxBounds = restrictBounds;
         </script>
 
         <script type="text/javascript">
@@ -192,18 +194,39 @@
         /////////////////////////////////////////////////////////////////////////////
         
         var LeafIcon6 = L.Icon.extend({
-        iconUrl: 'img/kfc.png',
+        iconUrl: 'img/icrc.png',
         iconSize: new L.Point(58, 50),
         //shadowSize: new L.Point(68, 95),
         //iconAnchor: new L.Point(22, 94),
         //popupAnchor: new L.Point(-3, -76)
         });
         
-        var kfc = new LeafIcon6('img/kfc.png'),
+        var kfc = new LeafIcon6('img/icrc.png'),
         marker6 = new L.Marker(new L.LatLng(47.91335, 1.90905), {icon: kfc});
         //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
         //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
-        marker6.bindPopup("<p class='bulle'>Eté 2009 : Employé polyvalent - KFC Ste Catherine Bordeaux </p>");
+        marker6.bindPopup("<p class='bulle'>2013 : Stage GIS de 1 an au Comité International de la Croix Rouge - Genève <br><br><a href='#ICRC' id='idlien' style='text-align: right '>+ de détails</a></p>").on('click', function (e) { 
+            $('.divICRC').remove();
+            $('#mapbox').next('.divICRC').remove();
+            $('#mapbox').after($('<div />').addClass('divICRC'));
+            $('.divICRC')
+            .html("<div class='titre'><div class='sp16'><img src='img/icrc.png' width='50' height='50' alt='ICRC'/>Comité International de la Croix Rouge</div><p class='trucs'>- Developpement d'outils web : <br>&nbsp;&nbsp; Par exemple :  <a href='http://www.icrcproject.org/app/2012-annual-report-map/' target=_blank>Le Rapport Annuel 2012 </a> ou <a href='http://www.icrcproject.org/app/safewater-30years/' target=_blank> La cartographie des 30 ans de l'unité Water and Habitat </a><br>- Administration et developpement de l'application Geoportal</p></div>")
+            //.prepend('<div class="close"></div>')
+            //.addClass('close').text('Close')
+            .css({height : 125, 'margin-right':150})
+            .slideToggle()
+            /*.fadeIn()*/
+            $("#idlien").click(function () {
+                 $('html,body').animate({scrollTop: $(".divICRC").offset().top},2000);
+            });
+        $('#subfoot').find('.close').remove();   
+        $('#subfoot')
+        .append($('<a />').addClass('close'));
+
+         $('#subfoot').find('.close').live('click', function(){
+         $('html,body').animate({scrollTop: $(".entete").offset().top},1000);
+         });
+            });;
         map.addLayer(marker6);
         
         //////////////////////////////////////////////////////////////////////
