@@ -53,6 +53,7 @@
 	      font-weight: bold;
 	      margin-bottom: .2em;
 	      display: block;
+        margin-left: 5px;
 	    }
 
 	    .leaflet-control-layers-group {
@@ -81,6 +82,30 @@
             border-radius: 5px;
 
         }
+
+
+        .overlay {
+        position: absolute;
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        color: #223;
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        }
+
+        .title {
+          text-align: left;
+          top: 10px;
+          right: 20%;
+          left: 20%;
+          }
+
+          .footer {
+          bottom: 10px;
+          left: 13px;
+        }
+
 /*		.leaflet-popup-content-wrapper {
 			background: #FFF;
 			box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
@@ -92,7 +117,10 @@
     </style>
 </head>
 <body>
-	<div id="map"></div>
+  <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+  <div class="overlay footer">
+</div>
+ <!-- <div class="overlay title"> <h2>Haiyan Cross Data Map</h2> </div> -->
 
 
 	<script src="js/jquery10.js"></script>
@@ -227,23 +255,25 @@
 
             overlays = {
 
-	            " <br>External Data" : { 
-                "Open Streep mapathon image 1" : TMS1 , 
-                "Open Streep mapathon image 2" : TMS2 , 
-                "Open Streep mapathon image 3" : TMS3 , 
-                "Digital Globe Imagery <br><br>" : image,
-	            	"Evacuated Persons By Province <br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch1'></span><span class='label'>95 - 1,249 persons</span><br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch2'></span><span class='label'>1,250 - 8,999 persons</span><br><span class='evac_person_20131111_swatch3'></span><span class='label'>9,000 - 24,999 persons</span><br> <span class='evac_person_20131111_swatch4'></span> <span class='label'>25,000 - 59,000 persons</span><br> <span class='evac_person_20131111_swatch5'></span> <span class='label'>60,000+ persons</span><br><br>" : EvacuatedPersonsByProvince,
-	            	"Population by Barangay <br><span class='swatch1_pop'></span> <span class='label'>0 - 499 Persons</span><br><span class='swatch2_pop'></span><span class='label'>500 - 4999 Persons</span><br><span class='swatch3_pop'></span> <span class='label'>10001 - 3499 Persons</span><br><span class='swatch4_pop'></span><span class='label'>3500 - 4999 Persons</span><br><span class='swatch5_pop'></span> <span class='label'>5000 - 10000 Persons</span><br><span class='swatch6_pop'></span><span class='label'>Greater than 10000 Persons</span><br><span class='swatch7_pop'></span><span class='label'>Greater than 15,000 Persons</span><br><span class='swatch8_pop'></span> <span class='label'>Data Missing</span><br><br>":Population_by_Barangay,
-	            	"NGA Damage Assessment<br><span class='swatch1_NGA'></span> <span class='label'>Catastrophic Damages</span><br><span class='swatch2_NGA'></span><span class='label'>Extensive Damages</span><br><span class='swatch3_NGA'></span><span class='label'>Moderate Damages</span><br><span class='swatch4_NGA'></span><span class='label'>Limited Damages</span><br>":NGA_Damage_Assessment 
-	            	}
+	            " <br>Imagery Post Disaster" : { 
+                "Open StreetMapathon 1" : TMS1 , 
+                "Open Street Mapathon 2" : TMS2 , 
+                "Open Street Mapathon 3" : TMS3 , 
+                "Digital Globe Imagery <br>" : image,
+              },
+                "<br>Other Data" : { 
+	            	"Evacuated Persons By Province" : EvacuatedPersonsByProvince,
+	            	"Population by Barangay":Population_by_Barangay,
+	            	"NGA Damage Assessment":NGA_Damage_Assessment 
+                }
             };
 
 			//var cities = new L.LayerGroup();
 
 
 			var map = L.map('map', {
-				center: [11.449069,125.293365],
-				zoom: 10,
+				center: [11.449069,123.293365],
+				zoom: 8,
 				layers: [baseLayers["Humanitarian OpenStreetMap"]]
 			});
 
@@ -256,29 +286,44 @@
 		    map.on('overlayadd', function(eventLayer) {
                 //IRL use polymorphism not an ugly case statement.
                 switch (eventLayer.name) {
-                    case "Evacuated Persons By Province <br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch1'></span><span class='label'>95 - 1,249 persons</span><br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch2'></span><span class='label'>1,250 - 8,999 persons</span><br><span class='evac_person_20131111_swatch3'></span><span class='label'>9,000 - 24,999 persons</span><br> <span class='evac_person_20131111_swatch4'></span> <span class='label'>25,000 - 59,000 persons</span><br> <span class='evac_person_20131111_swatch5'></span> <span class='label'>60,000+ persons</span><br><br>":
-                        map.setView([11.449069,125.293365], 8);
+                    case "Evacuated Persons By Province":
+                        //map.setView([11.449069,125.293365], 8);
+                         $(".overlay").append("<div class='evac'><br>Evacuated Persons By Province<br><br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch1'></span><span class='label'>95 - 1,249 persons</span><br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch2'></span><span class='label'>1,250 - 8,999 persons</span><br><span class='evac_person_20131111_swatch3'></span><span class='label'>9,000 - 24,999 persons</span><br> <span class='evac_person_20131111_swatch4'></span> <span class='label'>25,000 - 59,000 persons</span><br> <span class='evac_person_20131111_swatch5'></span> <span class='label'>60,000+ persons</span><br><br></div>")
                         break;
-                    case "NGA Damage Assessment<br><span class='swatch1_NGA'></span> <span class='label'>Catastrophic Damages</span><br><span class='swatch2_NGA'></span><span class='label'>Extensive Damages</span><br><span class='swatch3_NGA'></span><span class='label'>Moderate Damages</span><br><span class='swatch4_NGA'></span><span class='label'>Limited Damages</span><br>":
+                    case "NGA Damage Assessment":
                         map.setView([10.900739,125.267487], 10);
+                        $(".overlay").append("<div class='NGA'>NGA Damage Assessment<br><br><span class='swatch1_NGA'></span><span class='label'>Catastrophic Damages</span><br><span class='swatch2_NGA'></span><span class='label'>Extensive Damages</span><br><span class='swatch3_NGA'></span><span class='label'>Moderate Damages</span><br><span class='swatch4_NGA'></span><span class='label'>Limited Damages</span><br></div>");
                         break;
+                     case "Population by Barangay":
+                        $(".overlay").append("<div class='pop'>Population by Barangay<br><br><span class='swatch1_pop'></span> <span class='label'>0 - 499 Persons</span><br><span class='swatch2_pop'></span><span class='label'>500 - 4999 Persons</span><br><span class='swatch3_pop'></span> <span class='label'>10001 - 3499 Persons</span><br><span class='swatch4_pop'></span><span class='label'>3500 - 4999 Persons</span><br><span class='swatch5_pop'></span> <span class='label'>5000 - 10000 Persons</span><br><span class='swatch6_pop'></span><span class='label'>Greater than 10000 Persons</span><br><span class='swatch7_pop'></span><span class='label'>Greater than 15,000 Persons</span><br><span class='swatch8_pop'></span> <span class='label'>Data Missing</span><br><br></div>");
+                        break;
+                    case "Digital Globe Imagery <br>":
+                       map.setView([11.280269,124.681751], 12);
+                        break;
+
                     //default :
                     //    map6.setView([39.6618, -104.8604], 18);
                     //    new L.Marker([39.6618, -104.8604]).addTo(map6);
                 }
             });
 
-            // map.on('overlayremove', function(eventLayer) {
-            //     //IRL use polymorphism not an ugly case statement.
-            //     switch (eventLayer.name) {
-            //         case "Assessed Municipality As of 14-11-2013":
-            //             jQuery('#municip').hide();jQuery('#municipopup').hide();
-            //             break;
-            //         //default :
-            //         //    map6.setView([39.6618, -104.8604], 18);
-            //         //    new L.Marker([39.6618, -104.8604]).addTo(map6);
-            //     }
-            // });
+            map.on('overlayremove', function(eventLayer) {
+                //IRL use polymorphism not an ugly case statement.
+                switch (eventLayer.name) {
+                    case "NGA Damage Assessment":
+                        $(".NGA").remove('');
+                        break;
+                    case "Evacuated Persons By Province":
+                        $(".evac").remove('');
+                        break;
+                     case "Population by Barangay":
+                        $(".pop").remove('');
+                        break;
+                    //default :
+                    //    map6.setView([39.6618, -104.8604], 18);
+                    //    new L.Marker([39.6618, -104.8604]).addTo(map6);
+                }
+            });
 			//$ICRCsites = ICRCsites ; 
 			
 			//$('#municip').html(document.getElementsByClassName('iw-content'));
