@@ -184,124 +184,13 @@
 
 		$(document).ready(function() {
 
-			//var template = "<h3>{OBJECTID}</h3>{OBJECTID} Acres<br><small>Property ID: {OBJECTID}<small>";
-			// LogCenter = new lvector.AGS({
-   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/5",
-   //                  fields: "*",
-   //                  uniqueField: "OBJECTID",
-   //                  where: "1=1",
-   //                  //esriOptions: true,
-   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
-   //                  singlePopup: true
-   //          });
 
-   //          BHCU = new lvector.AGS({
-   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/6",
-   //                  fields: "*",
-   //                  uniqueField: "OBJECTID",
-   //                  where: "1=1",
-   //                  esriOptions: true,
-   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',  
-   //                  singlePopup: true,
-   //                  clickEvent: function (feature, event) {
-
-   //                      //alert(feature.properties.with_);
-   //                      //jQuery('#municip').css('left','8px').animate({width: '228px'},500).html(feature.properties.with_);
-   //                  }
-   //          });
-
-   //          Basecamp = new lvector.AGS({
-   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/7",
-   //                  fields: "*",
-   //                  uniqueField: "OBJECTID",
-   //                  where: "1=1",
-   //                  esriOptions: true,
-   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
-   //                  singlePopup: true
-   //          });
-
-   //         	Recomendation = new lvector.AGS({
-   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/0",
-   //                  fields: "*",
-   //                  uniqueField: "OBJECTID",
-   //                  where: "Category='PLANNED'",
-   //                  esriOptions: true,
-   //                  popupTemplate: '<div class="iw-content"><table class="condensed-table"><tr><td>{Description_1}</td></tr></table></div>',
-   //                  singlePopup: true
-   //          });
-
-            
-
-
-            ICRCActivity = new lvector.AGS({
-                    url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/8",
-                    fields: "*",
-                    uniqueField: "OBJECTID",
-                    where: "1=1",
-                    esriOptions: true,
-                    popupTemplate: '<div class="iw-content"><table class="condensed-table"><tr><td>{Description_1}</td></tr></table></div>',
-                    singlePopup: true
-            });
-
-           //var markers = new L.markerClusterGroup().addLayer(ICRCActivity);
-            //markers.addLayer(ICRCActivity);
-
-            ICRCsites = new lvector.AGS({
-                    url: "https://ext.icrc.org/arcgis/rest/services/ICRC/ICRC_Data_Auxiliary_Sphere/MapServer/0",
-                    fields: "*",
-                    uniqueField: "OBJECTID",
-                    where: "OpenY_N='1'",
-                    esriOptions: true,
-                    popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
-                    singlePopup: true
-            });
 
             TMS1 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls8/{z}/{x}/{y}.png');
             TMS2 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls8_post/{z}/{x}/{y}.png');
             TMS3 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls7_post/{z}/{x}/{y}.png');                              
 
-			// AssessedArea = new lvector.AGS({
-   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/3",
-   //                  fields: "*",
-   //                  uniqueField: "OBJECTID",
-   //                  where: "1=1",
-   //                  symbology: {
-			// 	        type: "single",
-			// 	        vectorOptions: {
-			// 	            fillColor: "#2ecc71",
-			// 	            fillOpacity: 0.25,
-			// 	            weight: 1,
-			// 	            opacity: 0.3,
-			// 	            color: "#666"
-			// 	        }
-			// 	    },
-   //                  //esriOptions: true,
-   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
-   //                  singlePopup: true
-   //              });
 
-			// AssessedMunicipality = new lvector.AGS({
-   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/2",
-   //                  fields: "*",
-   //                  uniqueField: "OBJECTID",
-   //                  where: "1=1",
-   //                  symbology: {
-   //    				        type: "single",
-   //    				        vectorOptions: {
-   //    				            fillColor: "#e74c3c",
-   //    				            fillOpacity: 0.25,
-   //    				            weight: 1,
-   //    				            opacity: 0.3,
-   //    				            color: "#666"
-   //    				        }
-   //    				      },
-   //                  singlePopup: true
-   //                  // clickEvent: function (feature, event) {
-
-   //                  //     //alert(feature.properties.with_);
-   //                  //     jQuery('#municipopup').fadeIn().html('<div class="iw-content"><h3>'+feature.properties.NAME_2+'</h3><table class="condensed-table"><tr><td>Affected Barrangays : '+feature.properties.affected_Barangay+'</td></tr><tr><td>Affected Population : '+feature.properties.affected_Population+'</td></tr><tr><td>Assistance Received : '+feature.properties.assistance_received+'</td></tr><tr><td>Health Structures : '+feature.properties.Health_structures+'</td></tr><tr><td> Water : '+feature.properties.Water+'</td></tr></table></div>');
-   //                  // }
-   //          });
 
             EvacuatedPersonsByProvince = new L.TileLayer("http://{s}.tiles.mapbox.com/v3/americanredcross.Haiyan_2013-11-11_EvacuatedPersonsByProvince/{z}/{x}/{y}.png", {
                     subdomains: ["a", "b", "c"],
@@ -337,12 +226,7 @@
 
 
             overlays = {
-            	"  <br>ICRC Data" :{ 
 
-	                "ICRC Presence" : ICRCsites,
-                    "ICRC Activity" : ICRCActivity,
-
-	            	},
 	            " <br>External Data" : { 
                 "Open Streep mapathon image 1" : TMS1 , 
                 "Open Streep mapathon image 2" : TMS2 , 
