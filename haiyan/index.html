@@ -14,7 +14,7 @@
 	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/leaflet.ie.css" /><![endif]-->
 	 <style>
       html, body,  
-      #map {
+      #mapcontent {
         width : 99.6%;
         height : 99.5%;
       }
@@ -106,6 +106,31 @@
           left: 13px;
         }
 
+            .button {
+    display: block;
+    z-index:20;
+    top:100px;
+    position: absolute;
+    float: left;
+    width: 22px;
+    height: 22px;
+    left:160px;
+    background: url('http://labs.easyblog.it/maps/leaflet-search/images/search-icon.png') no-repeat 0 0;
+    border-radius: 4px;
+    }
+
+    .search{
+    border-radius: 7px;
+    left:30px;
+    z-index:20;
+    top:98px;
+    width: 150px;
+    position: absolute;
+    display: block;
+    float: left;
+    background: rgba(0, 0, 0, 0.25);
+    height: 30px;}
+
 /*		.leaflet-popup-content-wrapper {
 			background: #FFF;
 			box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
@@ -117,7 +142,7 @@
     </style>
 </head>
 <body>
-  <div id="map" class="leaflet-container leaflet-fade-anim"></div>
+  <div id="mapcontent" class="leaflet-container leaflet-fade-anim"></div>
   <div class="overlay footer">
 </div>
  <!-- <div class="overlay title"> <h2>Haiyan Cross Data Map</h2> </div> -->
@@ -132,6 +157,7 @@
 	<script src="js/esri-leaflet.js"></script>
 	<script src="js/geoservices.js"></script>
   <script src="js/clusterEsri.js"></script>
+  <script src="js/OverPassLayer.js"></script>
 
 	<script>
 	var POIfood;
@@ -241,6 +267,42 @@
               transparent: true,
               attribution: "Digital Globe Imagery"
             });
+         
+          var getsearch = "hospital";
+          var query = "http://overpass-api.de/api/interpreter?data=[out:json];node(BBOX)[amenity~'"+getsearch+"'];out;"
+
+
+
+
+
+          //var opl = new L.TileLayer('http://{s}.tiles.mapbox.com/v3/examples.bc17bb2a/{z}/{x}/{y}.png', {opacity: 0.7});
+          
+          
+          var opl = new L.OverPassLayer({
+            _map:map,
+            query: query,
+            callback: function(data) {
+              for(i=0;i<data.elements.length;i++) {
+                e = data.elements[i];
+
+                if (e.id in this.instance._ids) return;
+                this.instance._ids[e.id] = true;
+                var pos = new L.LatLng(e.lat, e.lon);
+                var popup = this.instance._poiInfo(e.tags,e.id);
+                var color = e.tags.collection_times ? 'green':'red';
+                var circle = L.circle(pos, 50, {
+                  color: color,
+                  fillColor: '#fa3',
+                  fillOpacity: 0.5
+                })
+                .bindPopup(popup);
+                 this.instance.addLayer(circle);
+              }
+            },
+          }); 
+
+
+      
 
 		    baseLayers = {"Humanitarian OpenStreetMap": new L.TileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
                     subdomains: ["a", "b", "c"],
@@ -254,7 +316,9 @@
 
 
             overlays = {
-
+              "<br>Overpass API": {
+                "Hospitals" : opl,
+              },
 	            " <br>Imagery Post Disaster" : { 
                 "Open StreetMapathon 1" : TMS1 , 
                 "Open Street Mapathon 2" : TMS2 , 
@@ -271,11 +335,13 @@
 			//var cities = new L.LayerGroup();
 
 
-			var map = L.map('map', {
+			var map = L.map('mapcontent', {
 				center: [11.449069,123.293365],
 				zoom: 8,
 				layers: [baseLayers["Humanitarian OpenStreetMap"]]
 			});
+
+
 
             //map.addLayer(markers);
 
@@ -300,6 +366,7 @@
                     case "Digital Globe Imagery <br>":
                        map.setView([11.280269,124.681751], 12);
                         break;
+
 
                     //default :
                     //    map6.setView([39.6618, -104.8604], 18);
@@ -327,6 +394,8 @@
 			//$ICRCsites = ICRCsites ; 
 			
 			//$('#municip').html(document.getElementsByClassName('iw-content'));
+
+
 		});
 	</script>
 </body>
