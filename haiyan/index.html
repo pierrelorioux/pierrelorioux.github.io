@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Layers Control Example</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="css/leaflet.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/MarkerCluster.css" />
+    <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/leaflet.ie.css" /><![endif]-->
+	 <style>
+      html, body,  
+      #map {
+        width : 99.6%;
+        height : 99.5%;
+      }
+      .evac_person_20131111_swatch1 {padding-left: .5em;background:#fed976;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .evac_person_20131111_swatch2 {padding-left: .5em;background:#feb24c;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .evac_person_20131111_swatch3 {padding-left: .5em;background:#fd8d3c;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .evac_person_20131111_swatch4 {padding-left: .5em;background:#f03b20;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .evac_person_20131111_swatch5 {padding-left: .5em;background:#bd0026;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .legend-title{text-align:center;margin-bottom: 5px;font-family:"Cisalpin St LTD Regular";font-weight:bold;font-size:110%}
+
+
+      .swatch1_pop {padding-left: .5em;background:#f1eccd;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .swatch2_pop {padding-left: .5em;background:#f6efa7;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .swatch3_pop {padding-left: .5em;background:#e2d791;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .swatch4_pop {padding-left: .5em;background:#e2b689;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .swatch5_pop {padding-left: .5em;background:#d29c52;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .swatch6_pop {padding-left: .5em;background:#bb751a;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .swatch7_pop {padding-left: .5em;background:#875d18;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .swatch8_pop {padding-left: .5em;background:#d5d5d5;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+      .legend-title_complete{text-align:center;margin-bottom: 5px;font-family:"Cisalpin St LTD Regular";font-weight:bold;font-size:110%}
+
+
+     .swatch1_NGA {padding-left: .5em;background:#ff0000;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+     .swatch2_NGA {padding-left: .5em;background:#fd7216;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+     .swatch3_NGA {padding-left: .5em;background:#e3d70c;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+     .swatch4_NGA {padding-left: .5em;background:#d3f3b3;height: 16px;margin-right: 5px;display: table-cell;vertical-align:middle;text-align: center;width: 16px;display: inline-block;}
+     .legend-title_NGA{text-align:center;margin-bottom: 5px;font-family:"Cisalpin St LTD Regular";font-weight:bold;font-size:110%}
+
+	  	.leaflet-control-layers-base{
+	      margin-bottom: .2em;
+	      display: block;
+	      padding-left: .5em;
+	    }
+
+	    .leaflet-control-layers-group-name {
+	      font-weight: bold;
+	      margin-bottom: .2em;
+	      display: block;
+	    }
+
+	    .leaflet-control-layers-group {
+	      margin-bottom: .5em;
+	    }
+
+	    .leaflet-control-layers-group label {
+	      padding-left: .5em;
+	    }
+
+	    hr {
+		border-color: rgba(255, 255, 255, 0.38);
+		}
+
+		#municip {
+			background: #FFF;
+			box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+			position:absolute;top:40%;height: 400px;width:400px;left:15px;bottom: 10px;-webkit-border-radius: 5px;
+            border-radius: 5px;
+
+		}
+        #municipopup {
+            background: #FFF;
+            box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+            position:absolute;top:10%;height: 400px;width:400px;left:15px;bottom: 10px;-webkit-border-radius: 5px;
+            border-radius: 5px;
+
+        }
+/*		.leaflet-popup-content-wrapper {
+			background: #FFF;
+			box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+			position:absolute;top:60%;height: 400px;width:200px;left:10px;bottom: 10px;
+		}*/
+
+
+
+    </style>
+</head>
+<body>
+	<div id="map"></div>
+
+
+	<script src="js/jquery10.js"></script>
+	<script src="js/leaflet.js"></script>
+	<script src="js/lvector.js"></script>
+	<script src="js/grouplayer.js"></script>
+  <script src="js/leaflet.markercluster-src.js"></script>
+
+	<script src="js/esri-leaflet.js"></script>
+	<script src="js/geoservices.js"></script>
+  <script src="js/clusterEsri.js"></script>
+
+	<script>
+	var POIfood;
+        
+
+        lvector.Layer.prototype._checkLayerVisibility = function() {
+            if (!this.options.map) {
+                return; // The layer is not present on the map, so do nothing.
+            }
+            //
+            // Store current visibility so we can see if it changed
+            //
+            var visibilityBefore = this.options.visibleAtScale;
+
+            //
+            // Check current map scale and see if it's in this layer's range
+            //
+            var z = this.options.map.getZoom();
+            var sr = this.options.scaleRange;
+            this.options.visibleAtScale = (z >= sr[0] && z <= sr[1]);
+
+            //
+            // Check to see if the visibility has changed
+            //
+            if (visibilityBefore !== this.options.visibleAtScale) {
+                //
+                // It did, hide or show vectors
+                //
+                this[this.options.visibleAtScale ? "_showVectors" : "_hideVectors"]();
+            }
+
+            //
+            // Check to see if we need to set or clear any intervals for auto-updating layers
+            //
+            if (visibilityBefore && !this.options.visibleAtScale && this._autoUpdateInterval) {
+                clearInterval(this._autoUpdateInterval);
+            } else if (!visibilityBefore && this.options.autoUpdate && this.options.autoUpdateInterval) {
+                var me = this;
+                this._autoUpdateInterval = setInterval(function() {
+                    me._getFeatures();
+                }, this.options.autoUpdateInterval);
+            }
+
+        };
+        lvector.AGS.prototype._getFeatures = function() {
+            if (!this.options.map) {
+                return; // The layer is not present on the map, so do nothing.
+            }
+            // Build URL
+            var url = this.options.url + "query" + // Query this layer
+                    "?returnGeometry=true" + // Of course we want geometry
+                    "&outSR=4326" + // receive geometry in WGS 84 Lat/Lng.
+                    "&f=json" + // Wish it were GeoJSON, but we'll take it
+                    "&outFields=" + this.options.fields + // Please return the following fields
+                    "&where=" + this.options.where + // By default return all feature (1=1) but could pass SQL statement (value<90)
+                    "&callback=" + this._globalPointer + "._processFeatures"; // Need this for JSONP
+            if (!this.options.showAll) {
+                url += "&inSR=4326" + // request geometry in WGS 84 Lat/Lng.
+                        "&spatialRel=esriSpatialRelIntersects" + // Find stuff that intersects this envelope
+                        "&geometryType=esriGeometryEnvelope" + // Our "geometry" url param will be an envelope
+                        "&geometry=" + this.options.map.getBounds().toBBoxString(); // Build envelope geometry
+            }
+
+            // JSONP request
+            this._makeJsonpRequest(url);
+
+        };
+        // Lets implement ILayer.
+        lvector.AGS.prototype.onAdd = function(map) {
+            this.setMap(map)
+        }
+        lvector.AGS.prototype.onRemove = function(map) {
+            this.setMap(null)
+        }
+
+
+
+
+		$(document).ready(function() {
+
+			//var template = "<h3>{OBJECTID}</h3>{OBJECTID} Acres<br><small>Property ID: {OBJECTID}<small>";
+			// LogCenter = new lvector.AGS({
+   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/5",
+   //                  fields: "*",
+   //                  uniqueField: "OBJECTID",
+   //                  where: "1=1",
+   //                  //esriOptions: true,
+   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
+   //                  singlePopup: true
+   //          });
+
+   //          BHCU = new lvector.AGS({
+   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/6",
+   //                  fields: "*",
+   //                  uniqueField: "OBJECTID",
+   //                  where: "1=1",
+   //                  esriOptions: true,
+   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',  
+   //                  singlePopup: true,
+   //                  clickEvent: function (feature, event) {
+
+   //                      //alert(feature.properties.with_);
+   //                      //jQuery('#municip').css('left','8px').animate({width: '228px'},500).html(feature.properties.with_);
+   //                  }
+   //          });
+
+   //          Basecamp = new lvector.AGS({
+   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/7",
+   //                  fields: "*",
+   //                  uniqueField: "OBJECTID",
+   //                  where: "1=1",
+   //                  esriOptions: true,
+   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
+   //                  singlePopup: true
+   //          });
+
+   //         	Recomendation = new lvector.AGS({
+   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/0",
+   //                  fields: "*",
+   //                  uniqueField: "OBJECTID",
+   //                  where: "Category='PLANNED'",
+   //                  esriOptions: true,
+   //                  popupTemplate: '<div class="iw-content"><table class="condensed-table"><tr><td>{Description_1}</td></tr></table></div>',
+   //                  singlePopup: true
+   //          });
+
+            
+
+
+            ICRCActivity = new lvector.AGS({
+                    url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/8",
+                    fields: "*",
+                    uniqueField: "OBJECTID",
+                    where: "1=1",
+                    esriOptions: true,
+                    popupTemplate: '<div class="iw-content"><table class="condensed-table"><tr><td>{Description_1}</td></tr></table></div>',
+                    singlePopup: true
+            });
+
+           //var markers = new L.markerClusterGroup().addLayer(ICRCActivity);
+            //markers.addLayer(ICRCActivity);
+
+            ICRCsites = new lvector.AGS({
+                    url: "https://ext.icrc.org/arcgis/rest/services/ICRC/ICRC_Data_Auxiliary_Sphere/MapServer/0",
+                    fields: "*",
+                    uniqueField: "OBJECTID",
+                    where: "OpenY_N='1'",
+                    esriOptions: true,
+                    popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
+                    singlePopup: true
+            });
+
+            TMS1 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls8/{z}/{x}/{y}.png');
+            TMS2 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls8_post/{z}/{x}/{y}.png');
+            TMS3 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls7_post/{z}/{x}/{y}.png');                              
+
+			// AssessedArea = new lvector.AGS({
+   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/3",
+   //                  fields: "*",
+   //                  uniqueField: "OBJECTID",
+   //                  where: "1=1",
+   //                  symbology: {
+			// 	        type: "single",
+			// 	        vectorOptions: {
+			// 	            fillColor: "#2ecc71",
+			// 	            fillOpacity: 0.25,
+			// 	            weight: 1,
+			// 	            opacity: 0.3,
+			// 	            color: "#666"
+			// 	        }
+			// 	    },
+   //                  //esriOptions: true,
+   //                  popupTemplate: '<div class="iw-content"><h3>{Type}</h3><table class="condensed-table"><tr><td>{Name}</td></tr></table></div>',
+   //                  singlePopup: true
+   //              });
+
+			// AssessedMunicipality = new lvector.AGS({
+   //                  url: "https://ext.icrc.org/arcgis/rest/services/ICRC/PHL_Haiyan/MapServer/2",
+   //                  fields: "*",
+   //                  uniqueField: "OBJECTID",
+   //                  where: "1=1",
+   //                  symbology: {
+   //    				        type: "single",
+   //    				        vectorOptions: {
+   //    				            fillColor: "#e74c3c",
+   //    				            fillOpacity: 0.25,
+   //    				            weight: 1,
+   //    				            opacity: 0.3,
+   //    				            color: "#666"
+   //    				        }
+   //    				      },
+   //                  singlePopup: true
+   //                  // clickEvent: function (feature, event) {
+
+   //                  //     //alert(feature.properties.with_);
+   //                  //     jQuery('#municipopup').fadeIn().html('<div class="iw-content"><h3>'+feature.properties.NAME_2+'</h3><table class="condensed-table"><tr><td>Affected Barrangays : '+feature.properties.affected_Barangay+'</td></tr><tr><td>Affected Population : '+feature.properties.affected_Population+'</td></tr><tr><td>Assistance Received : '+feature.properties.assistance_received+'</td></tr><tr><td>Health Structures : '+feature.properties.Health_structures+'</td></tr><tr><td> Water : '+feature.properties.Water+'</td></tr></table></div>');
+   //                  // }
+   //          });
+
+            EvacuatedPersonsByProvince = new L.TileLayer("http://{s}.tiles.mapbox.com/v3/americanredcross.Haiyan_2013-11-11_EvacuatedPersonsByProvince/{z}/{x}/{y}.png", {
+                    subdomains: ["a", "b", "c"],
+                    attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a>. '
+            });
+
+            Population_by_Barangay = new L.TileLayer("http://{s}.tiles.mapbox.com/v3/americanredcross.HAIYAN_OCHA_Population_by_Barangay_2010/{z}/{x}/{y}.png", {
+                    subdomains: ["a", "b", "c"],
+                    attribution: 'Sources : <a href="http://reliefweb.int/" target="_blank">OCHA</a> Data from 2010 Census.'
+            });
+
+           NGA_Damage_Assessment = new L.TileLayer("http://{s}.tiles.mapbox.com/v3/americanredcross.Bridges_Haiyan/{z}/{x}/{y}.png", {
+                    subdomains: ["a", "b", "c"],
+                    attribution: 'Data from USG NGA, Updated November 14, 2013'
+            });
+
+            image = L.tileLayer.wms("https://services.digitalglobe.com/mapservice/wmsaccess?connectid=1ad41a7a-2a21-4221-b524-94aa6b63cdf4", {
+              layers: 'DigitalGlobe:Imagery',
+              format: 'image/png',
+              transparent: true,
+              attribution: "Digital Globe Imagery"
+            });
+
+		    baseLayers = {"Humanitarian OpenStreetMap": new L.TileLayer("http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+                    subdomains: ["a", "b", "c"],
+                    attribution: ' Map data (c) <a href="http://www.openstreetmap.org/" target="_blank">OpenStreetMap</a> contributors, CC-BY-SA.'
+                }),
+                "Mapbox Satelite (Pre-Disaster)": new L.TileLayer("http://{s}.tiles.mapbox.com/v3/icrc.ga4mf3lo/{z}/{x}/{y}.jpg",  {
+                    subdomains: ["a", "b", "c"],
+                    attribution: 'Map data (c) <a href="http://mapbox.com/" target="_blank">Mapbox</a>'
+                })
+            };
+
+
+            overlays = {
+            	"  <br>ICRC Data" :{ 
+
+	                "ICRC Presence" : ICRCsites,
+                    "ICRC Activity" : ICRCActivity,
+
+	            	},
+	            " <br>External Data" : { 
+                "Open Streep mapathon image 1" : TMS1 , 
+                "Open Streep mapathon image 2" : TMS2 , 
+                "Open Streep mapathon image 3" : TMS3 , 
+                "Digital Globe Imagery <br><br>" : image,
+	            	"Evacuated Persons By Province <br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch1'></span><span class='label'>95 - 1,249 persons</span><br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch2'></span><span class='label'>1,250 - 8,999 persons</span><br><span class='evac_person_20131111_swatch3'></span><span class='label'>9,000 - 24,999 persons</span><br> <span class='evac_person_20131111_swatch4'></span> <span class='label'>25,000 - 59,000 persons</span><br> <span class='evac_person_20131111_swatch5'></span> <span class='label'>60,000+ persons</span><br><br>" : EvacuatedPersonsByProvince,
+	            	"Population by Barangay <br><span class='swatch1_pop'></span> <span class='label'>0 - 499 Persons</span><br><span class='swatch2_pop'></span><span class='label'>500 - 4999 Persons</span><br><span class='swatch3_pop'></span> <span class='label'>10001 - 3499 Persons</span><br><span class='swatch4_pop'></span><span class='label'>3500 - 4999 Persons</span><br><span class='swatch5_pop'></span> <span class='label'>5000 - 10000 Persons</span><br><span class='swatch6_pop'></span><span class='label'>Greater than 10000 Persons</span><br><span class='swatch7_pop'></span><span class='label'>Greater than 15,000 Persons</span><br><span class='swatch8_pop'></span> <span class='label'>Data Missing</span><br><br>":Population_by_Barangay,
+	            	"NGA Damage Assessment<br><span class='swatch1_NGA'></span> <span class='label'>Catastrophic Damages</span><br><span class='swatch2_NGA'></span><span class='label'>Extensive Damages</span><br><span class='swatch3_NGA'></span><span class='label'>Moderate Damages</span><br><span class='swatch4_NGA'></span><span class='label'>Limited Damages</span><br>":NGA_Damage_Assessment 
+	            	}
+            };
+
+			//var cities = new L.LayerGroup();
+
+
+			var map = L.map('map', {
+				center: [11.449069,125.293365],
+				zoom: 10,
+				layers: [baseLayers["Humanitarian OpenStreetMap"]]
+			});
+
+            //map.addLayer(markers);
+
+			//L.control.layers(baseLayers, overlays,{collapsed:false}).addTo(map);
+			L.control.groupedLayers(baseLayers, overlays,{collapsed:false}).addTo(map);
+
+
+		    map.on('overlayadd', function(eventLayer) {
+                //IRL use polymorphism not an ugly case statement.
+                switch (eventLayer.name) {
+                    case "Evacuated Persons By Province <br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch1'></span><span class='label'>95 - 1,249 persons</span><br><div class='evacuatedpersons2013111'><span class='evac_person_20131111_swatch2'></span><span class='label'>1,250 - 8,999 persons</span><br><span class='evac_person_20131111_swatch3'></span><span class='label'>9,000 - 24,999 persons</span><br> <span class='evac_person_20131111_swatch4'></span> <span class='label'>25,000 - 59,000 persons</span><br> <span class='evac_person_20131111_swatch5'></span> <span class='label'>60,000+ persons</span><br><br>":
+                        map.setView([11.449069,125.293365], 8);
+                        break;
+                    case "NGA Damage Assessment<br><span class='swatch1_NGA'></span> <span class='label'>Catastrophic Damages</span><br><span class='swatch2_NGA'></span><span class='label'>Extensive Damages</span><br><span class='swatch3_NGA'></span><span class='label'>Moderate Damages</span><br><span class='swatch4_NGA'></span><span class='label'>Limited Damages</span><br>":
+                        map.setView([10.900739,125.267487], 10);
+                        break;
+                    //default :
+                    //    map6.setView([39.6618, -104.8604], 18);
+                    //    new L.Marker([39.6618, -104.8604]).addTo(map6);
+                }
+            });
+
+            // map.on('overlayremove', function(eventLayer) {
+            //     //IRL use polymorphism not an ugly case statement.
+            //     switch (eventLayer.name) {
+            //         case "Assessed Municipality As of 14-11-2013":
+            //             jQuery('#municip').hide();jQuery('#municipopup').hide();
+            //             break;
+            //         //default :
+            //         //    map6.setView([39.6618, -104.8604], 18);
+            //         //    new L.Marker([39.6618, -104.8604]).addTo(map6);
+            //     }
+            // });
+			//$ICRCsites = ICRCsites ; 
+			
+			//$('#municip').html(document.getElementsByClassName('iw-content'));
+		});
+	</script>
+</body>
+</html>
