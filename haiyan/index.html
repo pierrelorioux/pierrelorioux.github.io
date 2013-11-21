@@ -144,6 +144,7 @@
 <body>
   <div id="mapcontent" class="leaflet-container leaflet-fade-anim"></div>
   <div class="overlay footer">
+    
 </div>
  <!-- <div class="overlay title"> <h2>Haiyan Cross Data Map</h2> </div> -->
 
@@ -243,6 +244,7 @@
             TMS1 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls8/{z}/{x}/{y}.png');
             TMS2 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls8_post/{z}/{x}/{y}.png');
             TMS3 = L.tileLayer('http://imagery.openstreetmap.fr/tms/1.0.0/haiyan_ls7_post/{z}/{x}/{y}.png');                              
+            TMS4 = L.tileLayer('http://hiu-maps.net/hot/1.0.0/cebu-post-flipped/{z}/{x}/{y}.png'); 
 
 
 
@@ -323,6 +325,8 @@
                 "Open StreetMapathon 1" : TMS1 , 
                 "Open Street Mapathon 2" : TMS2 , 
                 "Open Street Mapathon 3" : TMS3 , 
+                "Nord Cevu" : TMS4,
+
                 "Digital Globe Imagery <br>" : image,
               },
                 "<br>Other Data" : { 
@@ -363,9 +367,7 @@
                      case "Population by Barangay":
                         $(".overlay").append("<div class='pop'>Population by Barangay<br><br><span class='swatch1_pop'></span> <span class='label'>0 - 499 Persons</span><br><span class='swatch2_pop'></span><span class='label'>500 - 4999 Persons</span><br><span class='swatch3_pop'></span> <span class='label'>10001 - 3499 Persons</span><br><span class='swatch4_pop'></span><span class='label'>3500 - 4999 Persons</span><br><span class='swatch5_pop'></span> <span class='label'>5000 - 10000 Persons</span><br><span class='swatch6_pop'></span><span class='label'>Greater than 10000 Persons</span><br><span class='swatch7_pop'></span><span class='label'>Greater than 15,000 Persons</span><br><span class='swatch8_pop'></span> <span class='label'>Data Missing</span><br><br></div>");
                         break;
-                    case "Digital Globe Imagery <br>":
-                       map.setView([11.280269,124.681751], 12);
-                        break;
+
 
 
                     //default :
