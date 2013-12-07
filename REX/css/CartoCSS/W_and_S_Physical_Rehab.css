@@ -1,0 +1,41 @@
+/** W_and_S_Physical_Rehab */
+
+#w_and_s_physical_rehab{
+  marker-fill: #FF5C00;
+  marker-line-color: #FFF;
+  marker-line-width: 1;
+  marker-line-opacity: 1;
+  marker-opacity: 0.7;
+  marker-placement: point;
+  marker-type: ellipse;
+  marker-allow-overlap: true;
+  marker-clip: false;
+  marker-multi-policy: largest;
+}
+#w_and_s_physical_rehab [ awwcs <= 13.0] {
+   marker-width: 35.6;
+}
+#w_and_s_physical_rehab [ awwcs <= 9.0] {
+   marker-width: 31.1;
+}
+#w_and_s_physical_rehab [ awwcs <= 8.0] {
+   marker-width: 26.7;
+}
+#w_and_s_physical_rehab [ awwcs <= 7.0] {
+   marker-width: 22.2;
+}
+#w_and_s_physical_rehab [ awwcs <= 5.0] {
+   marker-width: 17.8;
+}
+#w_and_s_physical_rehab [ awwcs <= 4.0] {
+   marker-width: 13.3;
+}
+#w_and_s_physical_rehab [ awwcs <= 3.0] {
+   marker-width: 8.9;
+}
+#w_and_s_physical_rehab [ awwcs <= 2.0] {
+   marker-width: 4.4;
+}
+#w_and_s_physical_rehab [ awwcs <= 1.0] {
+   marker-width: 0.0;
+}

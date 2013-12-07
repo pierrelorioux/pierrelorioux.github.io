@@ -1,0 +1,47 @@
+/** Civilians_RFL */
+
+#data_prot_pcrfl{
+  marker-fill: rgb(230,70,51);
+  marker-line-color: #FFF;
+  marker-line-width: 1;
+  marker-line-opacity: 1;
+  marker-opacity: 0.8;
+  marker-placement: point;
+  marker-type: ellipse;
+  marker-allow-overlap: true;
+  marker-clip: false;
+  marker-multi-policy: largest;
+}
+#data_prot_pcrfl [ rcm_collected <= 43044.0] {
+   marker-width: 30.0;
+}
+#data_prot_pcrfl [ rcm_collected <= 4297.0] {
+   marker-width: 27.8;
+}
+#data_prot_pcrfl [ rcm_collected <= 1659.0] {
+   marker-width: 25.6;
+}
+#data_prot_pcrfl [ rcm_collected <= 795.0] {
+   marker-width: 23.3;
+}
+#data_prot_pcrfl [ rcm_collected <= 453.0] {
+   marker-width: 21.1;
+}
+#data_prot_pcrfl [ rcm_collected <= 180.0] {
+   marker-width: 18.9;
+}
+#data_prot_pcrfl [ rcm_collected <= 116.0] {
+   marker-width: 16.7;
+}
+#data_prot_pcrfl [ rcm_collected <= 44.0] {
+   marker-width: 14.4;
+}
+#data_prot_pcrfl [ rcm_collected <= 32.0] {
+   marker-width: 12.2;
+}
+#data_prot_pcrfl [ rcm_collected <= 19.0] {
+   marker-width: 10.0;
+}
+#data_prot_pcrfl [ rcm_collected <= 5.0] {
+   marker-width: 5.0;
+}

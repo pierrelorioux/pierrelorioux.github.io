@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+   <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+    <![endif]-->  
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <link rel="stylesheet" href="../css/leaflet.css" />
+ <!--[if lte IE 8]>
+     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.ie.css" />
+ <![endif]-->
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+  <link rel="stylesheet" href="../css/bootstrap.css" />
+  <link href="../css/960.css" rel="stylesheet" media="screen" />
+  <link href="../css/defaultTheme.css" rel="stylesheet" media="screen" />
+  <link href="../css/myTheme.css" rel="stylesheet" media="screen" />
+  <link href="../css/rex.css" rel="stylesheet" media="screen" />
+	<script src="../js/jquery.fixedheadertable.js"></script>
+  <script src="../js/amcharts.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.js"></script>
+
+  <style>
+      html, body {padding: 0; color:#000;background:#fff; font-family: 'Open Sans', sans-serif;}
+  </style>
+  <script>
+  var map;
+  function init(){
+	 $('#cartodb-map').click(false);
+    $(".table").hide();
+    $('.span4spe2').show();
+    $('.span4spe2').html('<h4 style="margin-left:15px"><p class="titre">Expenditure in KCHF</p></h4> ');
+    map = new L.Map('cartodb-map', { 
+      center: [54.016241889667015, 74.53125],
+      maxZoom:6,
+      zoomControl:false,
+      minZoom:2,
+      zoom: 2
+    });
+    // var layerREXCoverage = L.tileLayer('http://{s}.tiles.mapbox.com/v3/icrc.map-fgsh86di/{z}/{x}/{y}.png', {
+    //   attribution: 'MapBox'
+    // }).addTo(map);
+    $('spam10spe h4').remove(); 
+    $(".table").show();
+    $('.span10spe').css('height','400px').css('width','430px');
+    $('#span4spe').hide();
+    $(".table").remove();
+		
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                        /*CONSTRUCTION DES TABLES */
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // FOnction qui construit les tables en fonction du nom de région 
+    function table(nomregion) {
+      $(".span10spe").html('<table class="fancyTable" id="myTable01" cellpadding="0" cellspacing="0"><thead><tr><th>Delegation</th><th>Total (in KCHF)</th><th>Protection (in KCHF)</th><th> Assistance (in KCHF)</th><th> Prevention (in KCHF)</th><th> Cooperation with National Societies (in KCHF)</th><th> No specific programs (in KCHF)</th><th> Imple-mentation Rate (%) </th><th>Expatriates</th><th>National staff</th><th></th></thead><tbody></tbody></table>') ;
+      //Table au depart de l'application 
+      var url2 = "http://icrc.cartodb.com/api/v2/sql?q=SELECT * FROM rex2012 WHERE nom is not null and codereg = '"+nomregion+"' and data='exp' ORDER BY codereg ASC , nom ASC &api_key=d0e92bbe039fadc96027c54db1fe94ae438d5bbc" ;
+      var ajaxData = {}
+      $.ajax({
+        url: url2,
+        type: 'GET',
+        data: ajaxData,
+        dataType: 'jsonp',
+        success:function(result){
+          $.each(result.rows,function(i, val) {
+
+            //Ajout d'un délimitateur de miliers 
+            function addCommas(nStr) {
+              nStr += '';
+              var x = nStr.split('.');
+              var x1 = x[0];
+              var x2 = x.length > 1 ? '.' + x[1] : '';
+              var rgx = /(\d+)(\d{3})/;
+              while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + "," + '$2');
+              }
+              //return x1 + x2; pour les chiffre après la virgule
+              return x1 ;
+            };
+
+				    var newRowContent = "<tr><td style='text-align:left'>"+val.nom+"&nbsp;&nbsp;&nbsp;</td><td style='color:#386CB0'>"+ addCommas(val.eet)+"</td><td style='color:#386CB0' >"+ addCommas(val.eeprot)+"</td><td style='color:#386CB0' >"+ addCommas(val.eea)+"</td><td style='color:#386CB0'>"+ addCommas(val.eeprev)+"</td><td style='color:#386CB0'>"+ addCommas(val.eecwns)+"</td><td style='color:#386CB0'>"+ val.eensp+"</td><td style='color:#386CB0' >"+ val.eiir+"</td><td style='color:#386CB0' >"+ val.ehe+"</td><td style='color:#386CB0'>"+ val.ehns+"</td></tr>";
+            var $newRowContent = newRowContent;
+            $(newRowContent).appendTo("tbody");
+          });
+        }
+      });
+		};
+
+    //Premiere table visible au lancement de la page
+    table('AFRICA');
+    //fixer 1er row et 1ere colonne 
+		$('#myTable01').fixedHeaderTable({ height: '400', altClass: 'odd', footer: true, fixedColumns: 1, themeClass: 'fancyTable' });
+    
+    //Construction des tables au clic sur un onglet de région. 
+    var $options = $('.nav li');
+    $options.click(function(e) {
+      var $li = $(e.target);
+      var area = $li.attr('data-toggle');
+      // if click sur le moyen orient
+      if(area == 'me'){
+        $(".fancyTable").html('');
+        $('li').removeClass('active');
+        $('#me').addClass('active');
+        table('MO');
+        $('#myTable01').fixedHeaderTable({ height: '400', altClass: 'odd', footer: true, fixedColumns: 1, themeClass: 'fancyTable' });
+      };
+      if(area == 'eu'){
+        $(".fancyTable").html('');
+        $('li').removeClass('active');
+        $('#eu').addClass('active');
+        table('EURAM');
+        $('#myTable01').fixedHeaderTable({ height: '400', altClass: 'odd', footer: true, fixedColumns: 1, themeClass: 'fancyTable' });
+      };
+      if(area == 'as'){
+        $(".fancyTable").html('');
+        $('li').removeClass('active');
+        $('#as').addClass('active');
+        table('ASIA');
+        $('#myTable01').fixedHeaderTable({ height: '400', altClass: 'odd', footer: true, fixedColumns: 1, themeClass: 'fancyTable' });
+      };
+      if(area == 'af'){
+        $(".fancyTable").html('');
+        $('li').removeClass('active');
+        $('#af').addClass('active');
+        table('AFRICA');
+        $('#myTable01').fixedHeaderTable({ height: '400', altClass: 'odd', footer: true, fixedColumns: 1, themeClass: 'fancyTable' });
+      };
+    });
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                        /*Construction des Cercles et des Graphs  */
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ var options = {
+    zoomControl: false,  // dont add the zoom overlay (it is added by default)
+    loaderControl: true //dont show tiles loader
+  };
+
+       
+cartodb.createVis('cartodb-map', 'http://icrc.cartodb.com/api/v2/viz/cdfea9cc-5dcf-11e3-b16c-3085a9a9563c/viz.json', options)
+    .done(function(vis, layers) {
+      // there are two layers, base layer and points layer
+      var sublayer = layers[1].getSubLayer(0);
+      var sublayer2 = layers[1].getSubLayer(1);
+
+      var lay = vis.getLayers();
+//console.log(lay);
+      sublayer.set({ 'interactivity': ['cartodb_id','delegdescr'] });
+      
+      sublayer2.set( {
+        'sql': "SELECT * FROM rex2012 WHERE data = 'exp'",
+        'cartocss': "/** Expenditure */ #rex{ marker-fill: #3E7BB6; marker-line-color: #FFF; marker-line-width: 1; marker-line-opacity: 1; marker-opacity: 0.9; marker-placement: point; marker-type: ellipse; marker-allow-overlap: true; marker-clip: false; marker-multi-policy: largest; } #rex [ eet > 60013.0] { marker-width: 50; } #rex [ eet <= 60013.0] { marker-width: 45; } #rex [ eet <= 40000.0] { marker-width: 40; } #rex[ eet <= 30000.0] { marker-width: 35; } #rex [ eet <= 20000.0] { marker-width: 30.0; } #rex [ eet <= 10000.0] { marker-width: 20.0; } #rex[ eet <= 5000.0] { marker-width: 15.0; } #rex [ eet <= 2000.0] { marker-width: 10.0; } #rex [ eet <= 4429.0] { marker-width: 13.3; } #rex [ eet <= 2748.0] { marker-width: 11.7; } #rex[ eet <= 2073.44381] { marker-width: 10.0; }",
+        'interactivity' : ['cartodb_id','nom','eeprot','eea','eeprev','eecwns','eensp','eet','eetow','eiir','ehe','ehns']
+      });
+
+      var sub2 = sublayer2.get('interactivity');
+      //console.log(sub2);
+
+      //PArfais pour la fonction du graph 
+      sublayer2.on('featureOver', function(e, latlng, pos, data) {
+        $( "#draggable" ).show(); 
+        //$('.closebox').show();
+        $('.headerbox').show();
+        function addCommas(nStr) {
+          nStr += '';
+          var x = nStr.split('.');
+          var x1 = x[0];
+          var x2 = x.length > 1 ? '.' + x[1] : '';
+          var rgx = /(\d+)(\d{3})/;
+          while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + "," + '$2');
+          }
+            return x1 ;
+        };
+        function sansdecim(nStr) {
+          nStr += '';
+          var x = nStr.split('.');
+          var x1 = x[0];
+          return x1 ;
+        };
+        $('#span4spe').show();
+        $('.span4spe3').show();
+        $('.span4spe4').show();
+        $('.headerbox').html('<h5 style="color:#386CB0;margin-left:15px;font-weight:100">'+data.nom+'</h5><h5 style="margin-left:15px"><p style="display:inline;padding-left:0px;color:#000;font-weight:100">Expenditure :</p></h6> <h5 style="color:#fff;margin-left:15px" ><p style="display:inline; color:#386CB0;font-size:110%">'+addCommas(data.eet)+' </p><p style ="color:#000;display:inline;font-weight:100">KCHF</p></h5><hr>');
+        $('#span4spe').css('height','400').css('width', '250px').css('top', '285px').css('left', '10px').css('z-index','9999999999999');
+
+        var sansdecinprot= sansdecim(data.eeprot),
+        sansdecimcoop=sansdecim(data.eecwns),
+        sansdecimprev=sansdecim(data.eeprev),
+        sansdecimass=sansdecim(data.eea),
+        sansdecimno=sansdecim(data.eensp);
+        var chart;
+        var legend;
+        var chartData = [{
+              country: "Protection",
+              litres: sansdecinprot},
+          {
+              country: "Coop with Nat.Soc.",
+              litres: sansdecimcoop},
+          {
+              country: "Prevention",
+              litres: sansdecimprev},
+          {
+              country: "Assistance",
+              litres: sansdecimass},
+          {
+              country: "No Specific programs",
+              litres: sansdecimno}];
+
+        // PIE CHART
+        chart = new AmCharts.AmPieChart();
+        chart.dataProvider = chartData;
+        chart.labelsEnabled=false;
+        chart.titleField = "country";
+        chart.valueField = "litres";
+        chart.outlineColor = "#fff";
+        chart.outlineAlpha = 0.8;
+        chart.outlineThickness = 1;
+        chart.startDuration=0;
+        chart.color ="#000";
+        chart.colors = ["#FFFF99", "#BEAED4", "#FDC086", "#7FC97F", "#95A5A6"];
+        // LEGEND
+        legend = new AmCharts.AmLegend();
+        //legend.align = "center";
+        legend.valueWidth=90;
+        legend.top= 350 ;
+        legend.color = "#000";
+        legend.markerType = "circle";
+        chart.addLegend(legend);
+        // WRITE
+        chart.write("span4spe");
+
+          //$( "#draggable" ).draggable();  
+      });
+      
+      sublayer2.on('featureOut', function(e, latlng, pos, data) {
+        $( "#draggable" ).hide();});
+
+      sublayer.infowindow.set('tooltip', $('.cartodb-tooltip').html());
+
+      var tooltip = new cartodb.geo.ui.Tooltip({
+             template: '<div style="text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;">{{delegdescr }}</div>',
+             layer: sublayer
+            });
+            tooltip.render();
+            $('#cartodb-map').append(tooltip.el);
+
+          //sublayer.on('mouseout', function(e) {
+          // resetStyle(e.layer);
+          //});
+      // vis.addOverlay({
+      //   type: 'tooltip',
+      //   //template: '<p>{{delegdescr }}</p>'
+      //   template: '<p>{{cartodb_id}}</p>'
+      // });
+
+    });
+
+ 
+
+
+
+     setTimeout(function(){
+       var $inner = $( '.frame' );
+      var lefty = $inner.css('width');
+      var $innertab = $( '.tabbable' );
+      var leftytab = $innertab.css('width');
+      var $innertitre = $( '.titre' );
+      var leftytitre = $innertitre.css('padding-left');
+      var $innerbox = $( '.tablebox' );
+      var leftybox = $innerbox.css('background-position-x');
+      if (lefty == '430px') $( '.frame' ).animate ({ 'right' : '0%','width' : '0px'}, 250 ); 
+      if (lefty == '-17px') $( '.frame' ).animate ({ 'right' : '0%','width' : '430px' }, 250 );
+      if (lefty == '0px') $( '.frame' ).animate ({ 'right' : '0%','width' : '430px' }, 250 );
+      if (lefty == '430px') $( '.tablebox' ).animate ({ 'right' : '0px'}, 250 );
+      if (lefty == '430px') $( '.navnotes' ).css('background','url("../img/history_nav.png") no-repeat scroll -8px -2px rgba(176, 176, 176, 0)');
+      if (lefty == '-17px') $( '.tablebox' ).animate ({ 'right' : '410px'}, 250 );
+      if (lefty == '-17px') $( '.navnotes' ).css('background','url("../img/history_nav.png") no-repeat scroll -121px -2px rgba(176, 176, 176, 0)'); 
+      if (lefty == '0px') $( '.tablebox' ).animate ({ 'right' : '410px'}, 250 );
+      if (lefty == '0px') $( '.navnotes' ).css('background','url("../img/history_nav.png") no-repeat scroll -121px -2px rgba(176, 176, 176, 0)'); 
+      if (leftytab == '430px') $( '.tabbable' ).animate ({ 'right' : '0%','width' : '0px' }, 250 ); 
+      if (leftytab == '0px') $( '.tabbable' ).animate ({ 'right' : '0%','width' : '430px' }, 250 );
+      if (lefty == '430px') $('.titre').animate({'padding-left':'40%'},250);
+      if (lefty == '-17px') $('.titre').animate({'padding-left':'27%'},250);
+      if (lefty == '0px') $('.titre').animate({'padding-left':'27%'});
+      if (lefty == '430px') $( '.nav' ).animate ({ 'right' : '0%','width' : '0px' }, 250 ).hide(); 
+      if (lefty == '-17px') $( '.nav' ).animate ({ 'right' : '0%','width' : '430px' }, 250 ).show();
+      if (lefty == '0px') $( '.nav' ).animate ({ 'right' : '0%','width' : '430px' }, 250 ).show();
+     },6000);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                        /*ELEMENTS DE UI  */
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+     /*LE SLIDE DU TABLEAU  */
+
+    $(".navnotes").click(function() {
+      var $inner = $( '.frame' );
+      var lefty = $inner.css('width');
+      var $innertab = $( '.tabbable' );
+      var leftytab = $innertab.css('width');
+      var $innertitre = $( '.titre' );
+      var leftytitre = $innertitre.css('padding-left');
+      var $innerbox = $( '.tablebox' );
+      var leftybox = $innerbox.css('background-position-x');
+      if (lefty == '430px') $( '.frame' ).animate ({ 'right' : '0%','width' : '0px'}, 250 ); 
+      if (lefty == '-17px') $( '.frame' ).animate ({ 'right' : '0%','width' : '430px' }, 250 );
+      if (lefty == '0px') $( '.frame' ).animate ({ 'right' : '0%','width' : '430px' }, 250 );
+      if (lefty == '430px') $( '.tablebox' ).animate ({ 'right' : '0px'}, 250 );
+      if (lefty == '430px') $( '.navnotes' ).css('background','url("../img/history_nav.png") no-repeat scroll -8px -2px rgba(176, 176, 176, 0)');
+      if (lefty == '-17px') $( '.tablebox' ).animate ({ 'right' : '410px'}, 250 );
+      if (lefty == '-17px') $( '.navnotes' ).css('background','url("../img/history_nav.png") no-repeat scroll -121px -2px rgba(176, 176, 176, 0)'); 
+      if (lefty == '0px') $( '.tablebox' ).animate ({ 'right' : '410px'}, 250 );
+      if (lefty == '0px') $( '.navnotes' ).css('background','url("../img/history_nav.png") no-repeat scroll -121px -2px rgba(176, 176, 176, 0)'); 
+      if (leftytab == '430px') $( '.tabbable' ).animate ({ 'right' : '0%','width' : '0px' }, 250 ); 
+      if (leftytab == '0px') $( '.tabbable' ).animate ({ 'right' : '0%','width' : '430px' }, 250 );
+      if (lefty == '430px') $('.titre').animate({'padding-left':'40%'},250);
+      if (lefty == '-17px') $('.titre').animate({'padding-left':'27%'},250);
+      if (lefty == '0px') $('.titre').animate({'padding-left':'27%'});
+      if (lefty == '430px') $( '.nav' ).animate ({ 'right' : '0%','width' : '0px' }, 250 ).hide(); 
+      if (lefty == '-17px') $( '.nav' ).animate ({ 'right' : '0%','width' : '430px' }, 250 ).show();
+      if (lefty == '0px') $( '.nav' ).animate ({ 'right' : '0%','width' : '430px' }, 250 ).show();
+    });
+    
+    /* FERMER LA DIV GRAPH */
+    $(".closebox").click(function() {
+          $(".span4spe3").hide(); $("#span4spe").hide();$(".closebox").hide();$(".headerbox").hide();
+    });
+
+    $('.leaflet-control-attribution').remove();
+
+    /* FONCTION DU MENU DEROULANT */
+    var $options = $('#layer_selector li');
+    $options.click(function(e) {
+      var $li = $(e.target);
+      var area = $li.attr('data');
+      $options.removeClass('selected');
+      $li.addClass('selected');
+      if(area == 'Budget'){
+      window.location = 'expenditure.html'; 
+      };
+      if(area == 'eco_security') {
+         window.location = 'civilians_ecosec.html'; 
+      };
+      if(area == 'WAT') {
+        window.location = 'civilians_wathab.html'; 
+      };
+      if(area == 'cphc') {
+        window.location = 'civilians_primary_health_care.html'; 
+      };
+      if(area == 'pdotfa') { 
+        window.location = 'ppl_dpvd_of_fdm_assist.html';     
+      };
+      if(area == 'wshfa') {     
+         window.location = 'w_and_s_hosp_first_aid.html';
+      };
+      if(area == 'awwcs') {     
+         window.location = 'w_and_s_physical_rehab.html';
+      };
+      if(area == 'icrc') {     
+         window.location = 'ICRCpresence.html';
+      };
+      if(area == 'crfl') {     
+         window.location = 'civilians_rfl.html';
+      };
+      if(area == 'pdotfv') {     
+         window.location = 'ppl_dpvd_of_fdm_prot.html';
+      };
+    });
+  };
+	</script>
+</head>
+
+<body onload="init()">
+
+  <div class ="headercolored"></div>
+
+    <div class ="span12spe">
+
+      <div class="logo"><img src = "../img/logo.png "></img></div>
+     
+      <div class="maintitre">
+          <div class="Annual">ANNUAL REPORT</div>
+          <div class="annee12">2012</div>
+          <div class="Mainop">Main Operational results and expenditures (figures)</div>
+      </div>
+    
+    </div>
+
+    <div class="tabbable">
+      <ul class="nav nav-tabs" style="">
+        <li id = "af" class="active"><a href="#Africa" data-toggle="af">Africa</a></li>
+        <li id = "as"><a href="#Asia and the Pacific" data-toggle="as">Asia and the Pacific</a></li>
+        <li id = "eu"><a href="#Europe and the Americas" data-toggle="eu">Europe and the Americas</a></li>
+        <li id = "me"><a href="#Middle East" data-toggle="me">Middle East</a></li>
+      </ul>
+    </div>
+
+    <div id='cartodb-map'></div>
+
+    <div id="layer_selector" class="cartodb_infobox">  
+      <div class="dropdown0">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html"></a>
+          <li style="border-left: 0px solid #000;background:rgba(255,255,255,0);color: #EEECEC;" data="icrc">ICRC presence</li>
+      </div>
+      <div class="dropdown3">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+          <li style="border-left: 0px solid #000;background:rgba(255,255,255,0);color: #EEECEC;" >Civilians <p class="fleche"></p></li>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <li style="width:190px" data="eco_security">Economic security</li>
+          <li data="crfl" style="width:190px">Restoring family links</li>
+          <li style="width:190px" data="cphc" >Primary health care</li>
+          <li style="width:190px" data="WAT"> Water and Habitat activities</li>
+        </ul>
+      </div>
+      <div class="dropdown">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+          <li style="border-left: 0px solid #000;background:rgba(255,255,255,0);color: #EEECEC;">People deprived of their freedom <p class="fleche"></li>
+        </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li style="width:225px" data="pdotfa"> Assistance</li>
+            <li data="pdotfv" style="width:225px"> Protection</li>
+          </ul>
+      </div>
+      <div class="dropdown2">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+          <li style="border-left: 0px solid #000;background:rgba(255,255,255,0);color: #EEECEC;">Wounded and sick <p class="fleche"> </li>
+        </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <li data="awwcs" style="width:170px">Physical rehabilitation</li>
+            <li data="wshfa" style="width:170px">Hospitals and first aid</li>
+          </ul>
+      </div>
+      <div class="dropdown4">
+        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html"></a>
+          <li style="border-left: 0px solid #000;background:rgba(255,255,255,0);color:#EEECEC;" data="Budget">Expenditure in KCHF</li>
+      </div>
+    </div>
+
+    <div class="frame">
+      <div class ="span10spe" ></div>
+    </div>
+
+    <div class="span4spe2" style="display:none"></div>
+    <div id ="draggable" style="z-index:9999;">
+      <div class="closebox" style="display:none"><img src = "cross.png " height="10px"></img></div>
+      <div class ="headerbox" style="display:none"></div>
+      <div id="span4spe"></div>
+      <div class="span4spe3" style="display:none"></div>
+    </div>
+
+    <div class="footmenu"></div>
+    <div class="tablebox"><a class="navnotes" ></a></div>
+    <div class="disclaimer">The boundaries and names shown and the designations used on this map do not imply official endorsement or acceptance by the ICRC<span class="gis">EHG13066&nbsp;</span>
+    </div>
+</body>
+</html>

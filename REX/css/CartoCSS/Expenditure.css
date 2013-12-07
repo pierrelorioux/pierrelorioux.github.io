@@ -1,0 +1,51 @@
+  /** Expenditure */
+
+#expenditure{
+  marker-fill: #3E7BB6;
+  marker-line-color: #FFF;
+  marker-line-width: 1;
+  marker-line-opacity: 1;
+  marker-opacity: 0.9;
+  marker-placement: point;
+  marker-type: ellipse;
+  marker-allow-overlap: true;
+  marker-clip: false;
+  marker-multi-policy: largest;
+}
+#expenditure [ eet > 60013.0] {
+   marker-width: 50;
+}
+#expenditure [ eet <= 60013.0] {
+   marker-width: 45;
+}
+#expenditure [ eet <= 40000.0] {
+   marker-width: 40;
+
+}
+#expenditure [ eet <= 30000.0] {
+   marker-width: 35;
+
+}
+#expenditure [ eet <= 20000.0] {
+   marker-width: 30.0;
+
+}
+#expenditure [ eet <= 10000.0] {
+   marker-width: 20.0;
+
+}
+#expenditure [ eet <= 5000.0] {
+   marker-width: 15.0;
+}
+#expenditure [ eet <= 2000.0] {
+   marker-width: 10.0;
+}
+#expenditure [ eet <= 4429.0] {
+   marker-width: 13.3;
+}
+#expenditure [ eet <= 2748.0] {
+   marker-width: 11.7;
+}
+#expenditure [ eet <= 2073.44381] {
+   marker-width: 10.0;
+}

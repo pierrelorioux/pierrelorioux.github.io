@@ -1,0 +1,34 @@
+.Annual{
+	padding-left: 5px;
+	color: #EEECEC;
+	font-size: 33px;
+	position: absolute;
+	top: -10px;
+	letter-spacing: 1px;
+}
+.annee12{
+	padding-left: 5px;
+	color: #EEECEC;
+	position: absolute;
+	font-size: 33px;
+	top: 27px;
+	letter-spacing: 2px;
+}
+.Mainop{
+	line-height: 15px;
+	padding-bottom: 0;
+	color: #EEECEC;
+	top: 22px;
+	height: 100px;
+	width: 200px;
+	left: 95px;
+	position: absolute;
+	font-size: 12.7px;
+	text-transform: uppercase;
+}
+.maintitre{
+   	position: absolute;
+    top: 35px;
+    height: 100px;
+    width: 800px;
+    }

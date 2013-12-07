@@ -1,0 +1,7 @@
+Sub Macro1()
+Dim wsA As Worksheet
+For Each wsA In ActiveWorkbook.Worksheets
+    MsgBox (wsA.Name)
+    wsA.SaveAs Filename:="P:\GIS\GIS\World\ICRC\2013\Web\REX\2012-annual-report-map\DataModel\Tables\" & wsA.Name & ".xls"
+Next
+End Sub

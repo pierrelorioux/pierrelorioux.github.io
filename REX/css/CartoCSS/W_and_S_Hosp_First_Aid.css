@@ -1,0 +1,41 @@
+/** W_and_S_Hosp_First_Aid */
+
+#w_and_s_hosp_first_aid{
+  marker-fill: #FF5C00;
+  marker-line-color: #FFF;
+  marker-line-width: 1;
+  marker-line-opacity: 1;
+  marker-opacity: 0.7;
+  marker-placement: point;
+  marker-type: ellipse;
+  marker-allow-overlap: true;
+  marker-clip: false;
+  marker-multi-policy: largest;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 13.0] {
+   marker-width: 35.6;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 9.0] {
+   marker-width: 31.1;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 8.0] {
+   marker-width: 26.7;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 7.0] {
+   marker-width: 22.2;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 5.0] {
+   marker-width: 17.8;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 4.0] {
+   marker-width: 13.3;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 3.0] {
+   marker-width: 8.9;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 2.0] {
+   marker-width: 4.4;
+}
+#w_and_s_hosp_first_aid [ awwhs <= 1.0] {
+   marker-width: 0.0;
+}

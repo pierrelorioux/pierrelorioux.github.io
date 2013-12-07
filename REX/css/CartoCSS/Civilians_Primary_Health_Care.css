@@ -1,0 +1,44 @@
+/** Civilians_Primary_Health_Care */
+
+#civilians_primary_health_care{
+  marker-fill: rgb(230,70,51);
+  marker-line-color: #FFF;
+  marker-line-width: 1;
+  marker-line-opacity: 1;
+  marker-opacity: 0.8;
+  marker-placement: point;
+  marker-type: ellipse;
+  marker-allow-overlap: true;
+  marker-clip: false;
+  marker-multi-policy: largest;
+}
+#civilians_primary_health_care[ acphcs <= 52.0] {
+   marker-width: 40.0;
+}
+#civilians_primary_health_care[ acphcs <= 50.0] {
+   marker-width: 35.6;
+}
+#civilians_primary_health_care[ acphcs <= 40.0] {
+   marker-width: 31.1;
+}
+#civilians_primary_health_care[ acphcs <= 28.0] {
+   marker-width: 26.7;
+}
+#civilians_primary_health_care[ acphcs <= 12.0] {
+   marker-width: 22.2;
+}
+#civilians_primary_health_care[ acphcs <= 10.0] {
+   marker-width: 17.8;
+}
+#civilians_primary_health_care[ acphcs <= 7.0] {
+   marker-width: 13.3;
+}
+#civilians_primary_health_care[ acphcs <= 5.0] {
+   marker-width: 8.9;
+}
+#civilians_primary_health_care [ acphcs <= 4.0] {
+   marker-width: 4.4;
+}
+#civilians_primary_health_care [ acphcs <= 1.0] {
+   marker-width: 0.0;
+}
