@@ -88,14 +88,14 @@
         /////////////////////////////////////////////////////////////////////////////////////
         
         var LeafIcon = L.Icon.extend({
-        iconUrl: 'img/ecole-01.png',
+        iconUrl: 'img/ecole_01.png',
         iconSize: new L.Point(49, 50),
         //shadowSize: new L.Point(68, 95),
         //iconAnchor: new L.Point(22, 94),
         //popupAnchor: new L.Point(-3, -76)
         });
         
-        var ecolicon = new LeafIcon('img/ecole-01.png'),
+        var ecolicon = new LeafIcon('img/ecole_01.png'),
         marker = new L.Marker(new L.LatLng(47.91137, 1.90235), {icon: ecolicon});
         //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
         //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
@@ -105,7 +105,7 @@
         /////////////////////////////////////////////////////////////////////////////////////////
         
         var LeafIcon2 = L.Icon.extend({
-        iconUrl: 'img/ecole-02.png',
+        iconUrl: 'img/ecole_02.png',
         iconSize: new L.Point(49, 50),
         //shadowSize: new L.Point(68, 95),
         //iconAnchor: new L.Point(22, 94),
@@ -122,7 +122,7 @@
         //////////////////////////////////////////////////////////////////////////////////////////
         
         var LeafIcon3 = L.Icon.extend({
-        iconUrl: 'img/ecole-03.png',
+        iconUrl: 'img/ecole_03.png',
         iconSize: new L.Point(49, 50),
         //shadowSize: new L.Point(68, 95),
         //iconAnchor: new L.Point(22, 94),
@@ -138,7 +138,7 @@
             $('#mapbox').next('.divUniv').remove();
             $('#mapbox').after($('<div />').addClass('divUniv'));
             $('.divUniv')
-            .html("<div class='titre'><div class='sp16'><img src='img/ecole-03.png' width='50' height='50' alt='l'Observatoire'/>Master 2 SIGGEST : Mention Bien</div><p class = 'trucs'> - Projet tutauré :<a href='http://remicarto.webou.net/' target=_blank> Paysage sonore d'Orléans</a></p><br></div>")
+            .html("<div class='titre'><div class='sp16'><img src='img/ecole_03.png' width='50' height='50' alt='l'Observatoire'/>Master 2 SIGGEST : Mention Bien</div><p class = 'trucs'> - Projet tutauré :<a href='http://remicarto.webou.net/' target=_blank> Paysage sonore d'Orléans</a></p><br></div>")
             //.prepend('<div class="close"></div>')
             //.addClass('close').text('Close')
             .css({height : 105, 'margin-right':150})
