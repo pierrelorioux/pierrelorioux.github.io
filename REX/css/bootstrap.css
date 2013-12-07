@@ -42,30 +42,7 @@
 
     }
 
-    p.titre{
-      display:inline;padding-left:27%;font-size:20px;font-weight: 100;/*text-transform: uppercase;*/
-    }
-    .tabbable{
-      z-index:99999;position: absolute;top: 148px;height: 42px;right: 0%;width: auto;background:#AEACB9;
-    }
-    .dropdown0{
-      position:absolute;left:-10px;top:-45px;width:170px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
-    }
-    .dropdown3{
-      position:absolute;left:120px;top:-45px;width:130px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
-    }
-    .dropdown{
-      position:absolute;left:230px;top:-45px;width:292px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
-    }
-    .dropdown2{
-      position:absolute;left:500px;top:-45px;width:200px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
-    }
-    .dropdown5{
-      position:absolute;left:605px;top:-45px;width:120px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
-    }
-    .dropdown4{
-      position:absolute;left:680px;top:-45px;width:200px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
-    }
+
 
     .closebox{
       position: relative;
@@ -517,18 +494,7 @@ a:focus {
   width: 940px;
 }
 
-.span12spe {
 
-  position :absolute;
-  z-index:10000;
-  left:0px;
-  right:0%;
-  width:auto;
-  background: rgb(105,98,151);
-  margin-left: 0px;
-  padding-left: 7px;
-  height: 110px;
-}
 
 a.notes {
 background: #989898 url(sprite.png) no-repeat -479px -230px;
@@ -643,20 +609,7 @@ padding-left: 10px;
 float: right;
 padding-right: 10px;
 }
-.headercolored {
-  position :absolute;
-  border-bottom: 1px solid #fff;
-  z-index:10001;
-  color: #AEACB9;
-  right:0%;
-  left:0px;
-  width:auto;
-  height: 40px;
-  background:#AEACB9 ;
-  margin-left: 0px;
-  padding-left: 15px;
-  top: 108px;
-}
+
 .logo {
   position :absolute;
   margin-top: 15px;
@@ -708,13 +661,7 @@ padding-right: 10px;
 .span4 {
   width: 300px;
 }
-.span4spe {
-  top:150px;
-  left:15px;
-  width: 550px;
-  margin-left:20px;
-  position: absolute; 
-}
+
 .triangleup {
   top:150px;
   width: 530px;

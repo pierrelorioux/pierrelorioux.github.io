@@ -1,34 +1,113 @@
-.Annual{
-	padding-left: 5px;
+.Annual {
+	padding-left: 12px;
 	color: #EEECEC;
-	font-size: 33px;
+	font-size: 23px;
 	position: absolute;
-	top: -10px;
+	top: -17px;
 	letter-spacing: 1px;
 }
-.annee12{
-	padding-left: 5px;
+.annee12 {
+	display: inline;
+	padding-left: 220px;
 	color: #EEECEC;
 	position: absolute;
-	font-size: 33px;
-	top: 27px;
+	font-size: 25px;
+	top: -18px;
 	letter-spacing: 2px;
 }
 .Mainop{
+	display: inline;
 	line-height: 15px;
 	padding-bottom: 0;
 	color: #EEECEC;
-	top: 22px;
-	height: 100px;
-	width: 200px;
-	left: 95px;
+	top: -22.5px;
+	height: 30px;
+	width: 160px;
+	left: 290px;
 	position: absolute;
-	font-size: 12.7px;
+	font-size: 10.7px;
 	text-transform: uppercase;
-}
+	}
 .maintitre{
    	position: absolute;
     top: 35px;
     height: 100px;
-    width: 800px;
+    width: 1300px;
     }
+
+.span12spe {
+
+  position :absolute;
+  z-index:10000;
+  left:0px;
+  right:0%;
+  width:auto;
+  background: rgb(105,98,151);
+  margin-left: 0px;
+  padding-left: 7px;
+  height: 50px;
+}
+
+.headercolored {
+  position :absolute;
+  border-bottom: 1px solid #fff;
+  z-index:10001;
+  color: #AEACB9;
+  right:0%;
+  left:0px;
+  width:auto;
+  height: 40px;
+  background:#AEACB9 ;
+  margin-left: 0px;
+  padding-left: 15px;
+  top: 50px;
+}
+
+p.titre{
+  display:inline;padding-left:27%;font-size:20px;font-weight: 100;/*text-transform: uppercase;*/
+}
+.tabbable{
+  z-index:99999;position: absolute;top: 148px;height: 42px;right: 0%;width: auto;background:#AEACB9;
+}
+.dropdown0{
+  position:absolute;left:-10px;top:-103px;width:170px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
+}
+.dropdown3{
+  position:absolute;left:100px;top:-103px;width:130px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
+}
+.dropdown{
+  position:absolute;left:175px;top:-103px;width:292px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
+}
+.dropdown2{
+  position:absolute;left:412px;top:-103px;width:200px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
+}
+.dropdown5{
+  position:absolute;left:605px;top:-103px;width:120px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
+}
+.dropdown4{
+  position:absolute;left:553px;top:-103px;width:200px;z-index:10;z-index: 9999999999999;text-transform: uppercase;
+}
+
+.span4spe2 {
+  /*position: absolute;*/
+  width: 100%;
+  top: 91px;
+  left: -20px;
+  height: 40px;
+  /*position: absolute;*/
+  color: #686868;
+  background: #fff;
+  position: absolute;
+  border-top: 5px solid #FFF;
+  border-bottom: 1px solid #FFF;
+  z-index:99;
+  /*box-shadow: 5px 5px 5px #888;*/
+
+}
+
+
+#draggable {
+	position: absolute;
+	top:-60px;
+	left:-5px;
+}
