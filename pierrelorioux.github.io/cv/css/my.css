@@ -1,0 +1,298 @@
+/* ------ general
+-----------------------------------------------*/
+
+div.entete{
+background: #A2C7B3;
+/*background-image:url(http://127.0.0.1/site/bootstrap/img/header.png);*/
+height : 120px;
+margin-top:5px;
+width:800px;
+}
+
+
+.entete2{
+position: absolute; 
+height : 150px;
+top:0px;
+width:270px;
+}
+
+.entete3{
+position: relative; 
+width: 100%; 
+/*height : 150px;*/
+top:0px;
+
+}
+
+.photo {
+    /*background-image: url("http://127.0.0.1/site/bootstrap/img/photo.png");*/
+   /*background: #000000;*/
+	position: relative;
+	height: 160px;
+	left: 600px;
+	top: -101px;
+	width: 130px;
+}
+
+.sp10 {
+  padding-top: 30px;
+  padding-left: 38px;
+  font-family: 'Lobster Two', cursive; 
+  font-size:65px;
+  color: #f9fdf4;
+  text-shadow: 1px 2px 0 rgba(201,220,200,0.4), 
+				1px 2px 3px rgba(0,0,0, 0.5);
+}
+.sp11 {
+	padding-top: 20px;
+	padding-left: 75px;
+  color: #f9fdf4;
+   font-family: 'Lobster Two', cursive; 
+  font-size:55px;
+	color: #f9fdf4;
+text-shadow: 1px 2px 0 rgba(201,220,200,0.4), 
+			1px 2px 3px rgba(0,0,0, 0.5);
+
+}
+
+.sp12 {
+  padding-top: 18px;
+  padding-left: 250px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size:14px;
+	color: #4F886B;
+text-shadow: 1px 2px 0 rgba(201,220,200,0.1), 
+			1px 2px 3px rgba(0,0,0, 0.1);
+}
+
+
+.sp13 {
+	padding-top: 05px;
+	padding-left: 250px;
+  color: #f9fdf4;
+  font-family: 'Open Sans Condensed:700', sans-serif;
+  font-size:17px;
+	color: #4F886B;
+text-shadow: 1px 2px 0 rgba(201,220,200,0.0), 
+			1px 2px 3px rgba(0,0,0, 0.1);
+}
+
+
+div.bandeau{
+background: #F5ECD3;
+/*background-image:url(http://127.0.0.1/site/bootstrap/img/header.png);*/
+height : 110px;
+width:800px;
+}
+
+.bandeau2{
+/*background: #F5ECD3;*/
+background-image:url(http://image.noelshack.com/fichiers/2013/35/1377869387-bandeau.png);
+background-repeat:no-repeat;
+height : 100px;
+position: relative;
+left: 175px;
+top:03px;
+/*width:850px;*/
+}
+
+.sp14 {
+  padding-top: 35px;
+  padding-left: 155px;
+  font-family: 'Lobster Two', cursive; 
+  font-size:25px;
+  color: #f9fdf4;
+/*  text-shadow: 1px 2px 0 rgba(214,109,54,0.4), 
+				1px 2px 3px rgba(0,0,0, 0.3);*/
+}
+
+
+.sp15 {
+  padding-top: 10px;
+  padding-left: 83px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size:32px;
+	color: #D66D36;
+text-shadow: 1px 2px 0 rgba(241,206,139,0.4), 
+			1px 2px 3px rgba(0,0,0, 0.3);
+}
+
+p.bulle{
+    font-family: 'Open Sans Condensed', sans-serif;
+    color:#1b3726;
+    font-size:15px;
+}
+
+p.trucs{
+  margin-left: 53px;
+}
+
+#mapbox{
+width: 800px;
+height: 570px;
+top:0px;
+z-index:1;
+}
+
+.divThem {
+/*margin-right: auto;
+margin-left: auto;*/
+/*position:absolute;*/
+display:none;
+/*padding:10px 15px;*/
+background: #A2C7B3;
+/*left: 450px;
+top: 245px;*/
+width : 800px;
+/* background:#f9fdf4; */
+/*font-family: 'Lobster Two', cursive;*/
+font-size:12px;
+/*max-height:200px;*/
+/*font-weight:bold;*/
+/*-webkit-border-bottom-right-radius: 30px;
+-webkit-border-bottom-left-radius: 30px;
+-moz-border-radius-bottomright: 30px;
+-moz-border-radius-bottomleft: 30px;
+border-bottom-right-radius: 30px;
+border-bottom-left-radius: 30px;*/
+z-index:2;
+}
+
+
+.divUniv {
+/*margin-right: auto;
+margin-left: auto;*/
+/*position:absolute;*/
+display:none;
+/*padding:10px 15px;*/
+background:#A2C7B3;
+/*left: 450px;*/
+top: 245px;
+width : 800px;
+/* background:#f9fdf4; */
+/*font-family: 'Lobster Two', cursive;*/
+font-size:12px;
+/*max-height:200px;*/
+/*font-weight:bold;*/
+/*-webkit-border-bottom-right-radius: 30px;
+-webkit-border-bottom-left-radius: 30px;
+-moz-border-radius-bottomright: 30px;
+-moz-border-radius-bottomleft: 30px;
+border-bottom-right-radius: 30px;
+border-bottom-left-radius: 30px;*/
+z-index:2;
+}
+
+
+
+.divVoiture {
+/*margin-right: auto;
+margin-left: auto;*/
+/*position:absolute;*/
+display:none;
+/*padding:10px 15px;*/
+background:#A2C7B3;
+/*left: 450px;
+top: 245px;*/
+width : 800px;
+/* background:#f9fdf4; */
+/*font-family: 'Lobster Two', cursive;*/
+font-size:12px;
+/*max-height:200px;*/
+/*font-weight:bold;*/
+/*-webkit-border-bottom-right-radius: 30px;
+-webkit-border-bottom-left-radius: 30px;
+-moz-border-radius-bottomright: 30px;
+-moz-border-radius-bottomleft: 30px;
+border-bottom-right-radius: 30px;
+border-bottom-left-radius: 30px;*/
+z-index:2;
+}
+
+.divICRC {
+/*margin-right: auto;
+margin-left: auto;*/
+/*position:absolute;*/
+display:none;
+/*padding:10px 15px;*/
+background:#A2C7B3;
+/*left: 450px;*/
+top: 245px;
+width : 800px;
+/* background:#f9fdf4; */
+/*font-family: 'Lobster Two', cursive;*/
+font-size:12px;
+/*max-height:200px;*/
+/*font-weight:bold;*/
+/*-webkit-border-bottom-right-radius: 30px;
+-webkit-border-bottom-left-radius: 30px;
+-moz-border-radius-bottomright: 30px;
+-moz-border-radius-bottomleft: 30px;
+border-bottom-right-radius: 30px;
+border-bottom-left-radius: 30px;*/
+z-index:2;
+}
+
+#foot{
+background: #A2C7B3;
+/*background-image:url(http://127.0.0.1/site/bootstrap/img/header.png);*/
+height : 30px;
+width:790px;
+padding-top: 15px;
+padding-right: 10px ;
+font-family: 'Open Sans Condensed', sans-serif;
+color:#1b3726;
+font-size:15px;
+text-align: right;
+}
+
+div.titre{
+  padding-top: 15px;
+  padding-left: 50px;
+  padding-right: 20px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color:#1b3726;
+    font-size:15px;
+
+}
+
+.sp16 {
+/*  padding-top: 35px;
+  padding-left: 155px;*/
+  font-family: 'Lobster Two', cursive; 
+  font-size:20px;
+  color: #f9fdf4;
+/*  text-shadow: 1px 2px 0 rgba(214,109,54,0.4), 
+        1px 2px 3px rgba(0,0,0, 0.3);*/
+}
+
+#subfoot{
+background: #A2C7B3;
+/*background-image:url(http://127.0.0.1/site/bootstrap/img/header.png);*/
+height : 10px;
+width:800px;
+/*padding-top: 15px;
+padding-right: 10px ;
+font-family: 'Open Sans Condensed', sans-serif;
+color:#1b3726;
+font-size:15px;
+text-align: right;*/
+}
+
+
+#subfoot .close {
+display:block;
+position:relative;
+/*margin-left: -100px ;*/
+top:0px;
+right:-100px;
+left:-400px;
+width:24px;
+height:24px;
+/*text-indent:-9999px;*/
+outline:none;
+background:url(http://image.noelshack.com/fichiers/2013/35/1377869387-fleche.png) no-repeat;
+z-index:3;
+}
+

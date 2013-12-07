@@ -1,0 +1,342 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>CV de Pierre</title>
+    <!-- Pierre -->
+    <!-- /*<script src="http://code.jquery.com/jquery-latest.js"></script>*/ -->
+    <script src="js/jquery.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/wax.leaf.min.js"></script>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
+    <link href="css/my.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/leaflet.css" rel="stylesheet">
+
+    </head>
+    <body>
+    <div class="container">
+        <div class ="entete">
+            <div class ="entete2">
+                <div class="sp10">Pierre</div>
+                <div class="sp11">Lorioux</div>
+            </div>
+            <div class ="entete3">
+                <div class="sp12">27 ans ~ Né le 27 février<br>
+                    10 RUE DU CHEVAL ROUGE 45000 ORLEANS</div>
+                <div class="sp13">06 22 79 73 71 <br>
+                    pierrelorioux@hotmail.fr</div>
+                 
+            </div>
+            <div class="photo"><img src="http://image.noelshack.com/fichiers/2013/35/1377869389-photo.png" width="250" height="250" alt="Photo" /> </div>
+        </div>
+        <div class = "bandeau">
+            <div class = "bandeau2">
+                <div class = "sp14">recherche d'emploi</div>
+                <div class = "sp15">GEOMATIQUE - WEBMAPPING</div>
+            </div>
+        </div>
+        <!-- LA CARTE-->
+        <div id="mapbox" name="map" ></div>
+        <!-- <div id="mapbox" name="map" style="width: 800px;
+        height: 570px;top:0px;"></div> -->
+
+<!-- /*        <script>
+        function goToByScroll(id){
+                $('html,body').animate({scrollTop: $("."+id).offset().top},'slow');
+        }
+        </script>*/ -->
+
+        <script type="text/javascript">
+        //bounds = new L.LatLngBounds(new L.LatLng(47.9, 1.9115), new L.LatLng(47.9065, 1.9115));
+        var southWest = new L.LatLng(47.89848, 1.89042);
+        var northEast = new L.LatLng(47.91476, 1.92892);
+        //var northEast = new L.LatLng(47.91634, .093282);  
+        var restrictBounds = new L.LatLngBounds(southWest, northEast);
+        //var mapOptions = { 
+        //zoomcontrol : false,
+        //center: new L.LatLng(47.9065, 1.9185),
+        //zoom: 15, 
+         //}; 
+        //var map = new L.Map('map', mapOptions); 
+        // Define the map to use from MapBox
+        // This is the TileJSON endpoint copied from the embed button on your map
+        var url = 'http://a.tiles.mapbox.com/v3/pierre.map.jsonp';
+
+        // Make a new Leaflet map in your container div
+        //var map = new L.Map('mapbox', mapOptions);  // container's id="mapbox"
+        var map = new L.Map('mapbox',{zoomControl : false})  // container's id="mapbox"
+        
+        // Center the map 
+        .setView(new L.LatLng(47.9065, 1.9095), 15);
+        
+
+        // Get metadata about the map from MapBox
+        wax.tilejson(url, function(tilejson) {
+            // Add MapBox Streets as a base layer
+            map.addLayer(new wax.leaf.connector(tilejson));
+        });
+		//TODO FIX THE MAX BOUND 
+		//map.options.maxBounds = restrictBounds;
+        </script>
+
+        <script type="text/javascript">
+        
+        /////////////////////////////////////////////////////////////////////////////////////
+        
+        var LeafIcon = L.Icon.extend({
+        iconUrl: 'http://image.noelshack.com/fichiers/2013/35/1377869387-ecole-01.png',
+        iconSize: new L.Point(49, 50),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var ecolicon = new LeafIcon('http://image.noelshack.com/fichiers/2013/35/1377869387-ecole-01.png'),
+        marker = new L.Marker(new L.LatLng(47.91137, 1.90235), {icon: ecolicon});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker.bindPopup("<p class='bulle'>2005 : Baccalauréat Economique et Social - Lycée Pierre Larrousse - Toucy (89)</p>");
+        map.addLayer(marker);
+        
+        /////////////////////////////////////////////////////////////////////////////////////////
+        
+        var LeafIcon2 = L.Icon.extend({
+        iconUrl: 'http://image.noelshack.com/fichiers/2013/35/1377869387-ecole-02.png',
+        iconSize: new L.Point(49, 50),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var ecolicon2 = new LeafIcon2(),
+        marker2 = new L.Marker(new L.LatLng(47.90866, 1.90969), {icon: ecolicon2});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker2.bindPopup("<p class='bulle'>2009-2010 : Master 1 Recherche Géographie - Université Bordeaux 3</p><p class='bulle'>2005-2009 : Licence Géographie et Aménagement- Université Bordeaux 3</p>");
+        map.addLayer(marker2);
+        
+        //////////////////////////////////////////////////////////////////////////////////////////
+        
+        var LeafIcon3 = L.Icon.extend({
+        iconUrl: 'http://image.noelshack.com/fichiers/2013/35/1377869388-ecole-03.png',
+        iconSize: new L.Point(49, 50),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var ecolicon3 = new LeafIcon3(),
+        marker3 = new L.Marker(new L.LatLng(47.90538, 1.91853), {icon: ecolicon3});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker3.bindPopup("<p class='bulle'>2011-2012 : Master 2 SIG & Gestion du territoire - Université d'Orléans</p><p class='bulle'>2010-2011 : Master 1 GeoGram - Université d'Orléans<br><br><a href='#Obs' id='idlien' style='text-align: right '>+ de détails</a></p>").on('click', function (e) { 
+            $('.divUniv').remove();
+            $('#mapbox').next('.divUniv').remove();
+            $('#mapbox').after($('<div />').addClass('divUniv'));
+            $('.divUniv')
+            .html("<div class='titre'><div class='sp16'><img src='http://image.noelshack.com/fichiers/2013/35/1377869388-ecole-03.png' width='50' height='50' alt='l'Observatoire'/>Master 2 SIGGEST : Mention Bien</div><p class = 'trucs'> - Projet tutauré :<a href='http://remicarto.webou.net/' target=_blank> Paysage sonore d'Orléans</a></p><br></div>")
+            //.prepend('<div class="close"></div>')
+            //.addClass('close').text('Close')
+            .css({height : 105, 'margin-right':150})
+            .slideToggle()
+            /*.fadeIn()*/
+            $("#idlien").click(function () {
+                 $('html,body').animate({scrollTop: $(".divUniv").offset().top},2000);
+            });
+        $('#subfoot').find('.close').remove();
+        $('#subfoot')
+        .append($('<a />').addClass('close'));
+
+         $('#subfoot').find('.close').live('click', function(){
+         $('html,body').animate({scrollTop: $(".entete").offset().top},1000);
+         });
+            });
+        map.addLayer(marker3);  
+        
+        /////////////////////////////////////////////////////////////////////////////
+       
+        var LeafIcon4 = L.Icon.extend({
+        iconUrl: 'http://image.noelshack.com/fichiers/2013/35/1377869387-cabane.png',
+        iconSize: new L.Point(49, 50),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var cabane = new LeafIcon4('http://image.noelshack.com/fichiers/2013/35/1377869387-cabane.png'),
+        marker4 = new L.Marker(new L.LatLng(47.91099, 1.89338), {icon: cabane});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker4.bindPopup("<p class='bulle'>Eté 2006 : Moniteur d'accrobranche - Parc d'aventure de St Fargeau</p>");
+        map.addLayer(marker4);
+        
+        /////////////////////////////////////////////////////////////////////////////
+        
+        var LeafIcon5 = L.Icon.extend({
+        iconUrl: 'http://image.noelshack.com/fichiers/2013/35/1377869389-silo.png',
+        iconSize: new L.Point(68, 60),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var silo = new LeafIcon5('http://image.noelshack.com/fichiers/2013/35/1377869389-silo.png'),
+        marker5 = new L.Marker(new L.LatLng(47.89989, 1.92342), {icon: silo});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker5.bindPopup("<p class='bulle'>Eté 2009 : Employé agricole - Exploitation familiale - Rogny-les-écluses</p>");
+        map.addLayer(marker5);
+        
+        /////////////////////////////////////////////////////////////////////////////
+        
+        var LeafIcon6 = L.Icon.extend({
+        iconUrl: 'http://image.noelshack.com/fichiers/2013/35/1377869388-icrc.png',
+        iconSize: new L.Point(58, 50),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var kfc = new LeafIcon6('http://image.noelshack.com/fichiers/2013/35/1377869388-icrc.png'),
+        marker6 = new L.Marker(new L.LatLng(47.91335, 1.90905), {icon: kfc});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker6.bindPopup("<p class='bulle'>2013 : Stage GIS de 1 an au Comité International de la Croix Rouge - Genève <br><br><a href='#ICRC' id='idlien' style='text-align: right '>+ de détails</a></p>").on('click', function (e) { 
+            $('.divICRC').remove();
+            $('#mapbox').next('.divICRC').remove();
+            $('#mapbox').after($('<div />').addClass('divICRC'));
+            $('.divICRC')
+            .html("<div class='titre'><div class='sp16'><img src='http://image.noelshack.com/fichiers/2013/35/1377869388-icrc.png' width='50' height='50' alt='ICRC'/>Comité International de la Croix Rouge</div><p class='trucs'>- Developpement d'outils web : <br>&nbsp;&nbsp; Par exemple :  <a href='http://www.icrcproject.org/app/2012-annual-report-map/' target=_blank>Le Rapport Annuel 2012 </a> ou <a href='http://www.icrcproject.org/app/safewater-30years/' target=_blank> La cartographie des 30 ans de l'unité Water and Habitat </a><br>- Administration et developpement de l'application Geoportal</p></div>")
+            //.prepend('<div class="close"></div>')
+            //.addClass('close').text('Close')
+            .css({height : 125, 'margin-right':150})
+            .slideToggle()
+            /*.fadeIn()*/
+            $("#idlien").click(function () {
+                 $('html,body').animate({scrollTop: $(".divICRC").offset().top},2000);
+            });
+        $('#subfoot').find('.close').remove();   
+        $('#subfoot')
+        .append($('<a />').addClass('close'));
+
+         $('#subfoot').find('.close').live('click', function(){
+         $('html,body').animate({scrollTop: $(".entete").offset().top},1000);
+         });
+            });;
+        map.addLayer(marker6);
+        
+        //////////////////////////////////////////////////////////////////////
+       
+        var LeafIcon7 = L.Icon.extend({
+        //iconUrl: 'img/obs.png',
+        iconSize: new L.Point(58, 50),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var obs = new LeafIcon6('http://image.noelshack.com/fichiers/2013/35/1377869388-obs.png'),
+        marker7 = new L.Marker(new L.LatLng(47.90627, 1.9069), {icon: obs});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        //var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker7.bindPopup("<p class='bulle'>2011-2012 : CDD de 4 mois - Assistant SIG - Observatoire de l'Economie et des Territoires du Loir-et-Cher </p><p class='bulle'>2011-2012 : Stage de 6 mois - Assistant SIG - Observatoire de l'Economie et des Territoires du Loir-et-Cher<br><br><a href='#Obs' id='idlien' style='text-align: right '>+ de détails</a></p>").on('click', function (e) { 
+            $('.divThem').remove();
+            $('#mapbox').next('.divThem').remove();
+            $('#mapbox').after($('<div />').addClass('divThem'));
+            $('.divThem')
+            .html("<div class='titre'><div class='sp16'><img src='http://image.noelshack.com/fichiers/2013/35/1377869388-obs.png' width='50' height='50' alt='l'Observatoire'/>Observatoire de l'Economie et des Territoires du Loir-et-Cher</div><p class='trucs'>- Enrichissement des outils de <a href='http://www.pilote41.fr/' target=_blank >Pilote41</a> et de ses partenaires.<br>&nbsp;&nbsp; Par exemple :  <a href='http://www.pilote41.fr/outils_obs/habitat_regroupe/carte_services.html' target=_blank>la cartographie des services de proximité</a> ou <a href='http://www.pilote41.fr/outils_obs/carto_metiers/' target=_blank> la cartographie des métiers du Conseil général du Loir-et-Cher</a><br>- Installation et mise en place des premières applications ArcgisServer10 et Arcopole Studio</p></div>")
+            //.prepend('<div class="close"></div>')
+            //.addClass('close').text('Close')
+            .css({height : 125, 'margin-right':150})
+            .slideToggle()
+            /*.fadeIn()*/
+            $("#idlien").click(function () {
+                 $('html,body').animate({scrollTop: $(".divThem").offset().top},2000);
+            });
+        $('#subfoot').find('.close').remove();   
+        $('#subfoot')
+        .append($('<a />').addClass('close'));
+
+         $('#subfoot').find('.close').live('click', function(){
+         $('html,body').animate({scrollTop: $(".entete").offset().top},1000);
+         });
+            });
+        map.addLayer(marker7);
+
+        //////////////////////////////////////////////////////////////////////
+        
+        var LeafIcon8 = L.Icon.extend({
+        iconUrl: 'http://image.noelshack.com/fichiers/2013/35/1377869389-voiture.png',
+        iconSize: new L.Point(38, 30),
+        //shadowSize: new L.Point(68, 95),
+        //iconAnchor: new L.Point(22, 94),
+        //popupAnchor: new L.Point(-3, -76)
+        });
+        
+        var voiture = new LeafIcon7('http://image.noelshack.com/fichiers/2013/35/1377869389-voiture.png'),
+        marker8 = new L.Marker(new L.LatLng(47.90363, 1.9033), {icon: voiture});
+        //var marker1 = new L.Marker(new L.LatLng(51.5, -0.09), {icon: greenIcon}),
+        var marker = new L.Marker(new L.LatLng(47.9065, 1.9115));
+        marker8.bindPopup("<p class='bulle'><a href='#perso' id='idlien'>+?</a></p>").on('click', function (e) { 
+            $('.divVoiture').remove();
+            $('#mapbox').next('.divVoiture').remove();
+            $('#mapbox').after($('<div />').addClass('divVoiture'));
+            $('.divVoiture')
+            .html("<div class='titre'><div class='sp16'><img src='http://image.noelshack.com/fichiers/2013/35/1377869389-voiture.png' width='50' height='50' alt='voiture'/>Interêts et projets personnels</div><p class='trucs'>- La dataviz et la cartographie.<br> - La plupart de mes projets pro ou perso sont recensés sur mon <a href='http://www.lesjamsdepierre.tumblr.com/' target=_blank>tumblr</a><br></p></div>")
+            //.prepend('<div class="close"></div>')
+            //.addClass('close').text('Close')
+            .css({height : 110, 'margin-right':150})
+            .slideToggle()
+            /*.fadeIn()*/
+            $("#idlien").click(function () {
+                 $('html,body').animate({scrollTop: $(".divVoiture").offset().top},2000);
+            });
+        $('#subfoot').find('.close').remove();
+        $('#subfoot')
+        .append($('<a />').addClass('close'));
+
+         $('#subfoot').find('.close').live('click', function(){
+         $('html,body').animate({scrollTop: $(".entete").offset().top},1000);
+         });
+            
+            });
+        map.addLayer(marker8);
+
+        ////////////////////////////////////////////////
+
+/*        var schools = L.layerGroup([mk7,mk8]);
+        //schools.addTo(map);
+
+        var overlayMaps = {
+        "schools": schools
+        };
+
+        L.control.layers(overlayMaps).addTo(map);
+*/
+        map.on('popupclose',popupCloseRecentre);
+        function popupCloseRecentre(e){
+            //alert("You clicked the map at " + e.latlng);
+         map.setView(new L.LatLng(47.9065, 1.9095), 15);
+        }
+/*        map.on('click', onMapClick);
+
+        function onMapClick(e) {
+        alert("You clicked the map at " + e.latlng);
+        }*/
+       
+        map.attributionControl.addAttribution('Pierre &copy; CV ');
+       </script>
+      
+    <div id="subfoot"></div>
+       <div id="foot"><!-- <img src="http://image.noelshack.com/fichiers/2013/35/1377869389-pdf.png" width="25" height="25" /> --><a href='http://pierre.lorioux.free.fr/CV_PIERRE_LORIOUX.pdf' target=_blank >Télécharger mon cv</a>
+      </div>
+            
+
+
+    <script src="js/bootstrap.min.js"></script>
+    </body>
+    </html>
