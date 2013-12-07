@@ -1,1 +1,0 @@
-Haiyan web map 
