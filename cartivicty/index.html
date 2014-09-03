@@ -1,0 +1,153 @@
+
+<html>
+<head>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <style>
+    html, body {width:100%; height:100%; padding: 0; margin: 0;}
+    #map { width: 100%; height:100%; background: black;}
+    #menu { position: absolute; top: 5px; right: 10px; width: 400px; height:60px; background: transparent; z-index:10;}
+    #menu a { 
+      margin: 15px 10px 0 0;
+      float: right;
+      vertical-align: baseline;
+      width: 100px;
+      padding: 10px;
+      text-align: center;
+      font: bold 11px "Helvetica",Arial;
+      line-height: normal;
+      color: #555;
+      border-radius: 4px;
+      border: 1px solid #777777;
+      background: #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    #menu a.selected,
+    #menu a:hover { 
+      color: #F84F40;
+    }
+  </style>
+
+  <script>
+    var map;
+
+    function init() {
+      // initiate leaflet map
+      map = new L.Map('map', { 
+        center: [33.91373381431625,35.9912109375],
+        zoom: 8
+      })
+
+      L.tileLayer('https://a.tiles.mapbox.com/v3/examples.3hqcl3di/{z}/{x}/{y}.png', {
+        attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms &amp; Feedback</a>'
+      }).addTo(map);
+
+      var layerUrl = 'http://reachlbn.cartodb.com/api/v2/viz/0571ba66-31dd-11e4-ad6c-0e10bcd91c2b/viz.json';
+
+      var sublayers = [];
+
+      var LayerActions = {
+        houserehab: function(){
+          sublayers[0].setSQL("SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner as partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'houserehab'");
+          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'houserehab'",
+          	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
+      }),
+		 sublayers[0].setInteractivity("cad_code");
+          return true;
+        },
+        weatherproofing: function(){
+          sublayers[0].setSQL("SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'weatherproofing'");
+          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'weatherproofing'",
+          	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
+      });
+          return true;
+        },
+        cashforshelter: function(){
+          sublayers[0].setSQL("SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'cashforshelter'");
+          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'cashforshelter'",
+          	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
+      });
+          return true;
+        },
+        Site_improvement: function(){
+          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'Site improvement'",
+          	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
+      });
+          return true;
+           },
+        Collectiveshelterrehab: function(){
+          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'Collectiveshelterrehab'",
+          	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
+      });
+          return true;
+           }
+      }
+
+      cartodb.createLayer(map, layerUrl)
+        .addTo(map)
+        .on('done', function(layer) {
+          // change the query for the first layer
+          var subLayerOptions = {
+            sql: "SELECT * FROM lbn_adm3_ply",
+            cartocss: "#lbn_adm3_ply{ polygon-fill: #FF6600; polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; }",
+          }
+          var sublayer = layer.getSubLayer(0);
+          sublayer.set(subLayerOptions);
+      	  sublayer.infowindow.set({
+   			 template: $('#infowindow_template').html(),
+    		  width: 218,
+    		  maxHeight: 100
+  		  });
+          sublayers.push(sublayer);
+
+        }).on('error', function() {
+          //log the error
+        }).on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
+  			console.log("mouse over polygon with data: " + data);
+		});
+
+
+      $('.button').click(function() {
+        $('.button').removeClass('selected');
+        $(this).addClass('selected');
+        LayerActions[$(this).attr('id')]();
+      });
+    }
+  </script>
+
+<script type="infowindow/html" id="infowindow_template">
+  <span> custom </span>
+  <div class="cartodb-popup">
+    <a href="#close" class="cartodb-popup-close-button close">x</a>
+
+     <div class="cartodb-popup-content-wrapper">
+       <div class="cartodb-popup-content">
+         <img style="width: 100%" src="http://rambo.webcindario.com/images/18447755.jpg"></src>
+         <!-- content.data contains the field info -->
+         <h4>Ward {{content.data.cad_code}}</h4>
+       </div>
+     </div>
+     <div class="cartodb-popup-tip-container"></div>
+  </div>
+</script>
+
+</head>
+
+<body onload="init()">
+  <div id='map'></div>
+
+  <div id='menu'>
+  	<h1 style="color:#FFFFFF;text-align:right;"> By Partner </h5><hr>
+    <a href="#cashforshelter" id="cashforshelter" class="button cashforshelter">cashforshelter</a> 
+    <a href="#weatherproofing" id="weatherproofing" class="button weatherproofing">weatherproofing</a> 
+    <a href="#houserehab" id="houserehab" class="button houserehab">houserehab</a>
+    <a href="#Site_improvement" id="Site_improvement" class="button Site_improvement">Site_improvement</a>
+    <a href="#Collectiveshelterrehab" id="Collectiveshelterrehab" class="button Collectiveshelterrehab">Collectiveshelterrehab</a><hr>
+    <h1 style="color:#FFFFFF;text-align:right;">sitetype</h5>
+  </div>
+</body>
+</html>
