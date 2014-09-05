@@ -52,37 +52,38 @@
 
       var LayerActions = {
         houserehab: function(){
-          sublayers[0].setSQL("SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner as partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'houserehab'");
-          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'houserehab'",
+          sublayers[0].set( {'sql': "SELECT attributes.cartodb_id,lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'houserehab'",
           	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
       }),
-		 sublayers[0].setInteractivity("cad_code");
+		 sublayers[0].setInteractivity("cartodb_id");
           return true;
         },
         weatherproofing: function(){
-          sublayers[0].setSQL("SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'weatherproofing'");
-          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'weatherproofing'",
+          sublayers[0].set( {'sql': "SELECT  attributes.cartodb_id,lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'weatherproofing'",
           	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
-      });
+      }),
+     sublayers[0].setInteractivity("cartodb_id");
           return true;
         },
-        cashforshelter: function(){
-          sublayers[0].setSQL("SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'cashforshelter'");
-          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'cashforshelter'",
+        cashforshelter: function(){          
+          sublayers[0].set( {'sql': "SELECT attributes.cartodb_id, lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'cashforshelter'",
           	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
-      });
+      }),
+     sublayers[0].setInteractivity("cartodb_id");
           return true;
         },
         Site_improvement: function(){
-          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'Site improvement'",
+          sublayers[0].set( {'sql': "SELECT attributes.cartodb_id,lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'Site improvement'",
           	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
-      });
+      }),
+     sublayers[0].setInteractivity("cartodb_id");
           return true;
            },
         Collectiveshelterrehab: function(){
-          sublayers[0].set( {'sql': "SELECT lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'Collectiveshelterrehab'",
+          sublayers[0].set( {'sql': "SELECT attributes.cartodb_id,lbn_adm3_ply.the_geom_webmercator,lbn_adm3_ply.cad_code,attributes.partner FROM lbn_adm3_ply, attributes WHERE lbn_adm3_ply.cad_code = attributes.cadacode AND attributes.indicatorcategory = 'Collectiveshelterrehab'",
           	'cartocss': "/** category visualization */ #lbn_adm3_ply { polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; } #lbn_adm3_ply[partner='NRC'] { polygon-fill: #A6CEE3; } #lbn_adm3_ply[partner='PU-AMI Lebanon'] { polygon-fill: #1F78B4; } #lbn_adm3_ply[partner='SI'] { polygon-fill: #B2DF8A; } #lbn_adm3_ply[partner='SCI Lebanon'] { polygon-fill: #33A02C; } #lbn_adm3_ply[partner='CHF'] { polygon-fill: #FB9A99; } #lbn_adm3_ply[partner='UNHABITAT'] { polygon-fill: #E31A1C; } #lbn_adm3_ply[partner='Intersos'] { polygon-fill: #FDBF6F; } #lbn_adm3_ply[partner='ACTED Lebanon'] { polygon-fill: #FF7F00; } #lbn_adm3_ply[partner='COOPI'] { polygon-fill: #CAB2D6; } #lbn_adm3_ply[partner='CISP - Lebanon'] { polygon-fill: #6A3D9A; } #lbn_adm3_ply { polygon-fill: #DDDDDD; }"
-      });
+      }),
+     sublayers[0].setInteractivity("cartodb_id");
           return true;
            }
       }
@@ -92,23 +93,21 @@
         .on('done', function(layer) {
           // change the query for the first layer
           var subLayerOptions = {
-            sql: "SELECT * FROM lbn_adm3_ply",
-            cartocss: "#lbn_adm3_ply{ polygon-fill: #FF6600; polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; }",
+            //sql: "SELECT * FROM lbn_adm3_ply",
+            //cartocss: "#lbn_adm3_ply{ polygon-fill: #FF6600; polygon-opacity: 0.7; line-color: #FFF; line-width: 1; line-opacity: 1; }",
           }
           var sublayer = layer.getSubLayer(0);
           sublayer.set(subLayerOptions);
       	  sublayer.infowindow.set({
-   			 template: $('#infowindow_template').html(),
-    		  width: 218,
-    		  maxHeight: 100
-  		  });
+   			    template: $('#infowindow_template').html(),
+    		    width: 218,
+    		    maxHeight: 100
+  		    });
           sublayers.push(sublayer);
 
         }).on('error', function() {
           //log the error
-        }).on('featureOver', function(e, latlng, pos, data, subLayerIndex) {
-  			console.log("mouse over polygon with data: " + data);
-		});
+        });
 
 
       $('.button').click(function() {
@@ -120,17 +119,17 @@
   </script>
 
 <script type="infowindow/html" id="infowindow_template">
-  <span> custom </span>
   <div class="cartodb-popup">
     <a href="#close" class="cartodb-popup-close-button close">x</a>
 
-     <div class="cartodb-popup-content-wrapper">
-       <div class="cartodb-popup-content">
-         <img style="width: 100%" src="http://rambo.webcindario.com/images/18447755.jpg"></src>
-         <!-- content.data contains the field info -->
-         <h4>Ward {{content.data.cad_code}}</h4>
-       </div>
-     </div>
+  <div class="cartodb-popup-content-wrapper">
+    <div class="cartodb-popup-content">
+      <h4>partner</h4>
+      <p>{{partner}}</p>
+      <h4>cad_code</h4>
+      <p>{{cad_code}}</p>
+    </div>
+  </div>
      <div class="cartodb-popup-tip-container"></div>
   </div>
 </script>
