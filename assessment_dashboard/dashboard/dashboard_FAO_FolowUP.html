@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FAO</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/dc.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div id="Section"><h3>FAO Data Collection</h3></div>
+    <div class="col-md-8">
+      <div id="month"></div>
+      <div id="map"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div id="Section"><br><h3>General information</h3>| <a
+    href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a></div>
+    <div class="col-md-8">
+      <div id="test"><p>Sub Office</p></div>
+      <div id="suboff-chart"><p>Clusters</p></div>
+      <div id="chart-hist-spend"><p>Rural Urban</p></div>
+    </div>
+  </div>
+  <div class="row">
+    <div id="Section"><br><h3>Household profile</h3>| <a
+    href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a></div>
+    <div class="col-md-8">
+      <div id="gender"><p>Gender of person intervied</p></div>
+      <div id="headofhh"><p>Gender of Head of HH</p></div>
+      <div id="maritalStatus"><p>Marital Status of the head of HH</p></div>
+      <div id="levelEdu"><p>Highest Level of education</p></div>
+      <div id="disabilities"><p>Head of HH Disabilties</p></div>
+      <div id="familiesHH"><p>Number of families living in HH</p></div>
+      <div id="peopleHH"><p>Number of people living in HH</p></div>
+      <div id="Syrian"><p>Syrians living in the property</p></div>
+      <div id="Syrianyes"><p>How many ?</p></div>
+      <div id="rentsyrian"><p>Rent or services from Syrian refugees</p></div>
+      <div id="rentservices"><p>Rent or services</p></div>
+    </div>
+  </div>
+  <div class ="row">
+    <div id="Section"><br><h3>Household Shelter and Infrastructure </h3>| <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a></div>
+    <div class="col-md-8">
+      <div id="plant"><p>HH plant any fruit/vegetables?</p></div>
+      <div id="whatplant"><p>What plant?</p></div>
+      <div id="whatuse"><p>Use of plants?</p></div>
+      <div id="intplant"><p>Int. in planting if input/trainings?</p></div>
+      <div id="trainplant"><p>Type of beneficit training</p></div>
+    </div>
+  </div>
+  <div class ="row">
+    <div class="col-md-8">
+      <div id="waterconstraints"><p>Constraints accessing water</p></div>
+      <div id="waterobst"><p>Obtacles accessing water</p></div>
+    </div>
+  </div>
+  <div class ="row">
+    <div id="Section"><br><h3>Livelihoods, Income and Expenditures </h3>| <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a></div>
+    <div class="col-md-8">
+      <div id="provideHH"><p>Activity to provide for HH?</p></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="../js/d3.js"></script>
+<script type="text/javascript" src="../js/crossfilter.js"></script>
+<script type="text/javascript" src="../js/dc.js"></script>
+<script type="text/javascript">
+
+var mapChart          = dc.geoChoroplethChart("#map"),
+    clusterchart      = dc.pieChart("#test"),
+    suboffchart       = dc.rowChart("#suboff-chart"),
+    rururbGroupChart  = dc.barChart("#chart-hist-spend"),
+    month_chart       = dc.lineChart("#month"),
+    genderChart       = dc.pieChart("#gender");
+    HeadHHChart       = dc.pieChart("#headofhh");
+    MaritalChart      = dc.barChart("#maritalStatus");
+    EduChart          = dc.rowChart("#levelEdu");
+    disabChart        = dc.barChart("#disabilities");
+    familyChart       = dc.barChart("#familiesHH");
+    peopleChart       = dc.barChart("#peopleHH");
+    syrianChart       = dc.barChart("#Syrian");
+    syrianyesChart    = dc.rowChart("#Syrianyes");
+    syrrentChart      = dc.barChart("#rentsyrian");
+    rentserviceChart  = dc.barChart("#rentservices");
+    plantChart        = dc.pieChart("#plant");
+    whatplantChart    = dc.rowChart("#whatplant");
+    useplantChart     = dc.rowChart("#whatuse");
+    intplantChart     = dc.pieChart("#intplant");
+    trainplantChart   = dc.rowChart("#trainplant");
+    waterconstChart   = dc.pieChart("#waterconstraints");
+    waterobscChart    = dc.rowChart("#waterobst");
+    provideChart      = dc.barChart("#provideHH");
+
+d3.csv("estelle.csv", function(error, experiments) {
+
+  var dateFormat = d3.time.format("%b %e, %Y %I:%M:%S %p");
+
+  experiments.forEach(function (d) {
+    d.dd  = dateFormat.parse(d.start);
+    d.day = d3.time.day(d.dd);
+    //convert to numbers
+    d.AssessmentG2Q2_7_total_of_people_living_in_HH = +d.AssessmentG2Q2_7_total_of_people_living_in_HH;
+    d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_ = +d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_;
+
+  });
+
+  var ndx              = crossfilter(experiments),
+      SubOffMapDim     = ndx.dimension(function(d) {return d.AssessmentG1Q1_3_sub_office;}),
+      SubOffMapGroup   = SubOffMapDim.group(),
+      SubOffDimension  = ndx.dimension(function(d) {return d.AssessmentG1Q1_3_sub_office;}),
+      SubOffGroup      = SubOffDimension.group(),
+      clusterDim       = ndx.dimension(function(d) {return d.AssessmentG1Q1_4_clusters;}),
+      clustGroup       = clusterDim.group(),
+      rururbDim        = ndx.dimension(function(d) {return d.AssessmentG1Q1_7_Rural_urban;}),
+      rururbGroup      = rururbDim.group().reduceCount(),
+      dayOfWeek        = ndx.dimension(function (d) { return d.day }),
+      dayOfWeekGroup   = dayOfWeek.group(),
+      genderDim        = ndx.dimension(function (d) { return d.AssessmentG2Q2_1_gender_of_person_interviewed;}),
+      genderGroup      = genderDim.group();
+      headHHDim        = ndx.dimension(function (d) { return d.AssessmentG2Q2_2_gender_of_HH_head;}),
+      headHHGroup      = headHHDim.group(),
+      maritalDim       = ndx.dimension(function (d) { return d.AssessmentG2Q2_3_marital_status_of_HH_head;}),
+      maritalGroup     = maritalDim.group(),
+      eduDim           = ndx.dimension(function (d) { return d.AssessmentG2Q2_4_highest_education_level_for_HH_head;}),
+      eduGroup         = eduDim.group(),
+      disabDim         = ndx.dimension(function (d) { return d.AssessmentG2Q2_5_household_have_disability_chronic_illness;}),
+      disabGroup       = disabDim.group(),
+      familyDim        = ndx.dimension(function (d) { return d.AssessmentG2Q2_6_total_of_Families_living_in_household;}),
+      familyGroup      = familyDim.group(),
+      peopleDim        = ndx.dimension(function (d) { return d.AssessmentG2Q2_7_total_of_people_living_in_HH;}),
+      peopleGroup      = peopleDim.group().reduceSum(function(d) {return d.AssessmentG2Q2_7_total_of_people_living_in_HH;});
+      syrianDim        = ndx.dimension(function (d) { return d.AssessmentG2Q2_11_Syrian_refugees_live_in_household_property;}),
+      syrianGroup      = syrianDim.group(),
+      syrianyesDim     = ndx.dimension(function (d) {return d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_ ;}),
+      syrianyesGroup   = syrianyesDim.group(),
+      syrrentDim       = ndx.dimension(function (d) {return d.AssessmentG2Q2_13_receive_rent_services_from_any_Syrian_refugees ;}),
+      syrrentGroup     = syrrentDim.group(),
+      rentserviceDim   = ndx.dimension(function (d) {if (d.AssessmentG2Q2_14_receive_rent_services ==='') {return 'No';}  else{return d.AssessmentG2Q2_14_receive_rent_services;}}),
+      rentserviceGroup = rentserviceDim.group(),
+      plantDim         = ndx.dimension(function (d) {return d.AssessmentG3Q7a_plant_fruits_vegetables;}),
+      plantGroup       = plantDim.group(),
+      whatplantDim     = ndx.dimension(function (d) {if (d.AssessmentG3Q3_7a_what_you_plant==='') {return 'Does Not Plant';}  else{return d.AssessmentG3Q3_7a_what_you_plant;}}),
+      whatplantGroup   = whatplantDim.group(),
+      useplantDim      = ndx.dimension(function (d) {if (d.AssessmentG3Q3_8_use_fruits_vegetables==='') {return 'Does Not Plant';}  else{return d.AssessmentG3Q3_8_use_fruits_vegetables;}}),
+      useplantGroup    = useplantDim.group(),
+      intplantDim      = ndx.dimension(function (d) {if (d.AssessmentG3Q3_9_interested_in_planting_if_provided_necessary_input_needed_training==='') {return '';}  else{return d.AssessmentG3Q3_9_interested_in_planting_if_provided_necessary_input_needed_training;}}),
+      intplantGroup    = intplantDim.group(),
+      trainplantDim    = ndx.dimension(function (d) {if (d.AssessmentG3Q3_10_interested_type_training_benefit_from==='') {return 'Not Int. in Trainings';}  else{return d.AssessmentG3Q3_10_interested_type_training_benefit_from;}}),
+      trainplantGroup  = trainplantDim.group(),
+      waterconstDim    = ndx.dimension(function (d) {return d.AssessmentG3Q3_13_face_constraints_accessing_water_YN ;}),
+      waterconstGroup  = waterconstDim.group(),
+      waterobsDim      = ndx.dimension(function (d) {if (d.AssessmentG3Q3_13_face_constraints_accessing_water==='') {return 'No const. acc. wat';}  else{return d.AssessmentG3Q3_13_face_constraints_accessing_water;}}),
+      waterobsGroup    = waterobsDim.group();
+      provideDim      = ndx.dimension(function (d) { return d.AssessmentG4Q4_1_members_of_HH_engaged_any_activity_last_30days ;}),
+      provideGroup    = provideDim.group();
+
+d3.json("op_area.json", function (statesJson) {
+
+  mapChart.width(400)
+          .height(350)
+          .dimension(SubOffMapDim)
+          .group(SubOffMapGroup)
+          .colors(d3.scale.quantize().range(["#E2F2FF", "#C4E4FF", "#9ED2FF", "#81C5FF", "#6BBAFF", "#51AEFF", "#36A2FF", "#1E96FF", "#0089FF", "#0061B5"]))
+          .colorDomain([0, 200])
+          .colorCalculator(function (d) { return d ? mapChart.colors()(d) : '#ccc'; })
+          .overlayGeoJson(statesJson.features, "state", function (d) {
+              return d.properties.name;
+          })
+          .projection(d3.geo.mercator().center([38.1,33.5]).scale(8000));
+          //.title(function (d) {
+          //    return "State: " + d.key + "\nTotal Amount Raised: " + numberFormat(d.value ? d.value : 0) + "M";
+          //});
+
+    month_chart.width(550).height(350)
+      .dimension(dayOfWeek)
+      .x(d3.time.scale())
+      .elasticY(true)
+      .x(d3.scale.ordinal())
+      .xUnits(dc.units.ordinal)
+      .renderHorizontalGridLines(true)
+      .group(dayOfWeekGroup)
+      .colors(['#ffc000']);
+
+    suboffchart
+        .width(400)
+        .height(200)
+        .dimension(clusterDim)
+        .group(clustGroup)
+        .renderLabel(true)
+
+    clusterchart
+      .width(250)
+      .height(200)
+      .slicesCap(4)
+      .dimension(SubOffDimension)
+      .group(SubOffGroup)
+
+    rururbGroupChart
+        .width(250)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        //.brushOn(false)
+        //.xAxisLabel("age")
+        //.yAxisLabel("Count")
+        .dimension(rururbDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(rururbGroup);
+
+    genderChart
+        .width(250)
+        .height(200)
+        .innerRadius(30)
+        .dimension(genderDim)
+        .group(genderGroup);
+
+    HeadHHChart
+        .width(250)
+        .height(200)
+        .innerRadius(30)
+        .dimension(headHHDim)
+        .group(headHHGroup);
+
+    MaritalChart
+        .width(400)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        //.brushOn(false)
+        //.xAxisLabel("age")
+        //.yAxisLabel("Count")
+        .dimension(maritalDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(maritalGroup);
+
+    EduChart
+        .width(450)
+        .height(200)
+        .dimension(eduDim)
+        .group(eduGroup);
+
+    disabChart
+        .width(450)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .dimension(disabDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(disabGroup);
+
+    familyChart
+        .width(450)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .dimension(familyDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(familyGroup);
+
+    peopleChart
+        .width(450)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .dimension(peopleDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        //.xAxis().ticks(4).tickFormat(d3.format(",f"))
+        .group(peopleGroup);
+
+    syrianChart
+        .width(450)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .dimension(syrianDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        //.xAxis().ticks(4).tickFormat(d3.format(",f"))
+        .group(syrianGroup);
+
+    syrianyesChart
+        .width(450)
+        .height(200)
+        .dimension(syrianyesDim)
+        .group(syrianyesGroup);
+
+    syrrentChart
+        .width(450)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .dimension(syrrentDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        //.xAxis().ticks(4).tickFormat(d3.format(",f"))
+        .group(syrrentGroup);
+
+    rentserviceChart
+        .width(450)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        .dimension(rentserviceDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        //.xAxis().ticks(4).tickFormat(d3.format(",f"))
+        .group(rentserviceGroup);
+
+    plantChart
+        .width(250)
+        .height(200)
+        .innerRadius(30)
+        .dimension(plantDim)
+        .group(plantGroup);
+
+    whatplantChart
+        .width(300)
+        .height(200)
+        .dimension(whatplantDim)
+        .group(whatplantGroup);
+
+    useplantChart
+        .width(350)
+        .height(200)
+        .dimension(useplantDim)
+        .group(useplantGroup);
+
+    intplantChart
+        .width(250)
+        .height(200)
+        .innerRadius(30)
+        .dimension(intplantDim)
+        .group(intplantGroup);
+
+    trainplantChart
+        .width(500)
+        .height(200)
+        .dimension(trainplantDim)
+        .group(trainplantGroup);
+
+    waterconstChart
+        .width(250)
+        .height(200)
+        .dimension(waterconstDim)
+        .group(waterconstGroup);
+
+    waterobscChart
+        .width(500)
+        .height(200)
+        .dimension(waterobsDim)
+        .group(waterobsGroup);
+
+    provideChart
+        .width(250)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        //.brushOn(false)
+        //.xAxisLabel("age")
+        //.yAxisLabel("Count")
+        .dimension(provideDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(provideGroup);
+
+    dc.renderAll();
+  });
+
+});
+
+</script>
+
+</body>
+</html>
