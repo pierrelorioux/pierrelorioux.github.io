@@ -61,7 +61,15 @@
     <div id="Section"><br><h3>Livelihoods, Income and Expenditures </h3>| <a href="javascript:dc.filterAll(); dc.renderAll();">Reset All</a></div>
     <div class="col-md-8">
       <div id="provideHH"><p>Activity to provide for HH?</p></div>
+      <div id="howprovideHH"><p>How many provide for HH?</p></div>
+      <div id="regemploy"><p>HH Regular employment</p></div>
+      <div id="seaemploy"><p>HH Seasonal employment</p></div>
+      <div id="tempemploy"><p>HH Temporary employment</p></div>
     </div>
+  </div>
+  <div class ="row">
+    <div id="inc_agr"><p>% Income for Agr. Act</p></div>
+    <div id="sourceInc"><p>1st Source Income</p></div>
   </div>
 </div>
 
@@ -94,6 +102,12 @@ var mapChart          = dc.geoChoroplethChart("#map"),
     waterconstChart   = dc.pieChart("#waterconstraints");
     waterobscChart    = dc.rowChart("#waterobst");
     provideChart      = dc.barChart("#provideHH");
+    howprovideChart   = dc.barChart("#howprovideHH");
+    regemployChart    = dc.barChart("#regemploy");
+    seaemployChart    = dc.barChart("#seaemploy");
+    tempemployChart   = dc.barChart("#tempemploy");
+    inc_agrChart      = dc.rowChart("#inc_agr");
+    sourceIncChart    = dc.rowChart("#sourceInc");
 
 d3.csv("estelle.csv", function(error, experiments) {
 
@@ -105,7 +119,6 @@ d3.csv("estelle.csv", function(error, experiments) {
     //convert to numbers
     d.AssessmentG2Q2_7_total_of_people_living_in_HH = +d.AssessmentG2Q2_7_total_of_people_living_in_HH;
     d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_ = +d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_;
-
   });
 
   var ndx              = crossfilter(experiments),
@@ -155,8 +168,20 @@ d3.csv("estelle.csv", function(error, experiments) {
       waterconstGroup  = waterconstDim.group(),
       waterobsDim      = ndx.dimension(function (d) {if (d.AssessmentG3Q3_13_face_constraints_accessing_water==='') {return 'No const. acc. wat';}  else{return d.AssessmentG3Q3_13_face_constraints_accessing_water;}}),
       waterobsGroup    = waterobsDim.group();
-      provideDim      = ndx.dimension(function (d) { return d.AssessmentG4Q4_1_members_of_HH_engaged_any_activity_last_30days ;}),
-      provideGroup    = provideDim.group();
+      provideDim       = ndx.dimension(function (d) { return d.AssessmentG4Q4_1_members_of_HH_engaged_any_activity_last_30days ;}),
+      provideGroup     = provideDim.group();
+      howprovideDim    = ndx.dimension(function (d) { return d.AssessmentG4Q4_2_total_HH_members_engaged_activity_last_30_days ;}),
+      howprovideGroup  = howprovideDim.group();
+      regemployDim     = ndx.dimension(function (d) { return d.AssessmentG4G4_3Q4_3_HH_members_engaged_regular ;}),
+      regemployGroup   = regemployDim.group();
+      seaemployDim     = ndx.dimension(function (d) { return d.AssessmentG4G4_3Q4_3_HH_members_engaged_seasonal ;}),
+      seaemployGroup   = seaemployDim.group();
+      tempemployDim    = ndx.dimension(function (d) { return d.AssessmentG4G4_3Q4_3_HH_members_engaged_temporary ;}),
+      tempemployGroup  = tempemployDim.group();
+      inc_agrDim       = ndx.dimension(function (d) { return d.AssessmentG4Q4_6_percentage_income_from_agriculture ;}),
+      inc_agrGroup     = inc_agrDim.group();
+      sourceIncDim     = ndx.dimension(function (d) { return d.AssessmentG4Q4_7_1st_sources_of_income_last_30days ;}),
+      sourceIncGroup   = sourceIncDim.group();
 
 d3.json("op_area.json", function (statesJson) {
 
@@ -380,6 +405,74 @@ d3.json("op_area.json", function (statesJson) {
         .outerPadding(0.05)
         .elasticY(true)
         .group(provideGroup);
+
+    howprovideChart
+        .width(250)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        //.brushOn(false)
+        //.xAxisLabel("age")
+        //.yAxisLabel("Count")
+        .dimension(howprovideDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(howprovideGroup);
+
+    regemployChart
+        .width(250)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        //.brushOn(false)
+        //.xAxisLabel("age")
+        //.yAxisLabel("Count")
+        .dimension(regemployDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(regemployGroup);
+
+    seaemployChart
+        .width(250)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        //.brushOn(false)
+        //.xAxisLabel("age")
+        //.yAxisLabel("Count")
+        .dimension(seaemployDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(seaemployGroup);
+
+    tempemployChart
+        .width(250)
+        .height(200)
+        .x(d3.scale.ordinal())
+        .xUnits(dc.units.ordinal)
+        //.brushOn(false)
+        //.xAxisLabel("age")
+        //.yAxisLabel("Count")
+        .dimension(tempemployDim)
+        .barPadding(0.1)
+        .outerPadding(0.05)
+        .elasticY(true)
+        .group(tempemployGroup);
+
+    inc_agrChart
+        .width(350)
+        .height(300)
+        .dimension(inc_agrDim)
+        .group(inc_agrGroup);
+
+    sourceIncChart
+        .width(450)
+        .height(300)
+        .dimension(sourceIncDim)
+        .group(sourceIncGroup);
 
     dc.renderAll();
   });
