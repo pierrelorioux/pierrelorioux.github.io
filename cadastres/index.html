@@ -6,6 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+		<script src="l.control.geosearch.js"></script>
+		<script src="l.geosearch.provider.openstreetmap.js"></script>
+		<link rel="stylesheet" href="l.geosearch.css" />
 </head>
     <style>
     /* Change the styles below in order to customize your template */
@@ -81,6 +84,9 @@
 			id: 'examples.map-i875mjb7'
 		}).addTo(map);
 
+		new L.Control.GeoSearch({
+            provider: new L.GeoSearch.Provider.OpenStreetMap()
+        }).addTo(map);
 
 		var popup = L.popup();
 
