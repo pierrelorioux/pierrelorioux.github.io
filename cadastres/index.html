@@ -120,7 +120,7 @@
 
 		var query = "http://reachlbn.cartodb.com/api/v2/sql?q=SELECT * FROM (SELECT acs_name, crefname,ST_Within(ST_GeomFromText('POINT("+lng+" "+lat+")', 4326),ST_TRANSFORM(the_geom_webmercator,4326)) as within FROM lbn_adm3_ply) as alias WHERE within IS true &api_key=41ccb1de56f2f13d67a673f427ea1e47d5c83d28";
 
-		var dist = "http://reachlbn.cartodb.com/api/v2/sql?q=SELECT * FROM (SELECT  m_ref_name,ST_Within(ST_GeomFromText('POINT("+lng+" "+lat+")', 4326),ST_TRANSFORM(the_geom_webmercator,4326)) as within FROM lbn_adm2_ply) as alias WHERE within IS true &api_key=41ccb1de56f2f13d67a673f427ea1e47d5c83d28";
+		var dist = "http://reachlbn.cartodb.com/api/v2/sql?q=SELECT * FROM (SELECT  k_ref_name,ST_Within(ST_GeomFromText('POINT("+lng+" "+lat+")', 4326),ST_TRANSFORM(the_geom_webmercator,4326)) as within FROM lbn_adm2_ply) as alias WHERE within IS true &api_key=41ccb1de56f2f13d67a673f427ea1e47d5c83d28";
 
 			var latitude = "<p>"+lat+"</p>" ; 
 			var longitude = "<p>"+lng+"</p>" ; 
@@ -156,7 +156,7 @@
 				success:function(result){
 				$.each(result.rows,function(i, val) {
 					
-						var content = "<p>"+val.m_ref_name+"</p>" ; 
+						var content = "<p>"+val.k_ref_name+"</p>" ; 
 
 						//$(content).html("#content");
 						$("#dist").html(content);
