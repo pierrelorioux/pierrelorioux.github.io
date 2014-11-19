@@ -11,9 +11,12 @@
   <div class="row">
     <div id="Section"><h3>FAO Data Collection</h3></div>
     <div class="col-md-8">
-      <div id="month"></div>
       <div id="map"></div>
+      <div id="suboff-chart"><p>Clusters</p></div>
     </div>
+  </div>
+  <div class="row">
+    <div id="month"></div>
   </div>
   <div class="row">
     <div id="Section"><br><h3>General information</h3>| <a
@@ -266,7 +269,7 @@ d3.json("op_area.json", function (statesJson) {
           //    return "State: " + d.key + "\nTotal Amount Raised: " + numberFormat(d.value ? d.value : 0) + "M";
           //});
 
-    month_chart.width(550).height(350)
+    month_chart.width(850).height(250)
       .dimension(dayOfWeek)
       .x(d3.time.scale())
       .elasticY(true)
@@ -278,7 +281,7 @@ d3.json("op_area.json", function (statesJson) {
 
     suboffchart
         .width(400)
-        .height(200)
+        .height(350)
         .dimension(clusterDim)
         .group(clustGroup)
         .renderLabel(true)

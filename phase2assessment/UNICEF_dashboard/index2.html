@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+    <meta name="author" content="Edouard Legoupil">
+    <title>Site Assessment - CCCM Cluster Iraq</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <meta itemprop="name" content="Site Assessment - CCCM Cluster Iraq"/>
+    <meta itemprop="description" content="Site Assessment - CCCM Cluster Iraq"/>
+
+    <meta property="og:title" content="Site Assessment - CCCM Cluster Iraq">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <meta property="og:site_name" content="Site Assessment - CCCM Cluster Iraq">
+    <meta property="og:description" content="Site Assessment - CCCM Cluster Iraq">
+
+    <link type="text/css" href="css/leaflet.css" rel="stylesheet"/>
+    <link type="text/css" href="css/leaflet.markercluster.css" rel="stylesheet"/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/dc.css">
+    <!-- Add IntroJs styles  -->
+    <link rel="stylesheet" type="text/css" href="css/introjs.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+
+
+</head>
+
+<body>
+    <div style="display: block;" class="container" id="dashboard">
+
+        <div class="col-xs-12">
+            <a href="https://www.humanitarianresponse.info/operations/iraq/camp-coordination-management" target="_blank">
+               <img src="images/ccccm-siteasessment2.png" style="width: 100%"></a>
+         </div>
+
+        <div class="col-xs-12">Explore the profile of the informal settlements hosting IDPs.</div>
+
+            <div class="socialmedia" data-step="6" data-intro="Feel Free to share if you like it!" data-position="left">
+                <table>
+                  <tbody><tr>
+                    <td valign="middle"><a href="https://twitter.com/intent/tweet?url=http://data.unhcr.org/jordan/rrp6&amp;text=%23Jordan%20@Refugees" target="_blank"><img src="images/Twitter.png" style="height: 25px; width: 25px"></a></td>
+                </tr>
+                </tbody></table>
+           </div>
+
+
+            <div class="row">
+                <div class="col-md-8" data-step="5" data-intro="Here's the number of activities you filtered. Use the reset button to delete all your filters" data-position="right">
+                    <div class="dc-chart" id="count-info"><strong><span class="filter-count"></span></strong> selected records</div>
+                    <a class="reset btn btn-primary btn-sm" id="reset" href="javascript:dc.filterAll();dc.redrawAll();">Reset All</a>
+                </div>
+                <div class="col-md-4">
+                    <a class="btn btn btn-success" href="javascript:void(0);" onclick="javascript:introJs().start();">More info</a>
+                </div>
+            </div>
+
+            <div class="row" >
+                
+                <!-- Box for the site condition -->
+                <div class="col-md-2">
+                    <div class="classp" id="cccm" class="col-xs-6 dc-chart" data-step="1" data-intro="Click on this pie chart to filter by sector." data-position="right">
+                      <h4>Site size</h4>
+                    </div>
+                    <div class="environmentp"  id="cccm" class="col-xs-6 dc-chart" data-step="1" data-intro="Click on this pie chart to filter by sector." data-position="right">
+                      <h4>Site Location</h4>
+                    </div>
+                </div>
+
+
+                <!-- Box for the site condition -->
+                <div  class="col-md-4" data-step="2" data-intro="Click on this pie chart to filter by sector." data-position="right">
+                    <h4>Condition in the sites</h4>
+                    <p><small>Based on site observation by enumerators</small></p>
+                      <div class="row">
+                        <div class="waterp" id="cccm" class="col-xs-2 dc-chart" >
+                          <p>Water Access</p>
+                        </div>
+                        <div class="waterqp" id="cccm" class="col-xs-2 dc-chart" >
+                          <p>Water Quality</p>
+                        </div>
+                      </div>
+                      
+                      <div class="row">
+                        <div class="openelementp"  id="cccm" class="col-xs-2 dc-chart" >
+                          <p>Open to the elements</p>
+                        </div>
+                        <div class="electricp" id="cccm" class="col-xs-2 dc-chart" >
+                          <p>Electric</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="hazardsp" id="cccm" class="col-xs-2 dc-chart" >
+                          <p>Hazard</p>
+                        </div>
+                        <div class="minesp" id="cccm" class="col-xs-2 dc-chart" >
+                          <p>Mines</p>
+                        </div>
+                      </div>
+                    </div>
+    
+    
+                </div>
+
+                <!-- Box for the map -->
+                <div  class="col-md-6">
+                    <div  class="map" id="cccm"></div>
+                </div>
+
+            </div>
+            <div class="row" ></div>
+
+            <div class="row" id="cccm">
+                    <h4>Participating Organisations</h4>
+                    <div  class="col-xs-8">
+                      <p> The CCCM clusters coordinates work on the ground from various organisations.
+                      This assessment has been made possible trough the contribution of various partners.</p>
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td valign="middle">
+                                        <a href="http://drc.dk/relief-work/where-we-work/middle-east/iraq/" target="_blank">
+                                        <img src="images/partner/drc.jpg" ></a>
+                                    </td>
+                                    <td valign="middle">
+                                        <a href="http://www.ifrc.org/en/news-and-media/press-releases/middle-east-and-north-africa/iraq/" target="_blank">
+                                        <img src="images/partner/frc.jpg" ></a>
+                                    </td>
+                                    <td valign="middle">
+                                        <a href="http://www.harikar.org/new/" target="_blank">
+                                        <img src="images/partner/harikar.jpg" ></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="middle">
+                                        <a href="http://iomiraq.net/news" target="_blank">
+                                        <img src="images/partner/iom.jpg" ></a>
+                                    </td>
+                                    <td valign="middle">
+                                        <a href="http://www.reach-initiative.org/tag/iraq" target="_blank">
+                                        <img src="images/partner/reach-initiative.jpg" ></a>
+                                    </td>
+                                    <td valign="middle">
+                                        <a href="http://www.unhcr.org/pages/49e486426.html" target="_blank">
+                                        <img src="images/partner/unhcr.jpg" ></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="orgap" id="cccm" class="col-xs-4 dc-chart" data-step="1" data-intro="Click on this pie chart to filter by sector." data-position="right">
+
+                      <p><small>Number of sites assessed per organisation</small></p>
+                    </div>
+            </div>
+
+    </div>
+
+    <small><a href="https://github.com/unhcr-iraq/Site-Assessment" target="_blank">Credit</a></small>
+
+
+    <script type="text/javascript" src="js/intro.js"></script>
+    <script type="text/javascript" src="js/d3_002.js"></script>
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/crossfilter.js"></script>
+    <script type="text/javascript" src="js/dc.js"></script>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+
+<!--maps-->
+    <script type="text/javascript" src="js/leaflet.js"></script>
+    <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+    <script type="text/javascript" src="js/dc.leaflet.js"></script>
+
+
+<script type="text/javascript">
+
+/*     Markers      */
+var numberFormat = d3.format(",f");
+
+
+
+
+d3.tsv("data/dataviz.tsv", function(data) {
+  drawMarkerSelect(data);
+ /* drawMarkerArea(data); */
+});
+
+function drawMarkerSelect(data) {
+  var xf = crossfilter(data);
+  var groupname = "marker-select";
+    var facilities = xf.dimension(function(d) { return d.geo; });
+    var facilitiesGroup = facilities.group().reduceCount();
+
+  dc.leafletMarkerChart("#cccm .map",groupname)
+      .dimension(facilities)
+      .group(facilitiesGroup)
+      .width(450)
+      .height(300)
+      .center([34.7503,44.5385])
+      .zoom(6)
+      .cluster(true);
+
+
+//water_access  water_quality   electric    openelement damage  hazards mines   fighting
+
+  var waters = xf.dimension(function(d) { return d.water_access; });
+  var watersGroup = waters.group().reduceCount();
+  dc.pieChart("#cccm .waterp",groupname)
+        .dimension(waters)
+        .group(watersGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+
+
+  var waterqs = xf.dimension(function(d) { return d.water_quality; });
+  var waterqsGroup = waterqs.group().reduceCount();
+  dc.pieChart("#cccm .waterqp",groupname)
+        .dimension(waterqs)
+        .group(waterqsGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+
+
+  var electrics = xf.dimension(function(d) { return d.electric; });
+  var electricsGroup = electrics.group().reduceCount();
+  dc.pieChart("#cccm .electricp",groupname)
+        .dimension(electrics)
+        .group(electricsGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+
+
+  var openelements = xf.dimension(function(d) { return d.openelement; });
+  var openelementsGroup = openelements.group().reduceCount();
+  dc.pieChart("#cccm .openelementp",groupname)
+        .dimension(openelements)
+        .group(openelementsGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+  var damages = xf.dimension(function(d) { return d.damage; });
+  var damagesGroup = damages.group().reduceCount();
+  dc.pieChart("#cccm .damagep",groupname)
+        .dimension(damages)
+        .group(damagesGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+  var hazardss = xf.dimension(function(d) { return d.hazards; });
+  var hazardssGroup = hazardss.group().reduceCount();
+  dc.pieChart("#cccm .hazardsp",groupname)
+        .dimension(hazardss)
+        .group(hazardssGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+  var miness = xf.dimension(function(d) { return d.mines; });
+  var minessGroup = miness.group().reduceCount();
+  dc.pieChart("#cccm .minesp",groupname)
+        .dimension(miness)
+        .group(minessGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+  var fightings = xf.dimension(function(d) { return d.fighting; });
+  var fightingsGroup = fightings.group().reduceCount();
+  dc.pieChart("#cccm .fightingp",groupname)
+        .dimension(fightings)
+        .group(fightingsGroup)
+        .width(80)
+        .height(80)
+        .renderLabel(true)
+        .renderTitle(true)
+       .ordering(function (p) {
+        return -p.value;
+      });
+
+
+  var environments = xf.dimension(function(d) { return d.environment; });
+  var environmentsGroup = environments.group().reduceCount();
+  dc.rowChart("#cccm .environmentp",groupname)
+        .dimension(environments)
+        .group(environmentsGroup)
+        .width(200)
+        .height(150)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+       // .ordering(function (p) { return -p.value;});
+
+
+  var classs = xf.dimension(function(d) { return d.class; });
+  var classsGroup = classs.group().reduceCount();
+  dc.rowChart("#cccm .classp",groupname)
+        .dimension(classs)
+        .group(classsGroup)
+        .width(200)
+        .height(200)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+       // .ordering(function (p) { return -p.value;});
+
+
+  var types = xf.dimension(function(d) { return d.organisat; });
+  var typesGroup = types.group().reduceCount();
+  dc.rowChart("#cccm .orgap",groupname)
+        .dimension(types)
+        .group(typesGroup)
+        .width(350)
+        .height(200)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+       // .ordering(function (p) { return -p.value;});
+
+
+  dc.dataCount("#count-info")
+
+  dc.renderAll(groupname);
+}
+
+
+</script>
+
+
+
+    <script src="js/bootstrap.js"></script>
+
+
+<script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
+
+<div class="d3-tip n" style="position: absolute; display: none; box-sizing: border-box; top: 186.9px; left: 727.5px;"></div><div class="d3-tip" style="position: absolute; display: none; box-sizing: border-box;"></div>
+</body>
+</html>

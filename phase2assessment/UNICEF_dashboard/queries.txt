@@ -1,0 +1,2 @@
+SELECT acs_name FROM (SELECT acs_name, st_contains(ST_GeomFromText('POINT(16.391944 48.218056)', 4326),the_geom)as cad2 WHERE cad2 <>'false'  FROM lbn_adm3_ply)as cad 
+

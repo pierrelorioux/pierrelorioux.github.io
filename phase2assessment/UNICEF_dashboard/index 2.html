@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+    <title>Phase2</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <meta itemprop="name" content="Site Assessment - CCCM Cluster Iraq"/>
+    <meta itemprop="description" content="Site Assessment - CCCM Cluster Iraq"/>
+
+
+    <link type="text/css" href="css/leaflet.css" rel="stylesheet"/>
+    <link type="text/css" href="css/leaflet.markercluster.css" rel="stylesheet"/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/dc.css">
+    <!-- Add IntroJs styles  -->
+    <link rel="stylesheet" type="text/css" href="css/introjs.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+
+
+</head>
+
+<body>
+
+    <div style="display: none;" class="col-sm-4 col-md-offset4" id="loading">
+        <h1>Patience: We are wrapping up the data... </h1><small>This webpage does not work on IE8 or older... Upgrade your browser if needed</small>
+    </div>
+
+    <div style="display: block;" class="container" id="dashboard">
+
+            <div class="row" id="cccm">
+                <div class="col-md-2">
+                 <br><a class="reset btn btn-primary btn-sm" id="reset" href="#">Reset All</a><br><br>
+                    <div class="governoratep" class="col-xs-6 dc-chart" data-step="3" data-intro="Click on this bar chart to filter by Sub_off" data-position="right">
+                      <h4>Sub_off</h4>
+                    </div>
+
+                    <div class="classp" class="col-xs-6 dc-chart" data-step="4" data-intro="Click on this bar chart to filter by site class size" data-position="right">
+                      <h4>District</h4>
+                    </div>
+
+                </div>
+
+                 <div  class="col-md-3"  data-step="5" data-intro="Click on this bar chart to filter by district" data-position="right">
+                    <div class="districtp" class="dc-chart" >
+                        <h4>Nationality</h4>
+                        <p><small><i>Number of individuals</i></small></p>
+                    </div>
+                    <div class="row">
+                      <div  class="col-md-6">
+                        <div  class="scorep" id="cccm" class="dc-chart">
+                          <h4>Gender</h4>
+                        </div>
+                      </div>
+                      <div  class="col-md-6">
+                        <div class="pregnant" class="dc-chart" >
+                            <h4>Pregnant</h4>
+                        </div>
+                      </div>
+                      <div  class="col-md-7">
+                        <div  class="sectionAA7_age" id="cccm" class="dc-chart">
+                           <h4>Age</h4>
+                        </div>
+                      </div>
+                      <div  class="col-md-5">
+                        <div class="care" class="dc-chart" >
+                            <h4>Caregiver</h4>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div  data-step="7" data-intro="Click on the map to filter by site" data-position="left">
+
+                    <h4>Map: Location of the sites</h4>
+                      <p><small><i>Zoom on the map to filter sites. click on the pinpoint for more information</i></small></p>
+                    <div  class="map" id="cccm"  > </div>
+                </div>
+            </div>
+            <div>
+              <div id="villages">Interviews per village</div>
+            </div>
+    </div>
+
+    <script type="text/javascript" src="js/intro.js"></script>
+    <script type="text/javascript" src="js/d3_002.js"></script>
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/crossfilter.js"></script>
+    <script type="text/javascript" src="js/dc.js"></script>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+
+<!--maps-->
+    <script type="text/javascript" src="js/leaflet.js"></script>
+    <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+    <script type="text/javascript" src="js/dc.leaflet.js"></script>
+
+
+<script type="text/javascript">
+
+/*     Markers      */
+var numberFormat = d3.format(",f");
+  
+
+
+d3.tsv("data/dataviz4.tsv", function(data) {
+ // drawMarkerSelect(data);
+  drawMarkerArea(data);
+});
+
+
+function regroup(dim, cols) {
+    var _groupAll = dim.groupAll().reduce(
+        function(p, v) { // add
+            cols.forEach(function(c) {
+                p[c] += v[c];
+            });
+            return p;
+        },
+        function(p, v) { // remove
+            cols.forEach(function(c) {
+                p[c] -= v[c];
+            });
+            return p;
+        },
+        function() { // init
+            var p = {};
+            cols.forEach(function(c) {
+                p[c] = 0;
+            });
+            return p;
+        });
+    return {
+        all: function() {
+            // or _.pairs, anything to turn the object into an array
+            return d3.map(_groupAll.value()).entries();
+        }
+    };
+}
+
+
+
+function drawMarkerArea(data) {
+//function drawMarkerSelect(data) {
+
+    data.forEach(function (d) {
+    //d.dd  = dateFormat.parse(d.start);
+    //d.day = d3.time.day(d.dd);
+    //convert to numbers
+    d.sectionAA7_age = +d['sectionAA7_age'];
+    //d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_ = +d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_;
+  });
+
+  var xf = crossfilter(data);
+
+
+  var groupname = "marker-select";
+
+  var facilities = xf.dimension(function(d) { return d.geo; });
+  var facilitiesGroup = facilities.group();
+
+  dc.leafletMarkerChart("#cccm .map",groupname)
+      .dimension(facilities)
+      .group(facilitiesGroup)
+      .width(800)
+      .height(890)
+      .center([34.0003,35.9085])
+      .zoom(8)
+      .cluster(true)
+      .filterByArea(true)
+      //.clusterObject({ maxClusterRadius: 40, disableClusteringAtZoom:10,spiderfyOnMaxZoom: false,showCoverageOnHover: false})
+    ;
+
+  var governorates = xf.dimension(function(d) { return d.sectionAA1_sub_office; });
+  var governoratesByIndividual = governorates.group();
+  var governoratesByHousehold = governorates.group().reduceSum(function (d) { return d.household; });
+  //var governoratesGroup = types.group().reduceCount();
+
+  dc.rowChart("#cccm .governoratep",groupname)
+        .dimension(governorates)
+        .group(governoratesByIndividual)
+       // .stack(governoratesByHousehold)
+       // .elasticX(true)
+        .width(200)
+        .height(150)
+        .renderLabel(true)
+        .ordering(function (p) { return -p.value;})
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var classs = xf.dimension(function(d) { return d.sectionAA2_district; });
+  var classsGroup = classs.group().reduceCount();
+  dc.rowChart("#cccm .classp",groupname)
+        .dimension(classs)
+        .group(classsGroup)
+        .width(200)
+        .height(300)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+       // .ordering(function (p) { return -p.value;});
+
+  var sectionAA5_nationality = xf.dimension(function(d) { return d.sectionAA5_nationality; });
+  var nationalityGroup = sectionAA5_nationality.group();
+
+  dc.rowChart("#cccm .districtp",groupname)
+        .dimension(sectionAA5_nationality)
+        .group(nationalityGroup)
+       // .group(districtsByMen, "Men")
+       // .stack(districtsByWomen, "Women")
+       // .stack(districtsByBoy, "Boys")
+       // .stack(districtsByGirl, "Girls")
+       // .elasticX(true)
+      //  .data(function(group) { return group.top(10); })
+        .width(250)
+        .height(200)
+        .renderLabel(true)
+        .ordering(function (p) { return -p.value;})
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+var scores = xf.dimension(function(d) { return d.sectionAA6_gender; });
+ var scoresGroup = scores.group();
+
+  dc.pieChart("#cccm .scorep",groupname)
+        .dimension(scores)
+        .group(scoresGroup)
+        .width(75)
+        .height(75)
+        .renderLabel(true)
+        .renderTitle(true)
+        //.colors(['#3182bd'])
+        //.colorDomain([0,0])
+        //.colorAccessor(function(d, i){return 1;})
+        //.ordering(function (p) { return -p.value;})
+        //.xAxis().ticks(4).tickFormat(d3.format("s"));
+
+ var preg = xf.dimension(function(d) { return d.sectionAA8a_pregnant; });
+ var pregGroup = preg.group();
+
+  dc.pieChart("#cccm .pregnant",groupname)
+        .dimension(preg)
+        .group(pregGroup)
+        .width(75)
+        .height(75)
+        .renderLabel(true)
+        .renderTitle(true);
+
+ var care = xf.dimension(function(d) { return d.sectionAA8a_caregiver; });
+ var careGroup = care.group();
+
+  dc.pieChart("#cccm .care",groupname)
+        .dimension(care)
+        .group(careGroup)
+        .width(75)
+        .height(75)
+        .renderLabel(true)
+        .renderTitle(true);
+
+
+var age = xf.dimension(function(d){ return d.sectionAA8_age_group});
+ var ageGroup = age.group().reduceCount();
+
+  dc.rowChart("#cccm .sectionAA7_age",groupname)
+        .dimension(age)
+        .group(ageGroup)
+        .width(200)
+        .height(150)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        //.ordering(function (p) { return -p.value;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var villageDim = xf.dimension(function(d) { return d.Village_Name; });
+  var villageGroup = villageDim.group();
+
+  dc.rowChart("#villages",groupname)
+        .dimension(villageDim)
+        .group(villageGroup)
+       // .group(districtsByMen, "Men")
+       // .stack(districtsByWomen, "Women")
+       // .stack(districtsByBoy, "Boys")
+       // .stack(districtsByGirl, "Girls")
+       // .elasticX(true)
+      //  .data(function(group) { return group.top(10); })
+        .width(850)
+        .height(900)
+        .renderLabel(true)
+        .ordering(function (p) { return -p.value;})
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+$('#reset').on('click', function (){
+  dc.filterAll(groupname);
+  dc.redrawAll(groupname);
+  return false;
+})
+
+
+//  dc.renderAll();
+  dc.renderAll(groupname);
+}
+
+</script>
+
+
+
+    <script src="js/bootstrap.js"></script>
+
+<div class="d3-tip n" style="position: absolute; display: none; box-sizing: border-box; top: 186.9px; left: 727.5px;"></div><div class="d3-tip" style="position: absolute; display: none; box-sizing: border-box;"></div>
+</body>
+
+
+</html>
