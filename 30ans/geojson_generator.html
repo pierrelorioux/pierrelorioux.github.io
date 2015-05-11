@@ -7,7 +7,7 @@
 </head>
 <body>
  <div>
-      <p>Get the GEOJSON BRO!</p>
+      <p>Get the GEOJSON !</p>
       <form method=post action="http://checkmyspot.cartodb.com/api/v2/sql?q=SELECT name,ST_ASTEXT(geojson) as the_geom FROM ne_countries where name = '{{yourName}}' &api_key=1ee27b6f5797b73fc59cd5d01f8747a42f40ecd2&format=geojson">
       <label>Name:</label>
        <input type="text" ng-model="yourName" placeholder="Enter a country name here">
