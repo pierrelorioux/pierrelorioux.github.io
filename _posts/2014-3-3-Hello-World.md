@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Reading news in csv
+title: Reading the news
 ---
 
 Regarder les news sur bbc c'est bien, les lire en csv c'est mieux!
