@@ -4,7 +4,6 @@ title: About
 permalink: /about/
 ---
 
-I'm currently consultant for CartONG.
 
 ### Contact me
 
