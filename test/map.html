@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>الآبار المجهزة في مدينة حلب من قبل اللجنة الدولية للصليب الأحمر</title>
+
+<meta property="og:image" content="https://farm1.staticflickr.com/706/20027681043_c1be536cd4_b.jpg">
+<script src='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
+
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+  .legend label,
+.legend span {
+  display:block;
+  float:right;
+  height:30px;
+  width:100%;
+  text-align:center;
+  font-size:12px;
+  color:#7d7d7d;
+
+}
+.my-custom-control { background: url('https://www.icrc.org/sites/default/themes/icrc_theme/images/en/logo.png'); 
+background-size: 70px 81px;
+background-repeat: no-repeat;
+background-position: center;
+background-clip: border-box;
+transition: background-size 0.2s;
+-webkit-transition: background-size 0.2s;
+transition-timing-function: cubic-bezier(.05,1.2,.72,1.2);
+display: inline-block; 
+width: 100px;
+height: 118px;
+}
+.my-custom-control:hover {
+    background-size: 100px;
+}
+/*show a larger image when you're on a big screen*/
+        @media screen and (min-width: 1200px) {
+            .my-custom-control {
+                background-size: 70px 81px;
+                width: 100px;
+                height: 118px;
+            }
+            .my-custom-control:hover {
+                background-size: 100px;
+            }
+        }
+#title{
+position:absolute;
+background-color: white;
+height:60px;
+width :200px;
+top:15px;
+right:50px;
+text-align:right;
+padding-top:5px;
+padding-right:5px;
+font-weight: bold;
+z-index:10;
+}
+#Disclaimer{
+position:absolute;
+/*background-color: white;*/
+height:20px;
+/*width :200px;*/
+bottom:12px;
+left:100px;
+/*text-align:left;*/
+padding-top:10px;
+padding-left:5px;
+font-size: 12px;
+z-index:10;
+}
+#wrapper {
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+}
+
+</style>
+</head>
+<body>
+ <div id='legend'>
+  <strong>مفتاح الرموز</strong>
+  <nav class='legend clearfix'>
+   <span><img src="https://a.tiles.mapbox.com/v4/marker/pin-s-marker+1087bf.png?access_token=pk.eyJ1IjoiaWNyYyIsImEiOiJ5dlNMaUhnIn0.QG1pZIPyfyekyHFAS6vb2w" height="50" width="20"></span>
+    <label> آبار مياه صالحة للشرب</label>  
+</div>
+<div id="wrapper">
+<div id="title">الآبار المجهزة في مدينة حلب من قبل اللجنة الدولية للصليب الأحمر<br><small>تحديث:آب.2015</small></div>
+
+<div id="Disclaimer">©ICRC 2015 | The boundaries and names shown and the designations used on this map. Do not imply official endorsement or acceptance by the ICRC.</div>
+</div>
+<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.mapbox.css' rel='stylesheet' />
+<!--[if lt IE 9]>
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.ie.css' rel='stylesheet' />
+<![endif]-->
+<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/css/font-awesome.min.css' rel='stylesheet' />
+
+<div id='map'></div>
+
+
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoiaWNyYyIsImEiOiJ5dlNMaUhnIn0.QG1pZIPyfyekyHFAS6vb2w';
+// Construct a bounding box for this map that the user cannot
+// move out of
+var southWest = L.latLng(36.121758, 36.965937),
+    northEast = L.latLng(36.300705, 37.368655),
+    bounds = L.latLngBounds(southWest, northEast);
+var map = L.mapbox.map('map', 'icrc.n4nnka35', {
+    // set that bounding box as maxBounds to restrict moving the map
+    // see full maxBounds documentation:
+    // http://leafletjs.com/reference.html#map-maxbounds
+    maxBounds: bounds,
+    maxZoom: 19,
+    minZoom: 13,
+});
+
+var layers = {
+      Streets: L.mapbox.tileLayer('mapbox.streets'),
+      Satellite: L.mapbox.tileLayer('mapbox.satellite'),
+	  Sat_Street_HQ:L.mapbox.tileLayer('icrc.kog47201')
+	 
+  };
+  layers.Streets.addTo(map);
+  L.control.layers(layers).addTo(map);
+// zoom the map to that bounding box
+map.fitBounds(bounds);
+map.legendControl.addLegend(document.getElementById('legend').innerHTML);
+L.control.scale().addTo(map);
+
+var MyControl = L.Control.extend({
+    options: {
+      position: 'bottomleft'
+    },
+    onAdd: function (map) {
+      // create the control container with a particular class name
+      // ** you can add the image to the div as a background image using css
+      var imageLink = document.createElement('a');
+          imageLink.href = 'https://www.icrc.org/ar/homepage';
+		  imageLink.target = "_blank";
+      var container = L.DomUtil.create('div', 'my-custom-control');
+      imageLink.appendChild(container);
+      // ... initialize other DOM elements, add listeners, etc.
+      return imageLink;
+    }
+});
+
+map.addControl(new MyControl());
+L.control.locate().addTo(map);
+map.featureLayer.on('click', function(e) {
+    map.panTo(e.layer.getLatLng());
+});
+
+</script>
+
+
+</body>
+</html>
