@@ -20,7 +20,8 @@ var width = 960,
 
 var fill = d3.scale.log()
     .domain([10, 500])
-    .range(["#fff7ec","#7f0000"]);
+    .range(["#ca0020","#0571b0"])
+    .interpolate(d3.interpolateRgb);
 
 var path = d3.geo.path();
 
