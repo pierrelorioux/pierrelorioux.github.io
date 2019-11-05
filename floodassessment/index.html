@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+    <title>InterAgency Flood Assessment</title>
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link type="text/css" href="css/leaflet.css" rel="stylesheet"/>
+    <link type="text/css" href="css/leaflet.markercluster.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="css/dc.css">
+    <!-- Add IntroJs styles  -->
+    <link rel="stylesheet" type="text/css" href="css/introjs.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+</head>
+
+
+<body>
+  <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top">Dashboard</a>
+        </li>
+        <li>
+            <a href="#gen">General Info</a>
+        </li>
+        <li>
+            <a href="#map">Map</a>
+        </li>
+        <li>
+            <a href="#dem">Demographic</a>
+        </li>
+        <li>
+            <a href="#WASH">WASH</a>
+        </li>
+        <li>
+            <a href="#Shelter">Shelter</a>
+        </li>
+        <li>
+            <a href="#health">Health</a>
+        </li>
+        <li>
+            <a href="#assist">Assistance</a>
+        </li>
+        <li>
+            <a href="#obs">Observation</a>
+        </li>
+    </ul>
+</nav>
+    <div style="display: block;" class="container" id="dashboard">
+      <p id="title"><h3>LBN - Akkar Governorate InterAgency Rapid Flood Assessment in IS</h3></p>
+            <div class="row" id="cccm">
+                <div class="col-md-10">
+                 <br><a class="reset btn btn-primary btn-sm" id="reset" href="#">Reset All</a>&nbsp;&nbsp;<a class="reset btn btn-primary btn-sm" id="data" href="data/Interagency_FloodAssessment_24102014.xls">Download the Data</a><br><br>
+                 <p id="gen"><h3>General Information</h3></p>
+                     <div class="row">
+                      <div  class="col-md-3">
+                        <div  class="org" id="cccm" class="dc-chart">
+                          <h4>Organization</h4>
+                        </div>
+                      </div>
+                      <div  class="col-md-3">
+                        <div class="date" class="dc-chart" >
+                            <h4>Date of Assessment</h4>
+                        </div>
+                      </div>
+
+                    </div>
+
+                </div>
+            </div>
+              <br>
+                <div  data-step="7" data-intro="Click on the map to filter by site" data-position="left">
+
+                    <h4 id="map">Map: Location of the Informal Settlements assessed</h4>
+                      <p><small><i>Zoom on the map to filter sites</i></small></p>
+                    <div  class="map" id="cccm"  > </div>
+                </div>
+
+            <div class="row" id="cccm">
+                <div class="col-md-10">
+                   <p id="dem"><h3>Demographic</h3></p>
+
+                     <div class="row">
+                      <div  class="col-md-3">
+                        <div  class="num_of_hou" id="cccm" class="dc-chart">
+                          <h4>NUM OF HOUSEHOLDS</h4>
+                        </div>
+                      </div>
+                       <div  class="col-md-3"><div  class="num_of_males_r id=cccm" class="dc-chart"><h4>NUM OF MALES </h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_females_r id=cccm" class="dc-chart"><h4>NUM OF FEMALES</h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_newborns_r id=cccm" class="dc-chart"><h4>NUM OF NEWBORNS </h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_children_r id=cccm" class="dc-chart"><h4>NUM OF CHILDREN </h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_pregnant_r id=cccm" class="dc-chart"><h4>NUM OF PREGNANT </h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_households id=cccm" class="dc-chart"><h4>NUM OF HOUSEHOLDS</h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_males id=cccm" class="dc-chart"><h4>NUM OF MALES</h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_females id=cccm" class="dc-chart"><h4>NUM OF FEMALES</h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_newborns id=cccm" class="dc-chart"><h4>NUM OF NEWBORNS</h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_children id=cccm" class="dc-chart"><h4>NUM OF CHILDREN</h4></div></div>
+                       <div  class="col-md-3"><div  class="num_of_pregnant id=cccm" class="dc-chart"><h4>NUM OF PREGNANT</h4></div></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row" id="cccm">
+                <div class="col-md-10">
+                   <p id="WASH"><h3>WASH</h3></p>
+                     <div class="row">
+                       <div  class="col-md-3"><div  class="main_water_sources id=cccm" class="dc-chart"><h4>MAIN WATER SOURCES</h4></div></div>
+                       <div  class="col-md-3"><div  class="borehole id=cccm" class="dc-chart"><h4>BOREHOLE</h4></div></div>
+                       <div  class="col-md-3"><div  class="spring id=cccm" class="dc-chart"><h4>SPRING</h4></div></div>
+                       <div  class="col-md-3"><div  class="tap_water id=cccm" class="dc-chart"><h4>TAP WATER</h4></div></div>
+                       <div  class="col-md-3"><div  class="water_truck id=cccm" class="dc-chart"><h4>WATER TRUCK</h4></div></div>
+                       <div  class="col-md-3"><div  class="bottled id=cccm" class="dc-chart"><h4>BOTTLED</h4></div></div>
+                       <div  class="col-md-3"><div  class="river_creek id=cccm" class="dc-chart"><h4>RIVER CREEK</h4></div></div>
+                       <div  class="col-md-3"><div  class="water_cleaniness id=cccm" class="dc-chart"><h4>WATER CLEANINESS</h4></div></div>
+                       <div  class="col-md-3"><div  class="water_sufficiency id=cccm" class="dc-chart"><h4>WATER SUFFICIENCY</h4></div></div>
+                       <div  class="col-md-3"><div  class="water_treating id=cccm" class="dc-chart"><h4>WATER TREATING</h4></div></div>
+                       <div  class="col-md-3"><div  class="boiling id=cccm" class="dc-chart"><h4>BOILING</h4></div></div>
+                       <div  class="col-md-3"><div  class="iodine_chlorine id=cccm" class="dc-chart"><h4>IODINE CHLORINE</h4></div></div>
+                       <div  class="col-md-3"><div  class="water_filter id=cccm" class="dc-chart"><h4>WATER FILTER</h4></div></div>
+                       <div  class="col-md-3"><div  class="sunlight id=cccm" class="dc-chart"><h4>SUNLIGHT</h4></div></div>
+                       <div  class="col-md-3"><div  class="none id=cccm" class="dc-chart"><h4>NONE</h4></div></div>
+                       <div  class="col-md-3"><div  class="toilet_type id=cccm" class="dc-chart"><h4>TOILET TYPE</h4></div></div>
+                       <div  class="col-md-3"><div  class="pit id=cccm" class="dc-chart"><h4>PIT</h4></div></div>
+                       <div  class="col-md-3"><div  class="open_air id=cccm" class="dc-chart"><h4>OPEN AIR</h4></div></div>
+                       <div  class="col-md-3"><div  class="pour_flush id=cccm" class="dc-chart"><h4>POUR FLUSH</h4></div></div>
+                       <div  class="col-md-3"><div  class="other_t id=cccm" class="dc-chart"><h4>OTHER T</h4></div></div>
+                       <div  class="col-md-3"><div  class="number_of_toilets id=cccm" class="dc-chart"><h4>NUMBER OF TOILETS</h4></div></div>
+                       <div  class="col-md-3"><div  class="functioning_toilets id=cccm" class="dc-chart"><h4>FUNCTIONING TOILETS</h4></div></div>
+                       <div  class="col-md-3"><div  class="broken_toilets id=cccm" class="dc-chart"><h4>BROKEN TOILETS</h4></div></div>
+                       <div  class="col-md-3"><div  class="waste_water id=cccm" class="dc-chart"><h4>WASTE WATER</h4></div></div>
+                       <div  class="col-md-3"><div  class="septic id=cccm" class="dc-chart"><h4>SEPTIC</h4></div></div>
+                       <div  class="col-md-3"><div  class="soakage id=cccm" class="dc-chart"><h4>SOAKAGE</h4></div></div>
+                       <div  class="col-md-3"><div  class="sewage id=cccm" class="dc-chart"><h4>SEWAGE</h4></div></div>
+                       <div  class="col-md-3"><div  class="stream id=cccm" class="dc-chart"><h4>STREAM</h4></div></div>
+                       <div  class="col-md-3"><div  class="sewage_water id=cccm" class="dc-chart"><h4>SEWAGE WATER</h4></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="cccm">
+            <div class="col-md-10">
+                <p id="Shelter"><h3>SHELTER</h3></p>
+                  <div class="row">
+                    <div  class="col-md-3"><div  class="shelters_total id=cccm" class="dc-chart"><h4>SHELTERS TOTAL</h4></div></div>
+                     <div  class="col-md-3"><div  class="shelters_partially_destroyed id=cccm" class="dc-chart"><h4>PARTIALLY DESTR.</h4></div></div>
+                     <div  class="col-md-3"><div  class="shelters_completely_destroyed id=cccm" class="dc-chart"><h4>COMPLETELY DESTR.</h4></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="cccm">
+            <div class="col-md-10">
+                <p id="health"><h3>HEALTH</h3></p>
+                  <div class="row">
+                     <div  class="col-md-3"><div  class="main_health_issues id=cccm" class="dc-chart"><h4>MAIN HEALTH ISSUES</h4></div></div>
+                     <div  class="col-md-3"><div  class="couch_cold id=cccm" class="dc-chart"><h4>COUCH COLD</h4></div></div>
+                     <div  class="col-md-3"><div  class="diarrhoea id=cccm" class="dc-chart"><h4>DIARRHOEA</h4></div></div>
+                     <div  class="col-md-3"><div  class="skin_infect id=cccm" class="dc-chart"><h4>SKIN INFECT</h4></div></div>
+                     <div  class="col-md-3"><div  class="do_not_know id=cccm" class="dc-chart"><h4>DO NOT KNOW</h4></div></div>
+                     <div  class="col-md-3"><div  class="health_worker id=cccm" class="dc-chart"><h4>HEALTH WORKER</h4></div></div>
+                     <div  class="col-md-3"><div  class="medical_team id=cccm" class="dc-chart"><h4>MEDICAL TEAM</h4></div></div>
+                     <div  class="col-md-3"><div  class="immunized_children id=cccm" class="dc-chart"><h4>IMMUNIZED CHILDREN</h4></div></div>
+                     <div  class="col-md-3"><div  class="mobile_outreach id=cccm" class="dc-chart"><h4>MOBILE OUTREACH</h4></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="cccm">
+            <div class="col-md-10">
+                <p id="assist"><h3>ASSISTANCE</h3></p>
+                  <div class="row">
+                     <div  class="col-md-3"><div  class="other_ngo id=cccm" class="dc-chart"><h4>OTHER NGO</h4></div></div>
+                     <div  class="col-md-3"><div  class="visit_purpose id=cccm" class="dc-chart"><h4>VISIT PURPOSE</h4></div></div>
+                     <div  class="col-md-3"><div  class="assistance_type id=cccm" class="dc-chart"><h4>ASSISTANCE TYPE</h4></div></div>
+                     <div  class="col-md-3"><div  class="sheets id=cccm" class="dc-chart"><h4>SHEETS</h4></div></div>
+                     <div  class="col-md-3"><div  class="blankets id=cccm" class="dc-chart"><h4>BLANKETS</h4></div></div>
+                     <div  class="col-md-3"><div  class="mattresses id=cccm" class="dc-chart"><h4>MATTRESSES</h4></div></div>
+                     <div  class="col-md-3"><div  class="electricity id=cccm" class="dc-chart"><h4>ELECTRICITY</h4></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="cccm">
+            <div class="col-md-10">
+                <p id="obs"><h3>Observation - Validation</h3></p>
+                  <div class="row">
+                   <div  class="col-md-3"><div  class="observation_validation id=cccm" class="dc-chart"><h4>OBSERVATION VALIDATION</h4></div></div>
+                   <div  class="col-md-3"><div  class="latrine_damage_observation id=cccm" class="dc-chart"><h4>LATRINE DAMAGE OBSERVATION</h4></div></div>
+                   <div  class="col-md-3"><div  class="sewage_overflow_observation id=cccm" class="dc-chart"><h4>SEWAGE OVERFLOW OBSERVATION</h4></div></div>
+                   <div  class="col-md-3"><div  class="observation_validation_water id=cccm" class="dc-chart"><h4>OBSERVATION VALIDATION WATER</h4></div></div>
+                   <div  class="col-md-3"><div  class="excreta_signs id=cccm" class="dc-chart"><h4>EXCRETA SIGNS</h4></div></div>
+                   <div  class="col-md-3"><div  class="garbage_problem id=cccm" class="dc-chart"><h4>GARBAGE PROBLEM</h4></div></div>
+                   <div  class="col-md-3"><div  class="stagnant_water id=cccm" class="dc-chart"><h4>STAGNANT WATER</h4></div></div>
+                   <div  class="col-md-3"><div  class="terrain_situation id=cccm" class="dc-chart"><h4>TERRAIN SITUATION</h4></div></div>
+                   <div  class="col-md-3"><div  class="shelter_o_validation id=cccm" class="dc-chart"><h4>SHELTER O VALIDATION</h4></div></div>
+                   <div  class="col-md-3"><div  class="totally_destroyed_o id=cccm" class="dc-chart"><h4>TOTALLY DESTROYED </h4></div></div>
+                   <div  class="col-md-3"><div  class="partially_destroyed_o id=cccm" class="dc-chart"><h4>PARTIALLY DESTROYED </h4></div></div>
+                   <div  class="col-md-3"><div  class="concrete_shelters id=cccm" class="dc-chart"><h4>CONCRETE SHELTERS</h4></div></div>
+                   <div  class="col-md-3"><div  class="no_concrete_shelters id=cccm" class="dc-chart"><h4>NO CONCRETE SHELTERS</h4></div></div>
+                   <div  class="col-md-3"><div  class="no_winter_clothes id=cccm" class="dc-chart"><h4>NO WINTER CLOTHES</h4></div></div>
+                   <div  class="col-md-3"><div  class="no_shoes id=cccm" class="dc-chart"><h4>NO SHOES</h4></div></div>
+                   <div  class="col-md-3"><div  class="no_winter_clothes_a id=cccm" class="dc-chart"><h4>NO WINTER CLOTHES </h4></div></div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div id="reachbar"><a href="http://www.reach-initiative.org/"><img src="img/reach.jpg" style="background-color:#fff;border:none;height:40px" /></a></div>
+        <br>
+    </div>
+
+
+    <script type="text/javascript" src="js/intro.js"></script>
+    <script type="text/javascript" src="js/d3_002.js"></script>
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/crossfilter.js"></script>
+    <script type="text/javascript" src="js/dc.js"></script>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+<!--maps-->
+    <script type="text/javascript" src="js/leaflet.js"></script>
+    <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+    <script type="text/javascript" src="js/dc.leaflet.js"></script>
+
+
+
+<script type="text/javascript">
+
+/*     Markers      */
+//var numberFormat = d3.format(",f");
+
+d3.tsv("data/Interagency_FloodAssessment.tsv", function(data) {
+ // drawMarkerSelect(data);
+  drawMarkerArea(data);
+});
+
+
+function regroup(dim, cols) {
+    var _groupAll = dim.groupAll().reduce(
+        function(p, v) { // add
+            cols.forEach(function(c) {
+                p[c] += v[c];
+            });
+            return p;
+        },
+        function(p, v) { // remove
+            cols.forEach(function(c) {
+                p[c] -= v[c];
+            });
+            return p;
+        },
+        function() { // init
+            var p = {};
+            cols.forEach(function(c) {
+                p[c] = 0;
+            });
+            return p;
+        });
+    return {
+        all: function() {
+            // or _.pairs, anything to turn the object into an array
+            return d3.map(_groupAll.value()).entries();
+        }
+    };
+}
+
+
+
+function drawMarkerArea(data) {
+//function drawMarkerSelect(data) {
+
+    data.forEach(function (d) {
+    //d.dd  = dateFormat.parse(d.start);
+    //d.day = d3.time.day(d.dd);
+    //convert to numbers
+    d.num_of_hou = +d['num_of_hou'];
+    //d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_ = +d.AssessmentG2Q2_12_individual_Syrian_refugees_live_in_household_property_;
+  });
+
+  var xf = crossfilter(data);
+
+
+  var groupname = "marker-select";
+
+  var facilities = xf.dimension(function(d) { return d.geo; });
+  var facilitiesGroup = facilities.group();
+
+  dc.leafletMarkerChart(".map",groupname)
+      .dimension(facilities)
+      .group(facilitiesGroup)
+      .width(950)
+      .height(400)
+      .center([34.53484,36.16699])
+      .zoom(11)
+      .cluster(true)
+      .renderPopup(false)
+      .filterByArea(true)
+      //.clusterObject({ maxClusterRadius: 40, disableClusteringAtZoom:10,spiderfyOnMaxZoom: false,showCoverageOnHover: false})
+    ;
+
+  var villageDim = xf.dimension(function(d) { return d.assessment_date; });
+  var villageGroup = villageDim.group();
+
+  dc.rowChart("#cccm .date",groupname)
+        .dimension(villageDim)
+        .group(villageGroup)
+        .width(250)
+        .height(150)
+        .renderLabel(true)
+        .ordering(function (p) { return -p.value;})
+        .colors(['#EE5859'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var orgDim = xf.dimension(function(d) { return d.organization; });
+  var orgGroup = orgDim.group();
+
+  dc.rowChart("#cccm .org",groupname)
+        .dimension(orgDim)
+        .group(orgGroup)
+       // .group(districtsByMen, "Men")
+       // .stack(districtsByWomen, "Women")
+       // .stack(districtsByBoy, "Boys")
+       // .stack(districtsByGirl, "Girls")
+       // .elasticX(true)
+      //  .data(function(group) { return group.top(10); })
+        .width(250)
+        .height(150)
+        .renderLabel(true)
+        .ordering(function (p) { return -p.value;})
+        .colors(['#EE5859'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var genderDim = xf.dimension(function(d) { return d.gender; });
+  var genderGroup = genderDim.group();
+
+  dc.pieChart("#cccm .gender",groupname)
+        .dimension(genderDim)
+        .group(genderGroup)
+       // .group(districtsByMen, "Men")
+       // .stack(districtsByWomen, "Women")
+       // .stack(districtsByBoy, "Boys")
+       // .stack(districtsByGirl, "Girls")
+       // .elasticX(true)
+      //  .data(function(group) { return group.top(10); })
+        .width(250)
+        .height(150)
+        .renderLabel(true)
+        ;
+
+ // var num_of_houDim = xf.dimension(function(d) { return +d['num_of_hou']; });
+  var num_of_houDim = xf.dimension(function (d) { if( d['num_of_households_r']<10){return 'a 0-10'} if(+d['num_of_households_r']>10 && +d['num_of_households_r']<25){return 'b 10-25'} if(+d['num_of_households_r']>25 && +d['num_of_households_r']<100){return 'c 25-100'} if(+d['num_of_households_r']>100){return 'd more than 100'};});
+
+  var num_of_houGroup = num_of_houDim.group();
+
+    dc.rowChart("#cccm .num_of_hou",groupname)
+          .dimension(num_of_houDim)
+          .group(num_of_houGroup)
+          .width(250)
+          .height(150)
+          .renderLabel(true)
+          .ordering(function (p) { return -p.value;})
+          .colors(['#EE5859'])
+          .colorDomain([0,0])
+          .colorAccessor(function(d, i){return 1;})
+          .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var num_of_males_rDim = xf.dimension(function (d) { if( d['num_of_males_r']<10){return 'a 0-10'} if(+d['num_of_males_r']>10 && +d['num_of_males_r']<25){return 'b 10-25'} if(+d['num_of_males_r']>25 && +d['num_of_males_r']<100){return 'c 25-100'} if(+d['num_of_males_r']>100){return 'd more than 100'};});var num_of_males_rGroup = num_of_males_rDim.group();dc.rowChart("#cccm .num_of_males_r",groupname).dimension(num_of_males_rDim).group(num_of_males_rGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var num_of_females_rDim = xf.dimension(function (d) { if( d['num_of_females_r']<10){return 'a 0-10'} if(+d['num_of_females_r']>10 && +d['num_of_females_r']<25){return 'b 10-25'} if(+d['num_of_females_r']>25 && +d['num_of_females_r']<100){return 'c 25-100'} if(+d['num_of_females_r']>100){return 'd more than 100'};});var num_of_females_rGroup = num_of_females_rDim.group();dc.rowChart("#cccm .num_of_females_r",groupname).dimension(num_of_females_rDim).group(num_of_females_rGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var num_of_newborns_rDim = xf.dimension(function(d) { return d.num_of_newborns_r; });var num_of_newborns_rGroup = num_of_newborns_rDim.group();dc.rowChart("#cccm .num_of_newborns_r",groupname).dimension(num_of_newborns_rDim).group(num_of_newborns_rGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var num_of_children_rDim = xf.dimension(function (d) { if( d['num_of_children_r']<10){return 'a 0-10'} if(+d['num_of_children_r']>10 && +d['num_of_children_r']<25){return 'b 10-25'} if(+d['num_of_children_r']>25 && +d['num_of_children_r']<100){return 'c 25-100'} if(+d['num_of_children_r']>100){return 'd more than 100'};});var num_of_children_rGroup = num_of_children_rDim.group();dc.rowChart("#cccm .num_of_children_r",groupname).dimension(num_of_children_rDim).group(num_of_children_rGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var num_of_pregnant_rDim = xf.dimension(function(d) { return d.num_of_pregnant_r; });var num_of_pregnant_rGroup = num_of_pregnant_rDim.group();dc.rowChart("#cccm .num_of_pregnant_r",groupname).dimension(num_of_pregnant_rDim).group(num_of_pregnant_rGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var num_of_householdsDim = xf.dimension(function(d) { return d.num_of_households; });var num_of_householdsGroup = num_of_householdsDim.group();dc.rowChart("#cccm .num_of_households",groupname).dimension(num_of_householdsDim).group(num_of_householdsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var num_of_malesDim = xf.dimension(function(d) { return d.num_of_males; });var num_of_malesGroup = num_of_malesDim.group();dc.rowChart("#cccm .num_of_males",groupname).dimension(num_of_malesDim).group(num_of_malesGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var num_of_femalesDim = xf.dimension(function(d) { return d.num_of_females; });var num_of_femalesGroup = num_of_femalesDim.group();dc.rowChart("#cccm .num_of_females",groupname).dimension(num_of_femalesDim).group(num_of_femalesGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var num_of_newbornsDim = xf.dimension(function(d) { return d.num_of_newborns; });var num_of_newbornsGroup = num_of_newbornsDim.group();dc.rowChart("#cccm .num_of_newborns",groupname).dimension(num_of_newbornsDim).group(num_of_newbornsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var num_of_childrenDim = xf.dimension(function(d) { return d.num_of_children; });var num_of_childrenGroup = num_of_childrenDim.group();dc.rowChart("#cccm .num_of_children",groupname).dimension(num_of_childrenDim).group(num_of_childrenGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var num_of_pregnantDim = xf.dimension(function(d) { return d.num_of_pregnant; });var num_of_pregnantGroup = num_of_pregnantDim.group();dc.rowChart("#cccm .num_of_pregnant",groupname).dimension(num_of_pregnantDim).group(num_of_pregnantGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var main_water_sourcesDim = xf.dimension(function(d) { return d.main_water_sources; });var main_water_sourcesGroup = main_water_sourcesDim.group();dc.rowChart("#cccm .main_water_sources",groupname).dimension(main_water_sourcesDim).group(main_water_sourcesGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var boreholeDim = xf.dimension(function(d) { return d.borehole; });var boreholeGroup = boreholeDim.group();dc.rowChart("#cccm .borehole",groupname).dimension(boreholeDim).group(boreholeGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var springDim = xf.dimension(function(d) { return d.spring; });var springGroup = springDim.group();dc.rowChart("#cccm .spring",groupname).dimension(springDim).group(springGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var tap_waterDim = xf.dimension(function(d) { return d.tap_water; });var tap_waterGroup = tap_waterDim.group();dc.rowChart("#cccm .tap_water",groupname).dimension(tap_waterDim).group(tap_waterGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var water_truckDim = xf.dimension(function(d) { return d.water_truck; });var water_truckGroup = water_truckDim.group();dc.rowChart("#cccm .water_truck",groupname).dimension(water_truckDim).group(water_truckGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var bottledDim = xf.dimension(function(d) { return d.bottled; });var bottledGroup = bottledDim.group();dc.rowChart("#cccm .bottled",groupname).dimension(bottledDim).group(bottledGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var river_creekDim = xf.dimension(function(d) { return d.river_creek; });var river_creekGroup = river_creekDim.group();dc.rowChart("#cccm .river_creek",groupname).dimension(river_creekDim).group(river_creekGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var water_cleaninessDim = xf.dimension(function(d) { return d.water_cleaniness; });var water_cleaninessGroup = water_cleaninessDim.group();dc.rowChart("#cccm .water_cleaniness",groupname).dimension(water_cleaninessDim).group(water_cleaninessGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var water_sufficiencyDim = xf.dimension(function(d) { return d.water_sufficiency; });var water_sufficiencyGroup = water_sufficiencyDim.group();dc.rowChart("#cccm .water_sufficiency",groupname).dimension(water_sufficiencyDim).group(water_sufficiencyGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var water_treatingDim = xf.dimension(function(d) { return d.water_treating; });var water_treatingGroup = water_treatingDim.group();dc.rowChart("#cccm .water_treating",groupname).dimension(water_treatingDim).group(water_treatingGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var boilingDim = xf.dimension(function(d) { return d.boiling; });var boilingGroup = boilingDim.group();dc.rowChart("#cccm .boiling",groupname).dimension(boilingDim).group(boilingGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var iodine_chlorineDim = xf.dimension(function(d) { return d.iodine_chlorine; });var iodine_chlorineGroup = iodine_chlorineDim.group();dc.rowChart("#cccm .iodine_chlorine",groupname).dimension(iodine_chlorineDim).group(iodine_chlorineGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var water_filterDim = xf.dimension(function(d) { return d.water_filter; });var water_filterGroup = water_filterDim.group();dc.rowChart("#cccm .water_filter",groupname).dimension(water_filterDim).group(water_filterGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var sunlightDim = xf.dimension(function(d) { return d.sunlight; });var sunlightGroup = sunlightDim.group();dc.rowChart("#cccm .sunlight",groupname).dimension(sunlightDim).group(sunlightGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var noneDim = xf.dimension(function(d) { return d.none; });var noneGroup = noneDim.group();dc.rowChart("#cccm .none",groupname).dimension(noneDim).group(noneGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var toilet_typeDim = xf.dimension(function(d) { return d.toilet_type; });var toilet_typeGroup = toilet_typeDim.group();dc.rowChart("#cccm .toilet_type",groupname).dimension(toilet_typeDim).group(toilet_typeGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var pitDim = xf.dimension(function(d) { return d.pit; });var pitGroup = pitDim.group();dc.rowChart("#cccm .pit",groupname).dimension(pitDim).group(pitGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var open_airDim = xf.dimension(function(d) { return d.open_air; });var open_airGroup = open_airDim.group();dc.rowChart("#cccm .open_air",groupname).dimension(open_airDim).group(open_airGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var pour_flushDim = xf.dimension(function(d) { return d.pour_flush; });var pour_flushGroup = pour_flushDim.group();dc.rowChart("#cccm .pour_flush",groupname).dimension(pour_flushDim).group(pour_flushGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var other_tDim = xf.dimension(function(d) { return d.other_t; });var other_tGroup = other_tDim.group();dc.rowChart("#cccm .other_t",groupname).dimension(other_tDim).group(other_tGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var number_of_toiletsDim = xf.dimension(function(d) { return d.number_of_toilets; });var number_of_toiletsGroup = number_of_toiletsDim.group();dc.rowChart("#cccm .number_of_toilets",groupname).dimension(number_of_toiletsDim).group(number_of_toiletsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var functioning_toiletsDim = xf.dimension(function(d) { return d.functioning_toilets; });var functioning_toiletsGroup = functioning_toiletsDim.group();dc.rowChart("#cccm .functioning_toilets",groupname).dimension(functioning_toiletsDim).group(functioning_toiletsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var broken_toiletsDim = xf.dimension(function(d) { return d.broken_toilets; });var broken_toiletsGroup = broken_toiletsDim.group();dc.rowChart("#cccm .broken_toilets",groupname).dimension(broken_toiletsDim).group(broken_toiletsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var waste_waterDim = xf.dimension(function(d) { return d.waste_water; });var waste_waterGroup = waste_waterDim.group();dc.rowChart("#cccm .waste_water",groupname).dimension(waste_waterDim).group(waste_waterGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var septicDim = xf.dimension(function(d) { return d.septic; });var septicGroup = septicDim.group();dc.rowChart("#cccm .septic",groupname).dimension(septicDim).group(septicGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var soakageDim = xf.dimension(function(d) { return d.soakage; });var soakageGroup = soakageDim.group();dc.rowChart("#cccm .soakage",groupname).dimension(soakageDim).group(soakageGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var sewageDim = xf.dimension(function(d) { return d.sewage; });var sewageGroup = sewageDim.group();dc.rowChart("#cccm .sewage",groupname).dimension(sewageDim).group(sewageGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var streamDim = xf.dimension(function(d) { return d.stream; });var streamGroup = streamDim.group();dc.rowChart("#cccm .stream",groupname).dimension(streamDim).group(streamGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var sewage_waterDim = xf.dimension(function(d) { return d.sewage_water; });var sewage_waterGroup = sewage_waterDim.group();dc.rowChart("#cccm .sewage_water",groupname).dimension(sewage_waterDim).group(sewage_waterGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+
+  var shelters_totalDim = xf.dimension(function (d) { if( d['shelters_total']<5){return 'a 0-5'} if(+d['shelters_total']>5 && +d['shelters_partially_destroyed']<10){return 'b 5-10'} if(+d['shelters_total']>10 && +d['shelters_total']<25){return 'c 10-25'} if(+d['shelters_total']>25){return 'd more than 250'};});var shelters_totalGroup = shelters_totalDim.group();dc.rowChart("#cccm .shelters_total",groupname).dimension(shelters_totalDim).group(shelters_totalGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var shelters_partially_destroyedDim = xf.dimension(function (d) { if( d['shelters_partially_destroyed']<5){return 'a 0-5'} if(+d['shelters_partially_destroyed']>5 && +d['shelters_partially_destroyed']<10){return 'b 5-10'} if(+d['shelters_partially_destroyed']>10 && +d['shelters_partially_destroyed']<25){return 'c 10-25'} if(+d['shelters_partially_destroyed']>25){return 'd more than 250'};});var shelters_partially_destroyedGroup = shelters_partially_destroyedDim.group();dc.rowChart("#cccm .shelters_partially_destroyed",groupname).dimension(shelters_partially_destroyedDim).group(shelters_partially_destroyedGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var shelters_completely_destroyedDim = xf.dimension(function (d) { if( d['shelters_completely_destroyed']<5){return 'a 0-5'} if(+d['shelters_completely_destroyed']>5 && +d['shelters_completely_destroyed']<10){return 'b 5-10'} if(+d['shelters_completely_destroyed']>10 && +d['shelters_completely_destroyed']<25){return 'c 10-25'} if(+d['shelters_completely_destroyed']>25){return 'd more than 250'};});var shelters_completely_destroyedGroup = shelters_completely_destroyedDim.group();dc.rowChart("#cccm .shelters_completely_destroyed",groupname).dimension(shelters_completely_destroyedDim).group(shelters_completely_destroyedGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+
+  var main_health_issuesDim = xf.dimension(function(d) { return d.main_health_issues; });var main_health_issuesGroup = main_health_issuesDim.group();dc.rowChart("#cccm .main_health_issues",groupname).dimension(main_health_issuesDim).group(main_health_issuesGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var couch_coldDim = xf.dimension(function(d) { return d.couch_cold; });var couch_coldGroup = couch_coldDim.group();dc.rowChart("#cccm .couch_cold",groupname).dimension(couch_coldDim).group(couch_coldGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var diarrhoeaDim = xf.dimension(function(d) { return d.diarrhoea; });var diarrhoeaGroup = diarrhoeaDim.group();dc.rowChart("#cccm .diarrhoea",groupname).dimension(diarrhoeaDim).group(diarrhoeaGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var skin_infectDim = xf.dimension(function(d) { return d.skin_infect; });var skin_infectGroup = skin_infectDim.group();dc.rowChart("#cccm .skin_infect",groupname).dimension(skin_infectDim).group(skin_infectGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var do_not_knowDim = xf.dimension(function(d) { return d.do_not_know; });var do_not_knowGroup = do_not_knowDim.group();dc.rowChart("#cccm .do_not_know",groupname).dimension(do_not_knowDim).group(do_not_knowGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var main_health_issues_childDim = xf.dimension(function(d) { return d.main_health_issues_child; });var main_health_issues_childGroup = main_health_issues_childDim.group();dc.rowChart("#cccm .main_health_issues_child",groupname).dimension(main_health_issues_childDim).group(main_health_issues_childGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var couch_coldDim = xf.dimension(function(d) { return d.couch_cold; });var couch_coldGroup = couch_coldDim.group();dc.rowChart("#cccm .couch_cold",groupname).dimension(couch_coldDim).group(couch_coldGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var diarrhoeaDim = xf.dimension(function(d) { return d.diarrhoea; });var diarrhoeaGroup = diarrhoeaDim.group();dc.rowChart("#cccm .diarrhoea",groupname).dimension(diarrhoeaDim).group(diarrhoeaGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var skin_infectDim = xf.dimension(function(d) { return d.skin_infect; });var skin_infectGroup = skin_infectDim.group();dc.rowChart("#cccm .skin_infect",groupname).dimension(skin_infectDim).group(skin_infectGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var do_not_knowDim = xf.dimension(function(d) { return d.do_not_know; });var do_not_knowGroup = do_not_knowDim.group();dc.rowChart("#cccm .do_not_know",groupname).dimension(do_not_knowDim).group(do_not_knowGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var health_workerDim = xf.dimension(function(d) { return d.health_worker; });var health_workerGroup = health_workerDim.group();dc.rowChart("#cccm .health_worker",groupname).dimension(health_workerDim).group(health_workerGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var medical_teamDim = xf.dimension(function(d) { return d.medical_team; });var medical_teamGroup = medical_teamDim.group();dc.rowChart("#cccm .medical_team",groupname).dimension(medical_teamDim).group(medical_teamGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var immunized_childrenDim = xf.dimension(function(d) { return d.immunized_children; });var immunized_childrenGroup = immunized_childrenDim.group();dc.rowChart("#cccm .immunized_children",groupname).dimension(immunized_childrenDim).group(immunized_childrenGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var mobile_outreachDim = xf.dimension(function(d) { return d.mobile_outreach; });var mobile_outreachGroup = mobile_outreachDim.group();dc.rowChart("#cccm .mobile_outreach",groupname).dimension(mobile_outreachDim).group(mobile_outreachGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+var other_ngoDim = xf.dimension(function(d) { return d.other_ngo; });var other_ngoGroup = other_ngoDim.group();dc.rowChart("#cccm .other_ngo",groupname).dimension(other_ngoDim).group(other_ngoGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var visit_purposeDim = xf.dimension(function(d) { return d.visit_purpose; });var visit_purposeGroup = visit_purposeDim.group();dc.rowChart("#cccm .visit_purpose",groupname).dimension(visit_purposeDim).group(visit_purposeGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var assistance_typeDim = xf.dimension(function(d) { return d.assistance_type; });var assistance_typeGroup = assistance_typeDim.group();dc.rowChart("#cccm .assistance_type",groupname).dimension(assistance_typeDim).group(assistance_typeGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var sheetsDim = xf.dimension(function(d) { return d.sheets; });var sheetsGroup = sheetsDim.group();dc.rowChart("#cccm .sheets",groupname).dimension(sheetsDim).group(sheetsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var blanketsDim = xf.dimension(function(d) { return d.blankets; });var blanketsGroup = blanketsDim.group();dc.rowChart("#cccm .blankets",groupname).dimension(blanketsDim).group(blanketsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var mattressesDim = xf.dimension(function(d) { return d.mattresses; });var mattressesGroup = mattressesDim.group();dc.rowChart("#cccm .mattresses",groupname).dimension(mattressesDim).group(mattressesGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var electricityDim = xf.dimension(function(d) { return d.electricity; });var electricityGroup = electricityDim.group();dc.rowChart("#cccm .electricity",groupname).dimension(electricityDim).group(electricityGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var observation_validationDim = xf.dimension(function(d) { return d.observation_validation; });var observation_validationGroup = observation_validationDim.group();dc.rowChart("#cccm .observation_validation",groupname).dimension(observation_validationDim).group(observation_validationGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var latrine_damage_observationDim = xf.dimension(function(d) { return d.latrine_damage_observation; });var latrine_damage_observationGroup = latrine_damage_observationDim.group();dc.rowChart("#cccm .latrine_damage_observation",groupname).dimension(latrine_damage_observationDim).group(latrine_damage_observationGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var sewage_overflow_observationDim = xf.dimension(function(d) { return d.sewage_overflow_observation; });var sewage_overflow_observationGroup = sewage_overflow_observationDim.group();dc.rowChart("#cccm .sewage_overflow_observation",groupname).dimension(sewage_overflow_observationDim).group(sewage_overflow_observationGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+var observation_validation_waterDim = xf.dimension(function(d) { return d.observation_validation_water; });var observation_validation_waterGroup = observation_validation_waterDim.group();dc.rowChart("#cccm .observation_validation_water",groupname).dimension(observation_validation_waterDim).group(observation_validation_waterGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var excreta_signsDim = xf.dimension(function(d) { return d.excreta_signs; });var excreta_signsGroup = excreta_signsDim.group();dc.rowChart("#cccm .excreta_signs",groupname).dimension(excreta_signsDim).group(excreta_signsGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var garbage_problemDim = xf.dimension(function(d) { return d.garbage_problem; });var garbage_problemGroup = garbage_problemDim.group();dc.rowChart("#cccm .garbage_problem",groupname).dimension(garbage_problemDim).group(garbage_problemGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var stagnant_waterDim = xf.dimension(function(d) { return d.stagnant_water; });var stagnant_waterGroup = stagnant_waterDim.group();dc.rowChart("#cccm .stagnant_water",groupname).dimension(stagnant_waterDim).group(stagnant_waterGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var terrain_situationDim = xf.dimension(function(d) { return d.terrain_situation; });var terrain_situationGroup = terrain_situationDim.group();dc.rowChart("#cccm .terrain_situation",groupname).dimension(terrain_situationDim).group(terrain_situationGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var sitation_photoDim = xf.dimension(function(d) { return d.sitation_photo; });var sitation_photoGroup = sitation_photoDim.group();dc.rowChart("#cccm .sitation_photo",groupname).dimension(sitation_photoDim).group(sitation_photoGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var shelter_o_validationDim = xf.dimension(function(d) { return d.shelter_o_validation; });var shelter_o_validationGroup = shelter_o_validationDim.group();dc.rowChart("#cccm .shelter_o_validation",groupname).dimension(shelter_o_validationDim).group(shelter_o_validationGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var totally_destroyed_oDim = xf.dimension(function(d) { return d.totally_destroyed_o; });var totally_destroyed_oGroup = totally_destroyed_oDim.group();dc.rowChart("#cccm .totally_destroyed_o",groupname).dimension(totally_destroyed_oDim).group(totally_destroyed_oGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var partially_destroyed_oDim = xf.dimension(function(d) { return d.partially_destroyed_o; });var partially_destroyed_oGroup = partially_destroyed_oDim.group();dc.rowChart("#cccm .partially_destroyed_o",groupname).dimension(partially_destroyed_oDim).group(partially_destroyed_oGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var concrete_sheltersDim = xf.dimension(function(d) { return d.concrete_shelters; });var concrete_sheltersGroup = concrete_sheltersDim.group();dc.rowChart("#cccm .concrete_shelters",groupname).dimension(concrete_sheltersDim).group(concrete_sheltersGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var no_concrete_sheltersDim = xf.dimension(function(d) { return d.no_concrete_shelters; });var no_concrete_sheltersGroup = no_concrete_sheltersDim.group();dc.rowChart("#cccm .no_concrete_shelters",groupname).dimension(no_concrete_sheltersDim).group(no_concrete_sheltersGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var no_winter_clothesDim = xf.dimension(function(d) { return d.no_winter_clothes; });var no_winter_clothesGroup = no_winter_clothesDim.group();dc.rowChart("#cccm .no_winter_clothes",groupname).dimension(no_winter_clothesDim).group(no_winter_clothesGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var no_shoesDim = xf.dimension(function(d) { return d.no_shoes; });var no_shoesGroup = no_shoesDim.group();dc.rowChart("#cccm .no_shoes",groupname).dimension(no_shoesDim).group(no_shoesGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+  var no_winter_clothes_aDim = xf.dimension(function(d) { return d.no_winter_clothes_a; });var no_winter_clothes_aGroup = no_winter_clothes_aDim.group();dc.rowChart("#cccm .no_winter_clothes_a",groupname).dimension(no_winter_clothes_aDim).group(no_winter_clothes_aGroup).width(250).height(150).renderLabel(true).ordering(function (p) { return -p.value;}).colors(['#EE5859']).colorDomain([0,0]).colorAccessor(function(d, i){return 1;}).xAxis().ticks(4).tickFormat(d3.format("s"));
+
+
+
+$('#reset').on('click', function (){
+  dc.filterAll(groupname);
+  dc.redrawAll(groupname);
+  return false;
+})
+
+
+  dc.renderAll(groupname);
+}
+
+</script>
+
+ <script src="js/bootstrap.js"></script>
+<!-- Custom Theme JavaScript -->
+<script>
+// Closes the sidebar menu
+$("#menu-close").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+
+// Opens the sidebar menu
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#sidebar-wrapper").toggleClass("active");
+});
+
+// Scrolls to the selected menu item on the page
+$(function() {
+    $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+                $('html,body').animate({
+                    scrollTop: target.offset().top
+                }, 1000);
+                return false;
+            }
+        }
+    });
+});
+</script>
+
+</body>
+
+
+</html>

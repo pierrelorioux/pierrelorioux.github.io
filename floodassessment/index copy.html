@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+    <title>Phase2</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <meta itemprop="name" content="Site Assessment - CCCM Cluster Iraq"/>
+    <meta itemprop="description" content="Site Assessment - CCCM Cluster Iraq"/>
+
+    <meta property="og:title" content="Site Assessment - CCCM Cluster Iraq">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="http://unhcr-iraq.github.io/Site-Assessment/">
+    <meta property="og:image" content="http://unhcr-iraq.github.io/Site-Assessment/SiteAssessment.jpg">
+    <meta property="og:site_name" content="Site Assessment - CCCM Cluster Iraq">
+    <meta property="og:description" content="Site Assessment - CCCM Cluster Iraq">
+
+    <link type="text/css" href="css/leaflet.css" rel="stylesheet"/>
+    <link type="text/css" href="css/leaflet.markercluster.css" rel="stylesheet"/>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/dc.css">
+    <!-- Add IntroJs styles  -->
+    <link rel="stylesheet" type="text/css" href="css/introjs.css">
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+
+
+</head>
+
+<body>
+
+    <div style="display: none;" class="col-sm-4 col-md-offset4" id="loading">
+        <h1>Patience: We are wrapping up the data... </h1><small>This webpage does not work on IE8 or older... Upgrade your browser if needed</small>
+    </div>
+
+    <div style="display: block;" class="container" id="dashboard">
+
+        <div class="col-xs-12">
+            <a href="https://www.humanitarianresponse.info/operations/iraq/camp-coordination-management" target="_blank">
+               <img src="images/ccccm-siteasessment2.png" style="width: 100%"></a>
+         </div>
+
+
+            <!--
+             -->
+
+
+
+
+            <div class="row" id="cccm">
+
+                <div class="col-md-2">
+                    <div class="governoratep" class="col-xs-6 dc-chart" data-step="3" data-intro="Click on this bar chart to filter by governorate" data-position="right">
+                      <h4>Governorates</h4>
+                      <p><small><i>Number of individuals</i></small></p>
+                    </div>
+
+                    <div class="classp" class="col-xs-6 dc-chart" data-step="4" data-intro="Click on this bar chart to filter by site class size" data-position="right">
+                      <h4>Site size</h4>
+                      <p><small><i>Number of sites per size</i></small></p>
+                    </div>
+                </div>
+
+                <div  class="col-md-4"  data-step="5" data-intro="Click on this bar chart to filter by district" data-position="right">
+                    <div class="districtp" class="dc-chart" >
+                        <h4>Districts</h4>
+                        <p><small><i>Number of individuals</i></small></p>
+                    </div>
+                </div>
+
+                <div  class="col-md-2"  data-step="6" data-intro="Click on those chart to filter by site environment or shelter composition" data-position="right">
+
+
+                        <div class="environmentp" id="cccm" class="dc-chart" >
+                          <h4>Site type</h4>
+                        <p><small><i>Direct environment</i></small></p>
+                        </div>
+                       <div  class="scorep" id="cccm" class="dc-chart">
+                          <h4>Composite Score</h4>
+                          <p><small><i><a href="https://github.com/unhcr-iraq/cccm-assessment/blob/master/data.R"  target="_blank">
+                              (water_access + water_quality + openelement + damage + mines+ hazards + fighting) ranked in 5 five classes.</a><br >Number of sites</i></small></p>
+                        </div>
+                 <!--
+                      -->
+                </div>
+
+                <div  class="col-md-4"  data-step="7" data-intro="Click on the map to filter by site" data-position="left">
+                    <h4>Map: Location of the sites</h4>
+                      <p><small><i>Zoom on the map to filter sites. click on the pinpoint for more information</i></small></p>
+                    <div  class="map" id="cccm"  > </div>
+                </div>
+
+
+
+
+            </div>
+
+
+
+
+<!--
+           <div class='row'>
+            <div class='col-md-12'>
+              <table class='table table-hover' id='dc-table-graph'>
+                <thead>
+                  <tr class='header'>
+                    <th>Governorates</th>
+                    <th>District</th>
+                    <th>Household (num)</th>
+                    <th>Individual(num)</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+           </div>
+-->
+
+
+    </div>
+
+    <small><a href="https://github.com/unhcr-iraq/Site-Assessment" target="_blank">Credit</a></small>
+
+
+    <script type="text/javascript" src="js/intro.js"></script>
+    <script type="text/javascript" src="js/d3_002.js"></script>
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/crossfilter.js"></script>
+    <script type="text/javascript" src="js/dc.js"></script>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+
+
+<!--maps-->
+    <script type="text/javascript" src="js/leaflet.js"></script>
+    <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+    <script type="text/javascript" src="js/dc.leaflet.js"></script>
+
+
+<script type="text/javascript">
+
+/*     Markers      */
+var numberFormat = d3.format(",f");
+
+
+
+
+d3.tsv("data/dataviz.tsv", function(data) {
+ // drawMarkerSelect(data);
+  drawMarkerArea(data);
+});
+
+
+function regroup(dim, cols) {
+    var _groupAll = dim.groupAll().reduce(
+        function(p, v) { // add
+            cols.forEach(function(c) {
+                p[c] += v[c];
+            });
+            return p;
+        },
+        function(p, v) { // remove
+            cols.forEach(function(c) {
+                p[c] -= v[c];
+            });
+            return p;
+        },
+        function() { // init
+            var p = {};
+            cols.forEach(function(c) {
+                p[c] = 0;
+            });
+            return p;
+        });
+    return {
+        all: function() {
+            // or _.pairs, anything to turn the object into an array
+            return d3.map(_groupAll.value()).entries();
+        }
+    };
+}
+
+
+
+function drawMarkerArea(data) {
+//function drawMarkerSelect(data) {
+  var xf = crossfilter(data);
+
+  var groupname = "marker-select";
+
+
+  var all = xf.groupAll();
+  dc.dataCount("#count-info",groupname)
+        .dimension(xf)
+        .group(all);
+
+  var facilities = xf.dimension(function(d) { return d.geo; });
+  var facilitiesGroup = facilities.group().reduceCount();
+
+  dc.leafletMarkerChart("#cccm .map",groupname)
+      .dimension(facilities)
+      .group(facilitiesGroup)
+      .width(400)
+      .height(390)
+      .center([34.7503,44.5385])
+      .zoom(6)
+      .cluster(true)
+      .filterByArea(true)
+      //.clusterObject({ maxClusterRadius: 40, disableClusteringAtZoom:10,spiderfyOnMaxZoom: false,showCoverageOnHover: false})
+      .popup();
+
+
+//water_access  water_quality   electric    openelement damage  hazards mines   fighting
+
+  var waters = xf.dimension(function(d) { return d.water_access; });
+  var watersGroup = waters.group().reduceCount();
+  dc.pieChart("#cccm .waterp",groupname)
+        .dimension(waters)
+        .group(watersGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+    //   .ordering(function (p) { return -p.value; });
+
+
+  var waterqs = xf.dimension(function(d) { return d.water_quality; });
+  var waterqsGroup = waterqs.group().reduceCount();
+  dc.pieChart("#cccm .waterqp",groupname)
+        .dimension(waterqs)
+        .group(waterqsGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+    //   .ordering(function (p) { return -p.value; });
+
+
+  var electrics = xf.dimension(function(d) { return d.electric; });
+  var electricsGroup = electrics.group().reduceCount();
+  dc.pieChart("#cccm .electricp",groupname)
+        .dimension(electrics)
+        .group(electricsGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+     //  .ordering(function (p) { return -p.value; });
+
+
+  var openelements = xf.dimension(function(d) { return d.openelement; });
+  var openelementsGroup = openelements.group().reduceCount();
+  dc.pieChart("#cccm .openelementp",groupname)
+        .dimension(openelements)
+        .group(openelementsGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+     //   .ordering(function (p) { return -p.value; });
+
+  var damages = xf.dimension(function(d) { return d.damage; });
+  var damagesGroup = damages.group().reduceCount();
+  dc.pieChart("#cccm .damagep",groupname)
+        .dimension(damages)
+        .group(damagesGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+     //   .ordering(function (p) { return -p.value; });
+
+  var hazardss = xf.dimension(function(d) { return d.hazards; });
+  var hazardssGroup = hazardss.group().reduceCount();
+  dc.pieChart("#cccm .hazardsp",groupname)
+        .dimension(hazardss)
+        .group(hazardssGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+    //    .ordering(function (p) { return -p.value; });
+
+  var miness = xf.dimension(function(d) { return d.mines; });
+  var minessGroup = miness.group().reduceCount();
+  dc.pieChart("#cccm .minesp",groupname)
+        .dimension(miness)
+        .group(minessGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+    //    .ordering(function (p) { return -p.value; });
+
+  var fightings = xf.dimension(function(d) { return d.fighting; });
+  var fightingsGroup = fightings.group().reduceCount();
+  dc.pieChart("#cccm .fightingp",groupname)
+        .dimension(fightings)
+        .group(fightingsGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#cb181d', /* maj */
+                        '#fb6a4a', /* mod */
+                        '#fcae91', /* min */
+                        '#fee5d9' /* no */
+                        ])
+         .colorDomain([0,4]);
+    //    .ordering(function (p) { return -p.value; });
+
+
+  var environments = xf.dimension(function(d) { return d.environment; });
+  var environmentsGroup = environments.group().reduceCount();
+  dc.pieChart("#cccm .environmentp",groupname)
+        .dimension(environments)
+        .group(environmentsGroup)
+        .width(95)
+        .height(95)
+        .renderLabel(true)
+        .renderTitle(true)
+        .ordering(function (p) { return -p.value; });
+
+
+  var classs = xf.dimension(function(d) { return d.class; });
+  var classsGroup = classs.group().reduceCount();
+  dc.rowChart("#cccm .classp",groupname)
+        .dimension(classs)
+        .group(classsGroup)
+        .width(200)
+        .height(200)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+       // .ordering(function (p) { return -p.value;});
+
+
+  var types = xf.dimension(function(d) { return d.organisat; });
+  var typesGroup = types.group().reduceCount();
+  dc.rowChart("#cccm .orgap",groupname)
+        .dimension(types)
+        .group(typesGroup)
+        .width(350)
+        .height(200)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+       // .ordering(function (p) { return -p.value;});
+
+
+  var districts = xf.dimension(function(d) { return d.district; });
+  var districtsByIndividual = districts.group().reduceSum(function (d) { return d.individual; });
+  var districtsByMen = districts.group().reduceSum(function (d) { return d.men; });
+  var districtsByWomen  = districts.group().reduceSum(function (d) { return d.women; });
+  var districtsByBoy =  districts.group().reduceSum(function (d) { return d.boys; });
+  var districtsByGirl = districts.group().reduceSum(function (d) { return d.girls; });
+  //var districtsGroup = types.group().reduceCount();
+
+  dc.rowChart("#cccm .districtp",groupname)
+        .dimension(districts)
+        .group(districtsByIndividual)
+       // .group(districtsByMen, "Men")
+       // .stack(districtsByWomen, "Women")
+       // .stack(districtsByBoy, "Boys")
+       // .stack(districtsByGirl, "Girls")
+       // .elasticX(true)
+      //  .data(function(group) { return group.top(10); })
+        .width(350)
+        .height(400)
+        .renderLabel(true)
+        .ordering(function (p) { return -p.value;})
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+  var governorates = xf.dimension(function(d) { return d.governorate; });
+  var governoratesByIndividual = governorates.group().reduceSum(function (d) { return d.individual; });
+  var governoratesByHousehold = governorates.group().reduceSum(function (d) { return d.household; });
+  //var governoratesGroup = types.group().reduceCount();
+
+  dc.rowChart("#cccm .governoratep",groupname)
+        .dimension(governorates)
+        .group(governoratesByIndividual)
+       // .stack(governoratesByHousehold)
+       // .elasticX(true)
+        .width(200)
+        .height(150)
+        .renderLabel(true)
+        .ordering(function (p) { return -p.value;})
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+// it doesn't really matter what you index the dimension on,
+// because you won't be able to filter on this dimension
+// we just need something to call .groupAll on.
+//Improvised_Shelter    Tent    Individual_mud_building Individual_mix_building Individual_concrete_building
+//  Shop    Apartment_block Under_construction
+
+
+ //    var accoms = xf.dimension(function(r) { return r.Improvised_Shelter; });
+ //    var accomsGroup = regroup(accoms, ['Improvised_Shelter', 'Tent', 'Individual_mud_building', 'Individual_mix_building', 'Individual_concrete_building', 'Shop', 'Apartment_block Under_construction']);
+
+ var scores = xf.dimension(function(d) { return d.scoreclass; });
+ var scoresGroup = scores.group().reduceCount(function (d) { return d.scoreclass; });
+
+  dc.rowChart("#cccm .scorep",groupname)
+        .dimension(scores)
+        .group(scoresGroup)
+        .width(220)
+        .height(185)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        //.ordering(function (p) { return -p.value;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+/*
+ var clusters = xf.dimension(function(d) { return d.cluster; });
+ var clustersGroup = accoms.group().reduceCount(function (d) { return d.cluster; });
+
+  dc.rowChart("#cccm .accomp",groupname)
+        .dimension(clusters)
+        .group(clustersGroup)
+        .width(220)
+        .height(205)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        //.ordering(function (p) { return -p.value;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+
+ var tents = xf.dimension(function(d) { return d.Tent; });
+ var tentsGroup = impros.group().reduceSum(function (d) { return d.Tent; });
+  dc.rowChart("#cccm .tentp",groupname)
+        .dimension(tents)
+        .group(tentsGroup)
+        .width(200)
+        .height(15)
+        .renderLabel(true)
+        .renderTitle(true)
+        .colors(['#3182bd'])
+        .colorDomain([0,0])
+        .colorAccessor(function(d, i){return 1;})
+        .xAxis().ticks(4).tickFormat(d3.format("s"));
+       // .ordering(function (p) { return -p.value;});
+
+
+
+*/
+
+  // Table
+  /*
+  dc.dataTable("#dc-table-graph",groupname)
+    .width(960).height(800)
+    .dimension(governorates)
+    .group(function(d) { return "Sites Table" })
+    .size(30)
+    .columns([
+      function(d) { return d.governorate; },
+      function(d) { return d.district; },
+      function(d) { return d.household; },
+      function(d) { return d.individual; }
+    ])
+    .sortBy(function(d){ return d.governorate; })
+    .order(d3.ascending)
+    .renderlet(function (table) { table.selectAll(".dc-table-group").classed("info", true); });
+*/
+
+
+
+$('#reset').on('click', function (){
+  dc.filterAll(groupname);
+  dc.redrawAll(groupname);
+  return false;
+})
+
+
+//  dc.renderAll();
+  dc.renderAll(groupname);
+}
+
+</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+    <script src="js/bootstrap.js"></script>
+
+
+<script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
+
+<div class="d3-tip n" style="position: absolute; display: none; box-sizing: border-box; top: 186.9px; left: 727.5px;"></div><div class="d3-tip" style="position: absolute; display: none; box-sizing: border-box;"></div>
+</body>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-55906613-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</html>
